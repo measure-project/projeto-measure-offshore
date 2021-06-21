@@ -7,6 +7,7 @@ import { AppComponent } from "./app.component";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from "src/environments/environment";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { environment } from "src/environments/environment";
 		AppRoutingModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFireDatabaseModule,
+		BrowserAnimationsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
