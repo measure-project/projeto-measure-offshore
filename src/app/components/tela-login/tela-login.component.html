@@ -1,0 +1,31 @@
+<div class="engloba-mat-card">
+	<mat-card class="mat-elevation-z4">
+		<!--Aqui, ficará a logo da empresa> <img src="" id="logo-empresa"> <-->
+		<form class="login-form">
+			<mat-form-field appearance="outline">
+				<mat-label>E-mail</mat-label>
+				<input
+					matInput
+					ngModel
+					name="e-mail"
+					id=""
+					placeholder="E-mail"
+					type="text"
+				/>
+				<mat-error>Insira o e-mail!</mat-error>
+			</mat-form-field>
+			<mat-form-field>
+				<input
+					matInput
+					ngModel
+					name="senha"
+					id=""
+					placeholder="Senha"
+					type="password"
+				/>
+				<mat-error>Insira a senha</mat-error>
+			</mat-form-field>
+		</form>
+		<button class="login-button colorWhite" mat-raised-button>Login</button>
+	</mat-card>
+</div>

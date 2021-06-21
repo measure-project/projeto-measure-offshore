@@ -1,0 +1,33 @@
+.engloba-mat-card {
+	align-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+mat-card {
+	width: 25rem;
+	height: 30rem;
+	border-radius: 1rem;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-moz-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.login-button {
+	margin-top: 1rem;
+	background-color: #2ab67b;
+	font-size: 1rem;
+	width: 10rem;
+	height: 3rem;
+	border-radius: 3rem;
+}
