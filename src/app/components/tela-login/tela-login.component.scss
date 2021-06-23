@@ -5,8 +5,8 @@
 }
 
 mat-card {
-	width: 25rem;
-	height: 30rem;
+	width: 20rem;
+	height: 25rem;
 	border-radius: 1rem;
 	position: absolute;
 	left: 50%;
@@ -28,6 +28,27 @@ mat-card {
 	background-color: #2ab67b;
 	font-size: 1rem;
 	width: 10rem;
-	height: 3rem;
+	height: 2.5rem;
 	border-radius: 3rem;
+}
+
+.google-button {
+	// margin-top: 1rem;
+	background-color: #ebebeb;
+	font-size: 1rem;
+	width: 15rem;
+	height: 2.5rem;
+	border-radius: 3rem;
+}
+
+.forgot-password {
+	text-align: end;
+}
+
+.forgot-password a {
+	color: grey;
+}
+
+.ou-txt {
+	margin: 10px 10px;
 }

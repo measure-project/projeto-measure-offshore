@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TelaLoginComponent } from './components/tela-login/tela-login.component';
 
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -28,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 		MatFormFieldModule,
 		MatButtonModule,
 		FormsModule,
+		MatInputModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

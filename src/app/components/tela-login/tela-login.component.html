@@ -1,29 +1,35 @@
 <div class="engloba-mat-card">
 	<mat-card class="mat-elevation-z4">
-		<!--Aqui, ficará a logo da empresa> <img src="" id="logo-empresa"> <-->
+		<p>LOGO</p>
 		<form class="login-form">
 			<mat-form-field appearance="outline">
-				<mat-label>E-mail</mat-label>
 				<input
 					matInput
 					ngModel
 					name="e-mail"
 					placeholder="E-mail"
 					type="text"
+					required
 				/>
 				<mat-error>Insira o e-mail!</mat-error>
 			</mat-form-field>
-			<mat-form-field>
+			<mat-form-field appearance="outline">
 				<input
 					matInput
 					ngModel
 					name="senha"
 					placeholder="Senha"
 					type="password"
+					required
 				/>
 				<mat-error>Insira a senha!</mat-error>
 			</mat-form-field>
 		</form>
+		<p class="forgot-password"><a href="#">Esqueci minha senha</a></p>
 		<button class="login-button colorWhite" mat-raised-button>Login</button>
+		<p class="ou-txt">ou</p>
+		<button class="google-button" mat-raised-button>
+			<img src="assets/Google-logo.svg" /> Entrar com o Google
+		</button>
 	</mat-card>
 </div>
