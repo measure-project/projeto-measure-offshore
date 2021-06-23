@@ -151,6 +151,7 @@
 					name="password"
 					ngModel
 					required
+					showHideInput
 					placeholder="**********"
 				/>
 				<!-- Icone com função para mostrar/esconder a senha -->
@@ -172,7 +173,7 @@
 					matInput
 					type="password"
 					name="password"
-					id="userPassword"
+					id="confirmPassword"
 					ngModel
 					required
 					showHideInput
@@ -182,10 +183,10 @@
 				<i
 					matSuffix
 					class="material-icons"
-					showHideTrigger="userPassword"
+					showHideTrigger="confirmPassword"
 					[showHideStatus]="{
 						materialIcon: true,
-						id: 'userPassword'
+						id: 'confirmPassword'
 					}"
 				></i>
 				<mat-error>Confirme sua senha!</mat-error>

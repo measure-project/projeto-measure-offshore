@@ -18,6 +18,7 @@ export class TelaCadastroComponent implements OnInit {
 	ngOnInit(): void {}
 
 	onPhoneChanged() {
+		//Função que checa o tamanho do numero, se for maior que 10 é telefone, senão é celular
 		if (this.phoneLength.length <= 10 && this.phoneMask === this.CELULAR) {
 			this.phoneMask = this.TELEFONE;
 		} else if (
