@@ -7,6 +7,7 @@
 					matInput
 					ngModel
 					name="e-mail"
+					[(ngModel)]="username"
 					placeholder="E-mail"
 					type="text"
 					required
@@ -18,6 +19,7 @@
 					matInput
 					ngModel
 					name="senha"
+					[(ngModel)]="password"
 					placeholder="Senha"
 					type="password"
 					required
@@ -26,10 +28,25 @@
 			</mat-form-field>
 		</form>
 		<p class="forgot-password"><a href="#">Esqueci minha senha</a></p>
-		<button class="login-button colorWhite" mat-raised-button>Login</button>
+		<button class="login-button colorWhite" mat-raised-button (click)="logar()">
+			Login
+		</button>
 		<p class="ou-txt">ou</p>
 		<button class="google-button" mat-raised-button>
-			<img src="assets/Google-logo.svg" /> Entrar com o Google
+			<img src="assets/Google-logo.svg" id="google-logo" />
+			Entrar com o Google
+		</button>
+
+		<p style="margin-top: 10px">
+			----------------------------- / / -----------------------------
+		</p>
+
+		<button
+			class="create-account-button colorWhite"
+			mat-raised-button
+			(click)="navigateToCreateNewAccount()"
+		>
+			Criar Conta
 		</button>
 	</mat-card>
 </div>

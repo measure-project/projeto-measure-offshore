@@ -5,8 +5,8 @@
 }
 
 mat-card {
-	width: 20rem;
-	height: 25rem;
+	width: 22rem;
+	height: 27rem;
 	border-radius: 1rem;
 	position: absolute;
 	left: 50%;
@@ -23,22 +23,33 @@ mat-card {
 	flex-direction: column;
 }
 
+.login-button,
+.google-button,
+.create-account-button {
+	font-size: 0.9rem;
+	height: 2rem;
+	border-radius: 3rem;
+	text-align: center;
+}
+
+.login-button,
+.create-account-button {
+	width: 10rem;
+	background-color: #4abdb7;
+}
+
 .login-button {
 	margin-top: 1rem;
-	background-color: #2ab67b;
-	font-size: 1rem;
-	width: 10rem;
-	height: 2.5rem;
-	border-radius: 3rem;
 }
 
 .google-button {
 	// margin-top: 1rem;
 	background-color: #ebebeb;
-	font-size: 1rem;
 	width: 15rem;
-	height: 2.5rem;
-	border-radius: 3rem;
+}
+
+#google-logo {
+	width: 1rem;
 }
 
 .forgot-password {
