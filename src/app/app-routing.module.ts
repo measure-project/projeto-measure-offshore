@@ -1,11 +1,16 @@
-import { TelaLoginComponent } from './components/tela-login/tela-login.component';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { TelaCadastroComponent } from "./components/tela-cadastro/tela-cadastro.component";
+import { TelaLoginComponent } from "./components/tela-login/tela-login.component";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
 	{
-		path: '',
+		path: "",
 		component: TelaLoginComponent,
+	},
+	{
+		path: "signup",
+		component: TelaCadastroComponent,
 	},
 ];
 

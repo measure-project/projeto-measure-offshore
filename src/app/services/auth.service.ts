@@ -1,18 +1,18 @@
-import { Injectable, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable, NgZone } from "@angular/core";
+import { Router } from "@angular/router";
 import {
 	AngularFirestore,
 	AngularFirestoreCollection,
 	AngularFirestoreDocument,
 	CollectionReference,
-} from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
-import firebase from 'firebase/app';
-import { User } from '../models/user';
-import { Observable } from 'rxjs';
+} from "@angular/fire/firestore";
+import { AngularFireAuth } from "@angular/fire/auth";
+import firebase from "firebase/app";
+import { User } from "../models/user";
+import { Observable } from "rxjs";
 
 @Injectable({
-	providedIn: 'root',
+	providedIn: "root",
 })
 export class AuthService {
 	userLogado = {} as User;
@@ -31,11 +31,11 @@ export class AuthService {
 			if (user) {
 				this.getUserData(user.email);
 				this.userState = user;
-				localStorage.setItem('user', JSON.stringify(this.userState));
-				JSON.parse(localStorage.getItem('user') || '{ }');
+				localStorage.setItem("user", JSON.stringify(this.userState));
+				JSON.parse(localStorage.getItem("user") || "{ }");
 			} else {
-				localStorage.setItem('user', '');
-				JSON.parse(localStorage.getItem('user') || '{ }');
+				localStorage.setItem("user", "");
+				JSON.parse(localStorage.getItem("user") || "{ }");
 			}
 		});
 	}
@@ -68,19 +68,19 @@ export class AuthService {
 
 	getUserData(email: string): User {
 		const userLogadoCollection: AngularFirestoreCollection<User> =
-			this.afs.collection<User>('/users', (ref: CollectionReference) =>
-				ref.where('email', '==', email)
+			this.afs.collection<User>("/users", (ref: CollectionReference) =>
+				ref.where("email", "==", email)
 			);
 		const userLogadoCollection$: Observable<User[]> =
-			userLogadoCollection.valueChanges({ idField: 'uid' });
-		userLogadoCollection$.subscribe(user => {
+			userLogadoCollection.valueChanges({ idField: "uid" });
+		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
 		});
 		return this.userLogado;
 	}
 
 	get isLoggedIn(): boolean {
-		const user = JSON.parse(localStorage.getItem('users') || '{}');
+		const user = JSON.parse(localStorage.getItem("users") || "{}");
 		return user !== null && user.emailVerified !== false ? true : false;
 	}
 
@@ -89,7 +89,7 @@ export class AuthService {
 			.signInWithEmailAndPassword(email, password)
 			.then((result: any) => {
 				this.ngZone.run(() => {
-					this.router.navigate(['home']);
+					this.router.navigate(["home"]);
 				});
 
 				this.SetUserData(result.user);
@@ -112,16 +112,16 @@ export class AuthService {
 
 	SignOut(): any {
 		return this.afAuth.signOut().then(() => {
-			localStorage.removeItem('user');
-			this.router.navigate(['sign-in']);
+			localStorage.removeItem("user");
+			this.router.navigate(["sign-in"]);
 		});
 	}
 
 	async SendVerificationMail() {
 		return await this.afAuth.currentUser
-			.then(u => u?.sendEmailVerification())
+			.then((u) => u?.sendEmailVerification())
 			.then(() => {
-				this.router.navigate(['email-verification']);
+				this.router.navigate(["email-verification"]);
 			});
 	}
 
@@ -130,7 +130,7 @@ export class AuthService {
 			.sendPasswordResetEmail(passwordResetEmail)
 			.then(() => {
 				window.alert(
-					'E-mail de recuperação de senha enviado, cheque seu e-mail.'
+					"E-mail de recuperação de senha enviado, cheque seu e-mail."
 				);
 			})
 			.catch((error: any) => {
@@ -141,9 +141,9 @@ export class AuthService {
 	AuthLogin(provider: any): any {
 		return this.afAuth
 			.signInWithPopup(provider)
-			.then(result => {
+			.then((result) => {
 				this.ngZone.run(() => {
-					this.router.navigate(['home']);
+					this.router.navigate(["home"]);
 				});
 				this.SetUserData(result.user);
 			})
