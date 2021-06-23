@@ -146,12 +146,23 @@
 				<mat-label>Senha</mat-label>
 				<input
 					matInput
-					type="text"
+					type="password"
+					id="userPassword"
 					name="password"
 					ngModel
 					required
 					placeholder="**********"
 				/>
+				<!-- Icone com função para mostrar/esconder a senha -->
+				<i
+					matSuffix
+					class="material-icons"
+					showHideTrigger="userPassword"
+					[showHideStatus]="{
+						materialIcon: true,
+						id: 'userPassword'
+					}"
+				></i>
 				<mat-error>Insira uma senha!</mat-error>
 			</mat-form-field>
 			<!-- Confirmar senha -->
@@ -159,12 +170,24 @@
 				<mat-label>Confirme sua senha</mat-label>
 				<input
 					matInput
-					type="text"
+					type="password"
 					name="password"
+					id="userPassword"
 					ngModel
 					required
+					showHideInput
 					placeholder="**********"
 				/>
+				<!-- Icone com função para mostrar/esconder a senha -->
+				<i
+					matSuffix
+					class="material-icons"
+					showHideTrigger="userPassword"
+					[showHideStatus]="{
+						materialIcon: true,
+						id: 'userPassword'
+					}"
+				></i>
 				<mat-error>Confirme sua senha!</mat-error>
 			</mat-form-field>
 

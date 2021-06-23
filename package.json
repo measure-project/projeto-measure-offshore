@@ -24,6 +24,7 @@
     "@angular/router": "~11.2.5",
     "firebase": "^8.6.5",
     "ngx-mask": "^12.0.0",
+    "ngx-show-hide-password": "^2.3.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

@@ -19,6 +19,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
 
 import { NgxMaskModule } from "ngx-mask";
+import { ShowHidePasswordModule } from "ngx-show-hide-password";
 
 @NgModule({
 	declarations: [AppComponent, TelaLoginComponent, TelaCadastroComponent],
@@ -33,6 +34,7 @@ import { NgxMaskModule } from "ngx-mask";
 		MatButtonModule,
 		FormsModule,
 		NgxMaskModule.forRoot(),
+		ShowHidePasswordModule,
 		MatInputModule,
 	],
 	providers: [],
