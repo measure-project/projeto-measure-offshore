@@ -57,6 +57,12 @@
 					<mat-error>Insira sua data de nascimento!</mat-error>
 				</mat-form-field>
 			</div>
+			<!-- Inscrição Estadual -->
+			<mat-form-field appearance="outline">
+				<mat-label>Inscrição Estadual</mat-label>
+				<input matInput type="text" name="inscricaoEstadual" ngModel />
+				<mat-error>Insira seu nome!</mat-error>
+			</mat-form-field>
 			<!-- Telefone -->
 			<mat-form-field appearance="outline">
 				<mat-label>Telefone</mat-label>
@@ -107,7 +113,7 @@
 					<input
 						matInput
 						type="text"
-						name="number"
+						name="houseNumber"
 						ngModel
 						required
 						placeholder="00"
@@ -137,7 +143,7 @@
 					ngModel
 					required
 					email
-					placeholder="(99) 9999-9999"
+					placeholder="exemplo@email.com"
 				/>
 				<mat-error>Insira um e-mail válido!</mat-error>
 			</mat-form-field>
@@ -148,11 +154,13 @@
 					matInput
 					type="password"
 					id="userPassword"
-					name="password"
-					ngModel
+					#pw="ngModel"
+					[(ngModel)]="password"
+					[ngModelOptions]="{ standalone: true }"
 					required
 					showHideInput
 					placeholder="**********"
+					minlength="6"
 				/>
 				<!-- Icone com função para mostrar/esconder a senha -->
 				<i
@@ -164,7 +172,9 @@
 						id: 'userPassword'
 					}"
 				></i>
-				<mat-error>Insira uma senha!</mat-error>
+				<mat-error
+					>Insira uma senha com mais de 6 caracteres!</mat-error
+				>
 			</mat-form-field>
 			<!-- Confirmar senha -->
 			<mat-form-field appearance="outline">
@@ -172,9 +182,10 @@
 				<input
 					matInput
 					type="password"
-					name="password"
 					id="confirmPassword"
+					#confirmPw="ngModel"
 					ngModel
+					[ngModelOptions]="{ standalone: true }"
 					required
 					showHideInput
 					placeholder="**********"
@@ -192,7 +203,15 @@
 				<mat-error>Confirme sua senha!</mat-error>
 			</mat-form-field>
 
-			<button mat-raised-button [disabled]="!userData.valid">
+			<button
+				mat-raised-button
+				[disabled]="
+					!userData.valid ||
+					!pw.valid ||
+					!confirmPw.valid ||
+					pw.value != confirmPw.value
+				"
+			>
 				Continuar
 			</button>
 		</form>
