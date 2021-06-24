@@ -5,10 +5,11 @@ export interface User {
 	phone: string;
 
 	cnpj: string;
-	inscricaoEstadual: string;
+	inscricaoEstadual?: string;
 
 	adress: string;
-	houseNumber: number;
+	houseNumber: string;
+	birthday: string,
 	district: string;
 	complement?: string;
 

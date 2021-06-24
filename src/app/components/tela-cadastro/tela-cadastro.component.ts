@@ -1,3 +1,4 @@
+import { AuthService } from "./../../services/auth.service";
 import { User } from "./../../models/user";
 import { Component, OnInit } from "@angular/core";
 
@@ -13,7 +14,9 @@ export class TelaCadastroComponent implements OnInit {
 	phoneLength = "";
 	previousLength = 0;
 
-	constructor() {}
+	password!: string;
+
+	constructor(private authService: AuthService) {}
 
 	ngOnInit(): void {}
 
@@ -34,5 +37,7 @@ export class TelaCadastroComponent implements OnInit {
 
 	userSignUp(user: User) {
 		console.log(user);
+		console.log(this.password);
+		this.authService.signUp(user, this.password);
 	}
 }
