@@ -46,7 +46,7 @@ export class AuthService {
 	displayMessage(msg: string, isError: boolean = false): void {
 		this.snackBar.open(msg, 'x', {
 			duration: 3000,
-			horizontalPosition: 'right',
+			horizontalPosition: 'center',
 			verticalPosition: 'top',
 			panelClass: isError ? ['msg-error'] : ['msg-success'],
 		});
@@ -97,16 +97,20 @@ export class AuthService {
 		return user !== null && user.emailVerified !== false ? true : false;
 	}
 
-	singIn(email: any, password: any): any {
+	singIn(email: string, password: string): any {
 		return this.afAuth
 			.signInWithEmailAndPassword(email, password)
 			.then((result: any) => {
-				this.ngZone.run(() => {
-					this.router.navigate(['/signup']);
-				});
-
-				this.SetUserData(result.user);
-			});
+				this.ngZone.run(
+					() => {
+						this.router.navigate(['/signup']);
+					},
+					() => this.SetUserData(result.user)
+				);
+			})
+			.catch((error: any) =>
+				this.displayMessage('Usuário ou senha incorretos', true)
+			);
 	}
 
 	signUp(user: User, password: string): any {
