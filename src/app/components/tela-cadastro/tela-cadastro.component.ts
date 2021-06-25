@@ -1,22 +1,23 @@
-import { AuthService } from "./../../services/auth.service";
-import { User } from "./../../models/user";
-import { Component, OnInit } from "@angular/core";
+import { Router } from '@angular/router';
+import { AuthService } from './../../services/auth.service';
+import { User } from './../../models/user';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: "app-tela-cadastro",
-	templateUrl: "./tela-cadastro.component.html",
-	styleUrls: ["./tela-cadastro.component.scss"],
+	selector: 'app-tela-cadastro',
+	templateUrl: './tela-cadastro.component.html',
+	styleUrls: ['./tela-cadastro.component.scss'],
 })
 export class TelaCadastroComponent implements OnInit {
-	CELULAR = "(00) 0 0000-0000"; //Mask para celular
-	TELEFONE = "(00) 0000-0000"; //Mask para telefone
+	CELULAR = '(00) 0 0000-0000'; //Mask para celular
+	TELEFONE = '(00) 0000-0000'; //Mask para telefone
 	phoneMask = this.TELEFONE;
-	phoneLength = "";
+	phoneLength = '';
 	previousLength = 0;
 
 	password!: string;
 
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private router: Router) {}
 
 	ngOnInit(): void {}
 
@@ -36,8 +37,19 @@ export class TelaCadastroComponent implements OnInit {
 	}
 
 	userSignUp(user: User) {
-		console.log(user);
-		console.log(this.password);
-		this.authService.signUp(user, this.password);
+		try {
+			this.authService.signUp(user, this.password);
+			this.authService.displayMessage(
+				'Conta criada com sucesso! Acesse seu e-mail para confirmar o cadastro.',
+				false
+			);
+		} catch (err) {
+			this.authService.displayMessage(
+				'Ocorreu um erro, não foi possível criar a conta. Erro: ' + err,
+				true
+			);
+		}
+
+		this.router.navigate(['/']);
 	}
 }
