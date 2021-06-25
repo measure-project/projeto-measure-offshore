@@ -6,7 +6,6 @@
 
 mat-card {
 	width: 22rem;
-	height: 27rem;
 	border-radius: 1rem;
 	position: absolute;
 	left: 50%;
@@ -16,6 +15,10 @@ mat-card {
 	-ms-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
+
+	img {
+		width: 20rem;
+	}
 }
 
 .login-form {
@@ -54,6 +57,10 @@ mat-card {
 
 .forgot-password {
 	text-align: end;
+
+	:hover {
+		cursor: pointer;
+	}
 }
 
 .forgot-password a {

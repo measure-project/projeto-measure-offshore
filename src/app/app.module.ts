@@ -21,9 +21,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import { TelaRecuperarSenhaComponent } from './components/tela-recuperar-senha/tela-recuperar-senha.component';
 
 @NgModule({
-	declarations: [AppComponent, TelaLoginComponent, TelaCadastroComponent],
+	declarations: [AppComponent, TelaLoginComponent, TelaCadastroComponent, TelaRecuperarSenhaComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,

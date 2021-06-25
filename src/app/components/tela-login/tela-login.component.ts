@@ -31,4 +31,8 @@ export class TelaLoginComponent implements OnInit {
 		this.router.navigate(['/signup']);
 		console.log(this.username, this.password);
 	}
+
+	forgotPassword() {
+		this.router.navigate(['/passwordRecovery']);
+	}
 }
