@@ -3,31 +3,33 @@
 		<p>LOGO</p>
 		<form class="login-form">
 			<mat-form-field appearance="outline">
+				<mat-label>E-mail</mat-label>
 				<input
 					matInput
 					ngModel
 					name="e-mail"
 					[(ngModel)]="username"
-					placeholder="E-mail"
+					placeholder="usuario@email.com"
 					type="text"
 					required
 				/>
 				<mat-error>Insira o e-mail!</mat-error>
 			</mat-form-field>
 			<mat-form-field appearance="outline">
+				<mat-label>Senha</mat-label>
 				<input
 					matInput
-					ngModel
 					name="senha"
 					id="userPassword"
 					[(ngModel)]="password"
-					placeholder="Senha"
+					placeholder="**************"
 					showHideInput
 					required
 				/>
 				<i
 					matSuffix
 					class="material-icons"
+					style="cursor: pointer"
 					showHideTrigger="userPassword"
 					[showHideStatus]="{
 						materialIcon: true,

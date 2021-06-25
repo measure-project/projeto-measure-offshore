@@ -102,7 +102,7 @@ export class AuthService {
 			.signInWithEmailAndPassword(email, password)
 			.then((result: any) => {
 				this.ngZone.run(() => {
-					this.router.navigate(['home']);
+					this.router.navigate(['/signup']);
 				});
 
 				this.SetUserData(result.user);
@@ -152,21 +152,13 @@ export class AuthService {
 	}
 
 	AuthLogin(provider: any): any {
-		return this.afAuth
-			.signInWithPopup(provider)
-			.then(result => {
-				this.ngZone.run(() => {
-					this.router.navigate(['home']);
-				});
-
-				this.SetUserData(result.user);
-			})
-			.catch((error: any) => {
-				this.displayMessage(
-					'Erro ao logar com o Google! Tente novamente mais tarde.',
-					true
-				);
+		return this.afAuth.signInWithPopup(provider).then(result => {
+			this.ngZone.run(() => {
+				this.router.navigate(['/signup']);
 			});
+
+			this.SetUserData(result.user);
+		});
 	}
 
 	// Sign in with Google
