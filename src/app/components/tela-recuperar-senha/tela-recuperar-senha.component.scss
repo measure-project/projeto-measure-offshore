@@ -36,3 +36,19 @@
 		align-self: center;
 	}
 }
+
+@media (max-width: 600px) {
+	.matCard {
+		width: 80%;
+
+		.cardTitle {
+			h1 {
+				font-size: 2rem;
+			}
+		}
+	}
+
+	mat-form-field {
+		width: 100% !important;
+	}
+}
