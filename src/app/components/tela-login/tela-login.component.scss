@@ -20,6 +20,23 @@ mat-card {
 	}
 }
 
+.upperBar,
+.bottomBar {
+	position: absolute;
+	width: 100%;
+	background-color: #4abdb7;
+	z-index: -1;
+}
+
+.upperBar {
+	height: 5rem;
+}
+
+.bottomBar {
+	bottom: 0;
+	height: 10rem;
+}
+
 .login-form {
 	display: flex;
 	flex-direction: column;
