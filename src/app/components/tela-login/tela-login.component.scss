@@ -1,20 +1,19 @@
 .engloba-mat-card {
-	align-content: center;
+	min-height: 100%;
+	display: flex;
 	align-items: center;
-	text-align: center;
+	justify-content: center;
 }
 
 mat-card {
-	width: 22rem;
+	width: 25rem;
 	border-radius: 1rem;
 	position: absolute;
-	left: 50%;
-	top: 50%;
-	-moz-transform: translate(-50%, -50%);
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	-o-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 
 	img {
 		width: 20rem;
@@ -24,6 +23,8 @@ mat-card {
 .login-form {
 	display: flex;
 	flex-direction: column;
+
+	width: 20rem;
 }
 
 .login-button,
@@ -49,6 +50,7 @@ mat-card {
 	// margin-top: 1rem;
 	background-color: #ebebeb;
 	width: 15rem;
+	color: #4f4f4f;
 }
 
 #google-logo {
@@ -61,10 +63,11 @@ mat-card {
 	:hover {
 		cursor: pointer;
 	}
-}
 
-.forgot-password a {
-	color: grey;
+	a {
+		color: grey;
+		text-decoration: underline;
+	}
 }
 
 .ou-txt {
