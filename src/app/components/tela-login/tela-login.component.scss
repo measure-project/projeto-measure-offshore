@@ -3,6 +3,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	background-image: linear-gradient(
+		to bottom,
+		#4abdb7 10%,
+		#ebebeb 10%,
+		#ebebeb 75%,
+		#4abdb7 75%,
+		#4abdb7 100%
+	);
 }
 
 mat-card {
