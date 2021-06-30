@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -17,6 +17,10 @@ export class TelaRecuperarSenhaComponent implements OnInit {
 
 		this.authService.ForgotPassword(email);
 
+		this.router.navigate(['/']);
+	}
+
+	cancel() {
 		this.router.navigate(['/']);
 	}
 }

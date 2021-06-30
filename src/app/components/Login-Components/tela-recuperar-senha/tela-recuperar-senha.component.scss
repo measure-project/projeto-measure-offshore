@@ -1,3 +1,5 @@
+@import '../../../../variables.scss';
+
 .matCardContainer {
 	min-height: 100%;
 	display: flex;
@@ -27,13 +29,18 @@
 	.pwRecoverForm {
 		display: flex;
 		flex-direction: column;
+
+		.formButtons {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 1rem;
+		}
 	}
 
 	button {
 		margin-top: 1rem;
 		width: 10rem;
-		background-color: #4abdb7;
-		align-self: center;
+		background-color: $backgroundColorPrimary;
 	}
 }
 

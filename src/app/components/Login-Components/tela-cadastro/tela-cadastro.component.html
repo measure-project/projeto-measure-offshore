@@ -203,17 +203,24 @@
 				<mat-error>Confirme sua senha!</mat-error>
 			</mat-form-field>
 
-			<button
-				mat-raised-button
-				[disabled]="
-					!userData.valid ||
-					!pw.valid ||
-					!confirmPw.valid ||
-					pw.value != confirmPw.value
-				"
-			>
-				Continuar
-			</button>
+			<div class="formButtons colorWhite">
+				<button mat-raised-button (click)="cancel()" class="colorWhite">
+					Cancelar
+				</button>
+
+				<button
+					mat-raised-button
+					[disabled]="
+						!userData.valid ||
+						!pw.valid ||
+						!confirmPw.valid ||
+						pw.value != confirmPw.value
+					"
+					class="colorWhite"
+				>
+					Continuar
+				</button>
+			</div>
 		</form>
 	</mat-card>
 </div>

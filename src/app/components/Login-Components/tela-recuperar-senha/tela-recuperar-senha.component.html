@@ -27,13 +27,19 @@
 				<mat-error>Digite um e-mail válido!</mat-error>
 			</mat-form-field>
 
-			<button
-				mat-raised-button
-				[disabled]="!email.valid"
-				class="colorWhite"
-			>
-				Enviar
-			</button>
+			<div class="formButtons">
+				<button mat-raised-button (click)="cancel()" class="colorWhite">
+					Cancelar
+				</button>
+
+				<button
+					mat-raised-button
+					[disabled]="!email.valid"
+					class="colorWhite"
+				>
+					Enviar
+				</button>
+			</div>
 		</form>
 	</mat-card>
 </div>
