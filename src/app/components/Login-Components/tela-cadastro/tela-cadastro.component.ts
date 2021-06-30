@@ -50,10 +50,10 @@ export class TelaCadastroComponent implements OnInit {
 			);
 		}
 
-		this.router.navigate(['/']);
+		this.router.navigate(['/login']);
 	}
 
 	cancel() {
-		this.router.navigate(['/']);
+		this.router.navigate(['/login']);
 	}
 }

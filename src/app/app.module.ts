@@ -19,13 +19,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { HomePageComponent } from './components/home-components/home-page/home-page.component';
+import { TelaVideoComponent } from './components/home-components/tela-video/tela-video.component';
 
 @NgModule({
-	declarations: [AppComponent, TelaLoginComponent, TelaCadastroComponent, TelaRecuperarSenhaComponent, HomePageComponent],
+	declarations: [
+		AppComponent,
+		TelaLoginComponent,
+		TelaCadastroComponent,
+		TelaRecuperarSenhaComponent,
+		HomePageComponent,
+  TelaVideoComponent,
+	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
@@ -40,6 +49,7 @@ import { HomePageComponent } from './components/home-components/home-page/home-p
 		ShowHidePasswordModule,
 		MatInputModule,
 		MatSnackBarModule,
+		MatToolbarModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

@@ -17,10 +17,10 @@ export class TelaRecuperarSenhaComponent implements OnInit {
 
 		this.authService.ForgotPassword(email);
 
-		this.router.navigate(['/']);
+		this.router.navigate(['/login']);
 	}
 
 	cancel() {
-		this.router.navigate(['/']);
+		this.router.navigate(['/login']);
 	}
 }

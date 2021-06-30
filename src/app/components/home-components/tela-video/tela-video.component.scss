@@ -1,0 +1,55 @@
+@import '../../../../variables.scss';
+
+#backgroundVideo {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+	z-index: -1;
+}
+
+.toolBar {
+	margin: 0;
+	position: fixed;
+	display: flex;
+	justify-content: space-between;
+	background-color: transparent;
+
+	img {
+		align-self: flex-start;
+		width: 10rem;
+		margin: 1rem;
+	}
+
+	.toolBarText {
+		margin-top: 2rem;
+	}
+
+	button {
+		margin-left: 2rem;
+		background-color: $backgroundColorPrimary;
+		border-radius: 50px;
+	}
+}
+
+.content {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	h1 {
+		text-align: center;
+		font-size: 2.5rem;
+		width: 15ch;
+	}
+
+	button {
+		background-color: $backgroundColorPrimary;
+		width: 15ch;
+		border-radius: 50px;
+	}
+}
