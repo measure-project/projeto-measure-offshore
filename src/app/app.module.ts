@@ -25,6 +25,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { HomePageComponent } from './components/home-components/home-page/home-page.component';
 import { TelaVideoComponent } from './components/home-components/tela-video/tela-video.component';
+import { TelaBottomComponent } from './components/home-components/tela-bottom/tela-bottom.component';
 
 @NgModule({
 	declarations: [
@@ -33,7 +34,8 @@ import { TelaVideoComponent } from './components/home-components/tela-video/tela
 		TelaCadastroComponent,
 		TelaRecuperarSenhaComponent,
 		HomePageComponent,
-  TelaVideoComponent,
+		TelaVideoComponent,
+  TelaBottomComponent,
 	],
 	imports: [
 		BrowserModule,
