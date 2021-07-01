@@ -1,0 +1,57 @@
+@import '../../../../variables.scss';
+$tamanho: 400px;
+.page-content {
+	margin-left: 7rem;
+	margin-bottom: 2rem;
+	margin-top: 2rem;
+	display: flex;
+
+	justify-content: space-between;
+
+	h2 {
+		line-height: 2rem;
+		font-size: 2rem;
+		font-weight: 400;
+	}
+
+	h3 {
+		font-weight: 500;
+	}
+
+	.palavra-servicos {
+		color: $backgroundColorPrimary;
+		margin-left: 3rem;
+	}
+
+	.orcamento-button {
+		background-color: $backgroundColorPrimary;
+		border-radius: 50px;
+		text-align: center;
+	}
+
+	.consulte-equipe {
+		background-size: contain;
+		width: (1279px / 853px) * $tamanho - 100px;
+		height: (853px / 1279px) * $tamanho;
+		border-radius: 30px;
+		margin-right: 7rem;
+		.black-box {
+			width: inherit;
+			height: inherit;
+			border-radius: inherit;
+			background-color: black;
+			opacity: 0.6;
+		}
+
+		.consulta-text {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+
+	.presta-servicos {
+		justify-content: right;
+	}
+}
