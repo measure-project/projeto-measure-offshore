@@ -1,5 +1,7 @@
 @import '../../../../variables.scss';
 
+$tamanho: 300px;
+
 .services {
 	width: 100%;
 	height: 100%;
@@ -23,14 +25,49 @@
 	.servicesImg {
 		width: 100%;
 		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
-		align-items: center;
+		display: grid;
+		justify-content: center;
+		align-content: center;
+		grid-template-columns: 30% 30%;
+		grid-template-rows: 40% 40%;
 
 		h2 {
-			display: inline;
-			margin: 10rem;
+			display: none;
+		}
+
+		.blackBox {
+			display: none;
+		}
+
+		.manutencao,
+		.gerais,
+		.pintura,
+		.jardinagem {
+			text-align: center;
+			background-size: cover;
+			background-image: url('../../../../assets/manutencao.jpg'); // Depois colocar a background image em cada elemento inline
+			border-radius: 50px;
+			width: (1279px / 853px) * $tamanho - 100px; // Tamanho provisório
+			height: (853px / 1279px) * $tamanho;
+		}
+
+		:hover {
+			.blackBox {
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+				width: inherit;
+				height: inherit;
+				border-radius: inherit;
+				background-color: black;
+				opacity: 0.6;
+			}
+			h2 {
+				font-size: 2rem;
+				display: inherit;
+				color: $backgroundColorSecondary;
+			}
+			cursor: pointer;
 		}
 	}
 }

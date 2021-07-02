@@ -17,7 +17,7 @@ export class TelaVideoComponent implements OnInit {
 
 	@HostListener('window:scroll', ['$event']) // Mudar cor da nav bar ao descer o scroll
 	onWindowScroll() {
-		let element = document.getElementById('toolBar') as HTMLElement; // Pega o elemento hmtl pelo seu id
+		let element = document.querySelector('.toolBar') as HTMLElement; // Pega o elemento hmtl pela classe
 
 		if (window.pageYOffset > element.clientHeight)
 			//Se o offset, ou seja, a posição atual do scroll for maior que a altura da tela
