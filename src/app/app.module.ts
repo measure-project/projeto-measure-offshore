@@ -26,6 +26,7 @@ import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { HomePageComponent } from './components/home-components/home-page/home-page.component';
 import { TelaVideoComponent } from './components/home-components/tela-video/tela-video.component';
 import { PrestacaoServicosComponent } from './components/home-components/prestacao-servicos/prestacao-servicos.component';
+import { TelaBottomComponent } from './components/home-components/tela-bottom/tela-bottom.component';
 
 @NgModule({
 	declarations: [
@@ -34,8 +35,9 @@ import { PrestacaoServicosComponent } from './components/home-components/prestac
 		TelaCadastroComponent,
 		TelaRecuperarSenhaComponent,
 		HomePageComponent,
-  TelaVideoComponent,
-  PrestacaoServicosComponent,
+		PrestacaoServicosComponent,
+		TelaVideoComponent,
+		TelaBottomComponent,
 	],
 	imports: [
 		BrowserModule,

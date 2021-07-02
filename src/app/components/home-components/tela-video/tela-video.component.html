@@ -1,10 +1,10 @@
-<mat-toolbar class="toolBar">
+<mat-toolbar id="toolBar" class="toolBar" (scroll)="onWindowScroll()">
 	<img
 		src="../../../../assets/measure-logo.png"
 		alt="Logo da Measure Offshore"
 	/>
-	<div class="toolBarText">
-		<span class="colorWhite">Home</span>
+	<div>
+		<span style="mix-blend-mode: difference" class="colorWhite">Home</span>
 		<button mat-raised-button (click)="toLogin()" class="colorWhite">
 			Entrar
 		</button>

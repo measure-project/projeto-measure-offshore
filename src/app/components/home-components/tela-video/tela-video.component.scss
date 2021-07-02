@@ -10,20 +10,18 @@
 }
 
 .toolBar {
+	transition: 1s;
 	margin: 0;
+	height: 5rem;
 	position: fixed;
 	display: flex;
 	justify-content: space-between;
 	background-color: transparent;
 
 	img {
+		margin-top: 0.5rem;
 		align-self: flex-start;
 		width: 10rem;
-		margin: 1rem;
-	}
-
-	.toolBarText {
-		margin-top: 2rem;
 	}
 
 	button {
@@ -31,6 +29,11 @@
 		background-color: $backgroundColorPrimary;
 		border-radius: 50px;
 	}
+}
+
+.toolBar-color {
+	transition: 1s;
+	background-color: $backgroundColorSecondary;
 }
 
 .content {
