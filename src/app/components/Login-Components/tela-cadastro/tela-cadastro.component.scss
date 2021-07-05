@@ -8,10 +8,10 @@
 	justify-content: center;
 
 	background-image: linear-gradient(
-		$backgroundColorPrimary 10%,
-		$backgroundColorSecondary 10%,
-		$backgroundColorSecondary 75%,
-		$backgroundColorPrimary 75%
+		$colorPrimary 10%,
+		$colorSecondary 10%,
+		$colorSecondary 75%,
+		$colorPrimary 75%
 	);
 }
 
@@ -45,7 +45,7 @@
 
 		button {
 			width: 10rem;
-			background-color: $backgroundColorPrimary;
+			background-color: $colorPrimary;
 		}
 
 		i:hover {

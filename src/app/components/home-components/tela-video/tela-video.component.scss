@@ -27,14 +27,14 @@
 
 	button {
 		margin-left: 2rem;
-		background-color: $backgroundColorPrimary;
+		background-color: $colorPrimary;
 		border-radius: 50px;
 	}
 }
 
 .toolBar-color {
 	transition: 1s;
-	background-color: $backgroundColorSecondary;
+	background-color: $colorSecondary;
 }
 
 .content {
@@ -49,10 +49,11 @@
 		text-align: center;
 		font-size: 2.5rem;
 		width: 15ch;
+		line-height: 1;
 	}
 
 	button {
-		background-color: $backgroundColorPrimary;
+		background-color: $colorPrimary;
 		width: 15ch;
 		border-radius: 50px;
 	}
