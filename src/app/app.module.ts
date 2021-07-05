@@ -29,6 +29,7 @@ import { HomePageComponent } from './components/home-components/home-page/home-p
 import { TelaVideoComponent } from './components/home-components/tela-video/tela-video.component';
 import { PrestacaoServicosComponent } from './components/home-components/prestacao-servicos/prestacao-servicos.component';
 import { TelaBottomComponent } from './components/home-components/tela-bottom/tela-bottom.component';
+import { VerPerfilComponent } from './components/Perfil-Components/ver-perfil/ver-perfil.component';
 
 @NgModule({
 	declarations: [
@@ -40,6 +41,7 @@ import { TelaBottomComponent } from './components/home-components/tela-bottom/te
 		PrestacaoServicosComponent,
 		TelaVideoComponent,
 		TelaBottomComponent,
+  VerPerfilComponent,
 	],
 	imports: [
 		BrowserModule,

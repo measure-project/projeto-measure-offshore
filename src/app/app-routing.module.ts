@@ -1,3 +1,4 @@
+import { VerPerfilComponent } from './components/Perfil-Components/ver-perfil/ver-perfil.component';
 import { HomePageComponent } from './components/home-components/home-page/home-page.component';
 import { TelaCadastroComponent } from './components/Login-Components/tela-cadastro/tela-cadastro.component';
 import { TelaLoginComponent } from './components/Login-Components/tela-login/tela-login.component';
@@ -21,6 +22,10 @@ const routes: Routes = [
 	{
 		path: 'passwordRecovery',
 		component: TelaRecuperarSenhaComponent,
+	},
+	{
+		path: 'verPerfil',
+		component: VerPerfilComponent,
 	},
 ];
 
