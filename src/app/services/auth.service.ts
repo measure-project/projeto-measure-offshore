@@ -86,7 +86,7 @@ export class AuthService {
 			);
 		const userLogadoCollection$: Observable<User[]> =
 			userLogadoCollection.valueChanges({ idField: 'uid' });
-		userLogadoCollection$.subscribe(user => {
+		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
 		});
 		return this.userLogado;
@@ -136,7 +136,7 @@ export class AuthService {
 
 	async SendVerificationMail() {
 		return await this.afAuth.currentUser
-			.then(u => u?.sendEmailVerification())
+			.then((u) => u?.sendEmailVerification())
 			.then(() => {
 				this.router.navigate(['email-verification']);
 			});
@@ -156,7 +156,7 @@ export class AuthService {
 	}
 
 	AuthLogin(provider: any): any {
-		return this.afAuth.signInWithPopup(provider).then(result => {
+		return this.afAuth.signInWithPopup(provider).then((result) => {
 			this.ngZone.run(() => {
 				this.router.navigate(['/signup']);
 			});

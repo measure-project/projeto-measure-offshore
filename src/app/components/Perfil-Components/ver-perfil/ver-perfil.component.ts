@@ -1,3 +1,4 @@
+import { User } from './../../../models/user';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./ver-perfil.component.scss'],
 })
 export class VerPerfilComponent implements OnInit {
+	defaultImage = '../../../../assets/manutencao.jpg';
+	user!: User;
+
 	constructor(private authService: AuthService) {}
 
 	ngOnInit(): void {
-		this.authService.displayMessage('Teste realizado com sucesso!', false);
+		this.user = this.authService.getUserData('joogui2010@gmail.com');
+		console.log(this.user); // Pra funcionar tem que fazer o login
 	}
 }
