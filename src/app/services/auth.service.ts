@@ -19,7 +19,7 @@ export class AuthService {
 	userLogado = {} as User;
 
 	userState: any;
-	afAuthcurrentUser: any;
+	currentUserEmail!: string;
 	dadosUser!: AngularFirestoreCollection<User>;
 
 	constructor(
@@ -98,15 +98,19 @@ export class AuthService {
 	}
 
 	singIn(email: string, password: string): any {
-		return this.afAuth
-			.signInWithEmailAndPassword(email, password)
-			.then((result: any) => {
-				this.ngZone.run(
-					() => {
-						this.router.navigate(['/verPerfil']);
-					},
-					() => this.SetUserData(result.user)
-				);
+		this.afAuth
+			.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+			.then(() => {
+				return this.afAuth
+					.signInWithEmailAndPassword(email, password)
+					.then((result: any) => {
+						this.ngZone.run(
+							() => {
+								this.router.navigate(['/verPerfil']);
+							},
+							() => this.SetUserData(result.user)
+						);
+					});
 			})
 			.catch((error: any) =>
 				this.displayMessage('Usuário ou senha incorretos', true)

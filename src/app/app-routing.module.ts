@@ -1,3 +1,4 @@
+import { EditarPerfilComponent } from './components/Perfil-Components/editar-perfil/editar-perfil.component';
 import { VerPerfilComponent } from './components/Perfil-Components/ver-perfil/ver-perfil.component';
 import { HomePageComponent } from './components/home-components/home-page/home-page.component';
 import { TelaCadastroComponent } from './components/Login-Components/tela-cadastro/tela-cadastro.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
 	{
 		path: 'verPerfil',
 		component: VerPerfilComponent,
+	},
+	{
+		path: 'editarPerfil',
+		component: EditarPerfilComponent,
 	},
 ];
 

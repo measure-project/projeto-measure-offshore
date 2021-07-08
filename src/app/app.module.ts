@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
@@ -30,6 +31,7 @@ import { TelaVideoComponent } from './components/home-components/tela-video/tela
 import { PrestacaoServicosComponent } from './components/home-components/prestacao-servicos/prestacao-servicos.component';
 import { TelaBottomComponent } from './components/home-components/tela-bottom/tela-bottom.component';
 import { VerPerfilComponent } from './components/Perfil-Components/ver-perfil/ver-perfil.component';
+import { EditarPerfilComponent } from './components/Perfil-Components/editar-perfil/editar-perfil.component';
 
 @NgModule({
 	declarations: [
@@ -41,7 +43,8 @@ import { VerPerfilComponent } from './components/Perfil-Components/ver-perfil/ve
 		PrestacaoServicosComponent,
 		TelaVideoComponent,
 		TelaBottomComponent,
-  VerPerfilComponent,
+		VerPerfilComponent,
+		EditarPerfilComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -59,6 +62,7 @@ import { VerPerfilComponent } from './components/Perfil-Components/ver-perfil/ve
 		MatSnackBarModule,
 		MatToolbarModule,
 		IvyCarouselModule,
+		MatExpansionModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

@@ -7,7 +7,7 @@
 	<mat-card class="profileCard mat-elevation-z4">
 		<mat-card-title>
 			<h1>Perfil</h1>
-			<a style="text-align: center">
+			<a [routerLink]="['/editarPerfil']" class="editProfile">
 				<span class="material-icons">edit</span><br />Editar
 			</a>
 		</mat-card-title>
@@ -22,4 +22,14 @@
 			<h3>{{ user.cnpj }}</h3>
 		</mat-card-content>
 	</mat-card>
+
+	<mat-expansion-panel class="filialPanel">
+		<mat-expansion-panel-header>
+			<mat-panel-title> Selecione sua filial </mat-panel-title>
+		</mat-expansion-panel-header>
+
+		<p>Iracema - MG</p>
+		<p>Rio Claro - SP</p>
+		<p>Belo Horizonte - MG</p>
+	</mat-expansion-panel>
 </div>

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { User } from './../../../models/user';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,10 +12,14 @@ export class VerPerfilComponent implements OnInit {
 	defaultImage = '../../../../assets/manutencao.jpg';
 	user!: User;
 
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private router: Router) {}
 
 	ngOnInit(): void {
-		this.user = this.authService.getUserData('joogui2010@gmail.com');
-		console.log(this.user); // Pra funcionar tem que fazer o login
+		this.authService.afAuth.onAuthStateChanged((user) => {
+			if (user && user.email) {
+				console.log('CARAIO	' + user.email);
+				this.user = this.authService.getUserData(user.email);
+			}
+		});
 	}
 }
