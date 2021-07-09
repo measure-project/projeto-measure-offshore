@@ -88,6 +88,10 @@ export class AuthService {
 			userLogadoCollection.valueChanges({ idField: 'uid' });
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
+			localStorage.setItem(
+				'currentUser',
+				JSON.stringify(this.userLogado)
+			);
 		});
 		return this.userLogado;
 	}
@@ -134,7 +138,7 @@ export class AuthService {
 	SignOut(): any {
 		return this.afAuth.signOut().then(() => {
 			localStorage.removeItem('user');
-			this.router.navigate(['sign-in']);
+			this.router.navigate(['/login']);
 		});
 	}
 

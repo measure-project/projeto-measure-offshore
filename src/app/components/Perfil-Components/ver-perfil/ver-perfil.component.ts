@@ -15,11 +15,6 @@ export class VerPerfilComponent implements OnInit {
 	constructor(private authService: AuthService, private router: Router) {}
 
 	ngOnInit(): void {
-		this.authService.afAuth.onAuthStateChanged((user) => {
-			if (user && user.email) {
-				console.log('CARAIO	' + user.email);
-				this.user = this.authService.getUserData(user.email);
-			}
-		});
+		this.user = JSON.parse(localStorage.getItem('currentUser') || '{}');
 	}
 }

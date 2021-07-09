@@ -16,7 +16,11 @@ export class TelaLoginComponent implements OnInit {
 		this.password = '';
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		if (this.authService.isLoggedIn) {
+			this.router.navigate(['/verPerfil']);
+		}
+	}
 
 	logar(): void {
 		this.authService.singIn(this.username, this.password);
