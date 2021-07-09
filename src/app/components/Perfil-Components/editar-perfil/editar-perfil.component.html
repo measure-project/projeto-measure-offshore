@@ -1,1 +1,18 @@
-<p>editar-perfil works!</p>
+<mat-toolbar class="toolBar">
+	<img src="../../../../assets/measure-logo.png" />
+	<span class="material-icons profileIcon">account_circle</span>
+</mat-toolbar>
+<div class="content">
+	<mat-card class="profileCard mat-elevation-z4">
+		<mat-card-title>
+			<h1>EDIÇÃO DE PERFIL</h1>
+		</mat-card-title>
+		<mat-card-content class="profileCardContent">
+			<img class="profilePicture" [src]="defaultImage" alt="Foto de perfil" />
+			<button mat-raised-button routerLink="/verPerfil" class="editPhoto">
+				<span class="material-icons">border_color</span>
+			</button>
+			<form>Aqui ficará o formulário</form>
+		</mat-card-content>
+	</mat-card>
+</div>
