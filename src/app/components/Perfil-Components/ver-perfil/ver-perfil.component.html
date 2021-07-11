@@ -1,14 +1,14 @@
-<mat-toolbar class="toolBar">
-	<img src="../../../../assets/measure-logo.png" />
-	<span class="material-icons profileIcon">account_circle</span>
-</mat-toolbar>
+<div class="content" *ngIf="user">
+	<mat-toolbar class="toolBar">
+		<img src="../../../../assets/measure-logo.png" />
+		<span class="material-icons profileIcon">account_circle</span>
+	</mat-toolbar>
 
-<div class="content">
 	<mat-card class="profileCard mat-elevation-z4">
 		<mat-card-title>
 			<h1>Perfil</h1>
 			<a [routerLink]="['/editarPerfil']" class="editProfile">
-				<span class="material-icons">edit</span><br />Editar
+				<span class="material-icons">border_color</span><br />Editar
 			</a>
 		</mat-card-title>
 		<mat-card-content class="profileCardContent">
@@ -21,6 +21,10 @@
 			<h3><span class="material-icons">place</span>{{ user.adress }}</h3>
 			<h3>{{ user.cnpj }}</h3>
 		</mat-card-content>
+
+		<mat-card-actions>
+			<button (click)="signOut()">Sair</button>
+		</mat-card-actions>
 	</mat-card>
 
 	<mat-expansion-panel class="filialPanel">
@@ -28,8 +32,48 @@
 			<mat-panel-title> Selecione sua filial </mat-panel-title>
 		</mat-expansion-panel-header>
 
-		<p>Iracema - MG</p>
-		<p>Rio Claro - SP</p>
-		<p>Belo Horizonte - MG</p>
+		<div class="panelContent">
+			<p>Iracema - MG</p>
+			<hr />
+			<p>Rio Claro - SP</p>
+			<hr />
+			<p>Belo Horizonte - MG</p>
+			<hr />
+			<p>Iracema - MG</p>
+			<hr />
+			<p>Rio Claro - SP</p>
+			<hr />
+			<p>Belo Horizonte - MG</p>
+			<hr />
+			<p>Iracema - MG</p>
+			<hr />
+			<p>Rio Claro - SP</p>
+			<hr />
+			<p>Belo Horizonte - MG</p>
+			<hr />
+			<p>Iracema - MG</p>
+			<hr />
+			<p>Rio Claro - SP</p>
+			<hr />
+			<p>Belo Horizonte - MG</p>
+		</div>
 	</mat-expansion-panel>
+
+	<div class="servicos">
+		<div class="header">
+			<h3>Serviços Contratados</h3>
+			<button mat-raised-button>Adicionar serviço</button>
+		</div>
+
+		<mat-card class="servicosLista" *ngFor="let service of services">
+			<mat-card-title>
+				<h1>{{ service.name }}</h1>
+				<p>{{ service.date }}</p>
+			</mat-card-title>
+
+			<mat-card-content>
+				<p>{{ service.description }}</p>
+			</mat-card-content>
+		</mat-card>
+	</div>
 </div>

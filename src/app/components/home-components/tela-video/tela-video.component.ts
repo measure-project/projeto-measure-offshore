@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, HostListener } from '@angular/core';
 
@@ -7,12 +8,15 @@ import { Component, OnInit, HostListener } from '@angular/core';
 	styleUrls: ['./tela-video.component.scss'],
 })
 export class TelaVideoComponent implements OnInit {
-	constructor(private router: Router) {}
+	constructor(private router: Router, private authService: AuthService) {}
 
 	ngOnInit(): void {}
 
 	toLogin() {
-		this.router.navigate(['/login']);
+		this.authService.afAuth.onAuthStateChanged((user) => {
+			if (user) this.router.navigate(['/verPerfil']);
+			else this.router.navigate(['/login']);
+		});
 	}
 
 	@HostListener('window:scroll', ['$event']) // Mudar cor da nav bar ao descer o scroll

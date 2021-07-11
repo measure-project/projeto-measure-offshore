@@ -31,7 +31,6 @@ export class AuthService {
 	) {
 		this.afAuth.authState.subscribe((user: any) => {
 			if (user) {
-				this.getUserData(user.email);
 				this.userState = user;
 				localStorage.setItem('user', JSON.stringify(this.userState));
 				JSON.parse(localStorage.getItem('user') || '{ }');
@@ -97,11 +96,12 @@ export class AuthService {
 	}
 
 	get isLoggedIn(): boolean {
-		const user = JSON.parse(localStorage.getItem('users') || '{}');
+		const user = JSON.parse(localStorage.getItem('user') || '{}');
 		return user !== null && user.emailVerified !== false ? true : false;
 	}
 
 	singIn(email: string, password: string): any {
+		this.getUserData(email);
 		this.afAuth
 			.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 			.then(() => {
@@ -138,6 +138,7 @@ export class AuthService {
 	SignOut(): any {
 		return this.afAuth.signOut().then(() => {
 			localStorage.removeItem('user');
+			localStorage.removeItem('currentUser');
 			this.router.navigate(['/login']);
 		});
 	}
