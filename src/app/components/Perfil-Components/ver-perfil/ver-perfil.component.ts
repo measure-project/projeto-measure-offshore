@@ -28,6 +28,27 @@ export class VerPerfilComponent implements OnInit {
 		},
 	];
 
+	filiais: Array<any> = [
+		{
+			name: 'Filial 1 - MG',
+		},
+		{
+			name: 'Filial 1 - MG',
+		},
+		{
+			name: 'Filial 1 - MG',
+		},
+		{
+			name: 'Filial 1 - MG',
+		},
+		{
+			name: 'Filial 1 - MG',
+		},
+		{
+			name: 'Filial 1 - MG',
+		},
+	];
+
 	constructor(private authService: AuthService, private router: Router) {}
 
 	ngOnInit(): void {
@@ -42,5 +63,9 @@ export class VerPerfilComponent implements OnInit {
 
 	signOut() {
 		this.authService.SignOut();
+	}
+
+	filialDialog() {
+		// Mat dialog para as filiais
 	}
 }

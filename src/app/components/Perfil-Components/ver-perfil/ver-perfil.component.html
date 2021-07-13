@@ -23,7 +23,7 @@
 		</mat-card-content>
 
 		<mat-card-actions>
-			<button (click)="signOut()">Sair</button>
+			<button mat-raised-button (click)="signOut()">Sair</button>
 		</mat-card-actions>
 	</mat-card>
 
@@ -33,29 +33,10 @@
 		</mat-expansion-panel-header>
 
 		<div class="panelContent">
-			<p>Iracema - MG</p>
-			<hr />
-			<p>Rio Claro - SP</p>
-			<hr />
-			<p>Belo Horizonte - MG</p>
-			<hr />
-			<p>Iracema - MG</p>
-			<hr />
-			<p>Rio Claro - SP</p>
-			<hr />
-			<p>Belo Horizonte - MG</p>
-			<hr />
-			<p>Iracema - MG</p>
-			<hr />
-			<p>Rio Claro - SP</p>
-			<hr />
-			<p>Belo Horizonte - MG</p>
-			<hr />
-			<p>Iracema - MG</p>
-			<hr />
-			<p>Rio Claro - SP</p>
-			<hr />
-			<p>Belo Horizonte - MG</p>
+			<a (click)="filialDialog()" *ngFor="let filial of filiais"
+				>{{ filial.name }}
+				<hr
+			/></a>
 		</div>
 	</mat-expansion-panel>
 

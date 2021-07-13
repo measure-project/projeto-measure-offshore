@@ -5,13 +5,14 @@
 				src="../../../assets/measure-logo.png"
 				alt="Logo da Measure offshore"
 		/></mat-card-title>
-		<form class="login-form" (ngSubmit)="logar()">
+		<form class="login-form" name="loginForm" (ngSubmit)="logar()">
 			<mat-form-field appearance="outline">
 				<mat-label>E-mail</mat-label>
 
 				<input
 					matInput
 					ngModel
+					type="email"
 					name="e-mail"
 					[(ngModel)]="username"
 					placeholder="usuario@email.com"
@@ -44,18 +45,17 @@
 				></i>
 				<mat-error>Insira a senha!</mat-error>
 			</mat-form-field>
+			<p class="forgot-password">
+				<a (click)="forgotPassword()">Esqueci minha senha</a>
+			</p>
+			<button
+				type="submit"
+				class="login-button colorWhite"
+				mat-raised-button
+			>
+				Login
+			</button>
 		</form>
-
-		<p class="forgot-password">
-			<a (click)="forgotPassword()">Esqueci minha senha</a>
-		</p>
-		<button
-			class="login-button colorWhite"
-			mat-raised-button
-			(click)="logar()"
-		>
-			Login
-		</button>
 
 		<p class="ou-txt">ou</p>
 		<button class="google-button" mat-raised-button (click)="logarGoogle()">

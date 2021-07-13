@@ -72,6 +72,13 @@
 				font-size: 1.5rem;
 			}
 		}
+
+		mat-card-actions {
+			button {
+				color: $colorSecondary;
+				background-color: $colorPrimary;
+			}
+		}
 	}
 
 	.filialPanel {
@@ -80,6 +87,14 @@
 		.panelContent {
 			overflow-y: auto;
 			height: 7rem;
+			text-align: center;
+
+			a {
+				display: block;
+			}
+			a:hover {
+				cursor: pointer;
+			}
 		}
 	}
 
