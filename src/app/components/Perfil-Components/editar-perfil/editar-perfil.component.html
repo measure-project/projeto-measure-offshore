@@ -12,7 +12,143 @@
 			<button mat-raised-button routerLink="/verPerfil" class="editPhoto">
 				<span class="material-icons">border_color</span>
 			</button>
-			<form>Aqui ficará o formulário</form>
+			<form (ngSubmit) = "editUserData()" class = "edit-form">
+				<mat-form-field appearance="outline">
+					<mat-label>Edite seu nome</mat-label>
+					<input
+						matInput
+						type="text"
+						name="name"
+						[(ngModel)] = "user.name"
+						required
+						placeholder="Nome"
+					/>
+					<mat-error>Insira um nome válido!</mat-error>
+				</mat-form-field>
+				<!-- CNPJ e data de Nascimento -->
+				<div>
+					<mat-form-field
+						appearance="outline"
+						style="margin-right: 0.5rem"
+					>
+						<mat-label>Editar CNPJ</mat-label>
+						<input
+							matInput
+							type="text"
+							name="cnpj"
+							[(ngModel)] = "user.cnpj"
+							required
+							placeholder="00.000.000/0000-00"
+							mask="00.000.000/0000-00"
+						/>
+						<mat-error>Insira um CNPJ válido!</mat-error>
+					</mat-form-field>
+					<mat-form-field appearance="outline" style="width: 13.5rem">
+						<mat-label>Nascimento</mat-label>
+						<input
+							matInput
+							type="text"
+							name="birthday"
+							[(ngModel)] = "user.birthday"
+							required
+							placeholder="01/01/2021"
+							mask="00/00/0000"
+						/>
+						<mat-error>Insira sua data de nascimento!</mat-error>
+					</mat-form-field>
+				</div>
+				<!-- Inscrição Estadual -->
+				<mat-form-field appearance="outline">
+					<mat-label>Editar Inscrição Estadual</mat-label>
+					<input matInput type="text" name="inscricaoEstadual" [(ngModel)] = "user.inscricaoEstadual" />
+				</mat-form-field>
+				<!-- Telefone -->
+				<mat-form-field appearance="outline">
+					<mat-label>Editar Telefone</mat-label>
+					<input
+						matInput
+						type="text"
+						name="phone"
+						[(ngModel)] = "user.phone"
+						required
+						placeholder="(99) 9999-9999"
+						mask="(00) 00000-0000"
+					/>
+					<mat-error>Insira um numero de telefone válido!</mat-error>
+				</mat-form-field>
+				<!-- Endereço -->
+				<mat-form-field appearance="outline">
+					<mat-label>Editar Endereço</mat-label>
+					<input
+						matInput
+						type="text"
+						name="adress"
+						[(ngModel)] = "user.adress"
+						required
+						placeholder="Nome da rua"
+					/>
+					<mat-error>Insira um endereço válido!</mat-error>
+				</mat-form-field>
+				<!-- Bairro e número -->
+				<div>
+					<mat-form-field
+						appearance="outline"
+						style="margin-right: 0.5rem; width: 21rem"
+					>
+						<mat-label>Edite o Bairro</mat-label>
+						<input
+							matInput
+							type="text"
+							name="district"
+							[(ngModel)] = "user.district"
+							required
+							placeholder="Nome do bairro"
+						/>
+						<mat-error>Insira seu bairro!</mat-error>
+					</mat-form-field>
+					<mat-form-field appearance="outline" style="width: 5rem">
+						<mat-label>Nº</mat-label>
+						<input
+							matInput
+							type="text"
+							name="houseNumber"
+							[(ngModel)] = "user.houseNumber"
+							required
+							placeholder="00"
+							mask="0*"
+						/>
+						<mat-error>Insira um nº válido!</mat-error>
+					</mat-form-field>
+				</div>
+				<!-- Complemento -->
+				<mat-form-field appearance="outline">
+					<mat-label>Complemento</mat-label>
+					<input
+						matInput
+						type="text"
+						name="complement"
+						[(ngModel)] = "user.complement"
+						placeholder="Nome da rua"
+					/>
+				</mat-form-field>
+				<!-- E-mail -->
+				<mat-form-field appearance="outline">
+					<mat-label>E-mail</mat-label>
+					<input
+						matInput
+						type="text"
+						name="email"
+						[(ngModel)] = "user.email"
+						required
+						email
+						placeholder="usuario@email.com"
+					/>
+					<mat-error>Insira um e-mail válido!</mat-error>
+				</mat-form-field>
+
+				<button mat-raised-button>Confirmar</button>
+				
+			</form>
 		</mat-card-content>
 	</mat-card>
 </div>
