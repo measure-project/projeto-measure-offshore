@@ -10,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditarPerfilComponent implements OnInit {
 	user!: User;
-	defaultImage = '../../../../assets/manutencao.jpg';
+	defaultImage: any = '../../../../assets/manutencao.jpg'; // Tem que adicionar a profile pic como atributo do user
+
+	CELULAR = '(00) 0 0000-0000'; //Mask para celular
+	TELEFONE = '(00) 0000-0000'; //Mask para telefone
+	phoneMask = this.TELEFONE;
+	phoneLength = '';
+	previousLength = 0;
 
 	constructor(private authService: AuthService, private router: Router) {}
+
+	onPhoneChanged() {
+		//Função que checa o tamanho do numero, se for maior que 10 é telefone, senão é celular
+		if (this.phoneLength.length <= 10 && this.phoneMask === this.CELULAR) {
+			this.phoneMask = this.TELEFONE;
+		} else if (
+			this.phoneLength.length === 10 &&
+			this.phoneMask === this.TELEFONE &&
+			this.previousLength === 10
+		) {
+			this.phoneMask = this.CELULAR;
+		}
+
+		this.previousLength = this.phoneLength.length;
+	}
 
 	ngOnInit(): void {
 		this.authService.afAuth.onAuthStateChanged((user) => {
@@ -26,11 +47,25 @@ export class EditarPerfilComponent implements OnInit {
 
 	editUserData() {
 		this.authService.SetUserData(this.user);
-		this.router.navigate(['/verPerfil'])
-		console.log('editado');
+		this.router.navigate(['/verPerfil']);
+		this.authService.displayMessage('Perfil Atualizado!', false);
 	}
 
-	editPhoto() {
-		this.router.navigate(['/editarPerfil']);
+	returnToProfile() {
+		this.router.navigate(['/verPerfil']);
+	}
+
+	editPhoto(event: any) {
+		if (event.target.files[0]) {
+			let fileReader = new FileReader();
+
+			fileReader.readAsDataURL(event.target.files[0]);
+
+			fileReader.onload = (e) => {
+				if (e) {
+					this.defaultImage = e.target?.result;
+				}
+			};
+		}
 	}
 }

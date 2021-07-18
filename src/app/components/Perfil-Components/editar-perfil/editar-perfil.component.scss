@@ -23,6 +23,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	background-color: $colorSecondary;
 }
 
 .profileCard {
@@ -70,6 +71,11 @@
 			margin-bottom: 1rem;
 		}
 
+		h2 {
+			align-self: flex-start;
+			color: $colorPrimary;
+		}
+
 		h3 {
 			margin: 0;
 			color: gray;
@@ -78,7 +84,13 @@
 	}
 
 	.edit-form {
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: 50% 50%;
+		column-gap: 3rem;
+
+		button {
+			background-color: $colorPrimary;
+			color: $colorSecondary;
+		}
 	}
 }
