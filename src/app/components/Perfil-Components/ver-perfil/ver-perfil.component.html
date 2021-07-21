@@ -14,12 +14,15 @@
 		<mat-card-content class="profileCardContent">
 			<img
 				class="profilePicture"
-				[src]="defaultImage"
+				[src]="user.profilePicture || defaultImage"
 				alt="Foto de perfil"
 			/>
-			<h3>{{ user.name }}</h3>
-			<h3><span class="material-icons">place</span>{{ user.adress }}</h3>
-			<h3>{{ user.cnpj }}</h3>
+			<h3>Nome: {{ user.name }}</h3>
+			<h3>
+				<span class="material-icons">place</span>Filial:
+				{{ user.adress }}
+			</h3>
+			<h3>CNPJ: {{ user.cnpj }}</h3>
 		</mat-card-content>
 
 		<mat-card-actions>

@@ -61,10 +61,8 @@ export class AuthService {
 			name: user.name,
 			phone: user.phone,
 			birthday: user.birthday,
-
 			cnpj: user.cnpj,
 			inscricaoEstadual: user.inscricaoEstadual,
-
 			adress: user.adress,
 			houseNumber: user.houseNumber,
 			district: user.district,

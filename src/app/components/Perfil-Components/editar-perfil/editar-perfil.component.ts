@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditarPerfilComponent implements OnInit {
 	user!: User;
-	defaultImage: any = '../../../../assets/manutencao.jpg'; // Tem que adicionar a profile pic como atributo do user
+	defaultImage: any = '../../../../assets/manutencao.jpg';
 
 	CELULAR = '(00) 0 0000-0000'; //Mask para celular
 	TELEFONE = '(00) 0000-0000'; //Mask para telefone
