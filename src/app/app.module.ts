@@ -33,6 +33,7 @@ import { TelaBottomComponent } from './components/home-components/tela-bottom/te
 import { VerPerfilComponent } from './components/Perfil-Components/ver-perfil/ver-perfil.component';
 import { EditarPerfilComponent } from './components/Perfil-Components/editar-perfil/editar-perfil.component';
 import { AdmVerPerfilComponent } from './components/Perfil-components/adm-ver-perfil/adm-ver-perfil.component';
+import { AdmEditarPerfilComponent } from './components/Perfil-Components/adm-editar-perfil/adm-editar-perfil.component';
 
 @NgModule({
 	declarations: [
@@ -47,6 +48,7 @@ import { AdmVerPerfilComponent } from './components/Perfil-components/adm-ver-pe
 		VerPerfilComponent,
 		EditarPerfilComponent,
   AdmVerPerfilComponent,
+  AdmEditarPerfilComponent,
 	],
 	imports: [
 		BrowserModule,
