@@ -1,3 +1,4 @@
+import { AdmVerPerfilComponent } from './components/Perfil-Components/adm-ver-perfil/adm-ver-perfil.component';
 import { EditarPerfilComponent } from './components/Perfil-Components/editar-perfil/editar-perfil.component';
 import { VerPerfilComponent } from './components/Perfil-Components/ver-perfil/ver-perfil.component';
 import { HomePageComponent } from './components/home-components/home-page/home-page.component';
@@ -31,6 +32,10 @@ const routes: Routes = [
 	{
 		path: 'editarPerfil',
 		component: EditarPerfilComponent,
+	},
+	{
+		path: 'verPerfilAdm',
+		component: AdmVerPerfilComponent,
 	},
 ];
 

@@ -33,7 +33,7 @@ import { PrestacaoServicosComponent } from './components/home-components/prestac
 import { TelaBottomComponent } from './components/home-components/tela-bottom/tela-bottom.component';
 import { VerPerfilComponent } from './components/Perfil-Components/ver-perfil/ver-perfil.component';
 import { EditarPerfilComponent } from './components/Perfil-Components/editar-perfil/editar-perfil.component';
-import { AdmVerPerfilComponent } from './components/Perfil-components/adm-ver-perfil/adm-ver-perfil.component';
+import { AdmVerPerfilComponent } from './components/Perfil-Components/adm-ver-perfil/adm-ver-perfil.component';
 
 @NgModule({
 	declarations: [
