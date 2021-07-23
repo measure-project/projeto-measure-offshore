@@ -121,6 +121,8 @@ export class AuthService {
 								if (this.userLogado.isAdmin)
 									this.router.navigate(['/verPerfilAdm']);
 								else this.router.navigate(['/verPerfil']);
+
+								console.log(this.userLogado);
 							},
 							() => this.SetUserData(result.user)
 						);
@@ -203,5 +205,15 @@ export class AuthService {
 
 	downloadProfilePicture(uid: string) {
 		return this.afStorage.ref(`users/${uid}/profile.jpg`).getDownloadURL();
+	}
+
+	toLoginOrToUserView() {
+		this.afAuth.onAuthStateChanged((user) => {
+			if (user) {
+				if(!this.userLogado.isAdmin) this.router.navigate(['/verPerfil']);
+				else this.router.navigate(['/verPerfilAdm']);
+			}
+			else this.router.navigate(['/login']);
+		});
 	}
 }

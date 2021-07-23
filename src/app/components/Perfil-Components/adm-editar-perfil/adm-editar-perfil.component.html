@@ -8,7 +8,7 @@
       <h1>EDIÇÃO DE PERFIL</h1>
     </mat-card-title>
     <mat-card-content class="profileCardContent">
-      <img class="profilePicture" [src]="defaultImage" alt="Foto de perfil" />
+      <img class="profilePicture" [src]="user.profilePicture" alt="Foto de perfil" />
       <button mat-raised-button class="editPhoto">
         <label for="uploadButton" class="material-icons">border_color</label>
       </button>
@@ -154,8 +154,25 @@
           <mat-error>Insira um e-mail válido!</mat-error>
         </mat-form-field>
 
+        <h2>Segurança</h2>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nova Senha</mat-label>
+          <input
+            matInput
+            type="password"
+            name="newpassword"
+            [(ngModel)]="user.name"
+            required
+            email
+            placeholder="Senha"
+          />
+          <mat-error>Insira um e-mail válido!</mat-error>
+        </mat-form-field>
+
         <button mat-raised-button (click)="returnToProfile()">Voltar</button>
         <button type="submit" mat-raised-button>Confirmar</button>
+        
       </form>
     </mat-card-content>
   </mat-card>

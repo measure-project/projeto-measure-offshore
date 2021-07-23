@@ -13,10 +13,7 @@ export class TelaVideoComponent implements OnInit {
 	ngOnInit(): void {}
 
 	toLogin() {
-		this.authService.afAuth.onAuthStateChanged((user) => {
-			if (user) this.router.navigate(['/verPerfil']);
-			else this.router.navigate(['/login']);
-		});
+		this.authService.toLoginOrToUserView();
 	}
 
 	@HostListener('window:scroll', ['$event']) // Mudar cor da nav bar ao descer o scroll
