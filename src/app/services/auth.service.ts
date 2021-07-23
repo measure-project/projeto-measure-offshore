@@ -7,6 +7,7 @@ import {
 	CollectionReference,
 } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
 import firebase from 'firebase/app';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
@@ -27,6 +28,7 @@ export class AuthService {
 		public afAuth: AngularFireAuth,
 		public router: Router,
 		public afs: AngularFirestore,
+		public afStorage: AngularFireStorage,
 		private snackBar: MatSnackBar
 	) {
 		this.afAuth.authState.subscribe((user: any) => {
@@ -56,27 +58,28 @@ export class AuthService {
 			`users/${user.uid}`
 		);
 		const userState: User = {
-      uid: user.uid,
+			uid: user.uid,
 
-      name: user.name,
-      phone: user.phone,
-      birthday: user.birthday,
-      cnpj: user.cnpj,
-      inscricaoEstadual: user.inscricaoEstadual,
-      adress: user.adress,
-      houseNumber: user.houseNumber,
-      district: user.district,
-      complement: user.complement,
+			name: user.name,
+			phone: user.phone,
+			birthday: user.birthday,
+			cnpj: user.cnpj,
+			inscricaoEstadual: user.inscricaoEstadual,
+			adress: user.adress,
+			houseNumber: user.houseNumber,
+			district: user.district,
+			complement: user.complement,
+			profilePicture: user.profilePicture,
 
-      email: user.email,
-      emailVerified: user.emailVerified,
+			email: user.email,
+			emailVerified: user.emailVerified,
 
-      isAdmin: user.isAdmin,
+			// isAdmin: user.isAdmin,
 
-      branches: user.branches,
+			// branches: user.branches,
 
-      services: user.services,
-    };
+			// services: user.services,
+		};
 		localStorage.setItem('currentUser', JSON.stringify(userState));
 		return userRef.set(userState, {
 			merge: true,
@@ -182,5 +185,21 @@ export class AuthService {
 	// Sign in with Google
 	GoogleAuth() {
 		return this.AuthLogin(new firebase.auth.GoogleAuthProvider());
+	}
+
+	uploadProfilePicture(uid: string, file: File) {
+		this.afStorage
+			.ref(`users/${uid}/profile.jpg`)
+			.put(file)
+			.then(() => {
+				console.log('Imagem upada!');
+			})
+			.catch((err) => {
+				console.log(`Houve um erro: ${err}`);
+			});
+	}
+
+	downloadProfilePicture(uid: string) {
+		return this.afStorage.ref(`users/${uid}/profile.jpg`).getDownloadURL();
 	}
 }

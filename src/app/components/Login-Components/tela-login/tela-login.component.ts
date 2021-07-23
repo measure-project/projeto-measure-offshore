@@ -18,7 +18,9 @@ export class TelaLoginComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.authService.afAuth.onAuthStateChanged((user) => {
-			if (user) this.router.navigate(['/verPerfil']);
+			if (user) {
+				this.router.navigate(['/verPerfil']);
+			}
 		});
 	}
 

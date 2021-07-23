@@ -14,12 +14,11 @@
 		<mat-card-content class="profileCardContent">
 			<img
 				class="profilePicture"
-				[src]="defaultImage"
+				[src]="user.profilePicture || defaultImage"
 				alt="Foto de perfil"
 			/>
 			<h3>{{ user.name }}</h3>
 			<h3>Nome do Setor</h3>
-			<!-- Também vai ter que adicionar como atributo do user -->
 		</mat-card-content>
 
 		<mat-card-actions>

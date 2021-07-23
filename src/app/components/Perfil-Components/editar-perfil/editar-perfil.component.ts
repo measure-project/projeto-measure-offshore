@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class EditarPerfilComponent implements OnInit {
 	user!: User;
 	defaultImage: any = '../../../../assets/manutencao.jpg';
+	newImage: any;
 
 	CELULAR = '(00) 0 0000-0000'; //Mask para celular
 	TELEFONE = '(00) 0000-0000'; //Mask para telefone
@@ -37,33 +38,40 @@ export class EditarPerfilComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.authService.afAuth.onAuthStateChanged((user) => {
-			if (user)
+			if (user) {
 				this.user = JSON.parse(
 					localStorage.getItem('currentUser') || '{}'
 				);
-			else this.router.navigate(['/login']);
+			} else this.router.navigate(['/login']);
 		});
 	}
 
 	editUserData() {
+		this.authService.uploadProfilePicture(this.user.uid, this.newImage);
+		this.authService
+			.downloadProfilePicture(this.user.uid)
+			.subscribe((imgUrl) => {
+				this.user.profilePicture = imgUrl;
+			});
 		this.authService.SetUserData(this.user);
 		this.router.navigate(['/verPerfil']);
 		this.authService.displayMessage('Perfil Atualizado!', false);
 	}
 
 	returnToProfile() {
+		this.user.profilePicture = '';
 		this.router.navigate(['/verPerfil']);
 	}
 
 	editPhoto(event: any) {
-		if (event.target.files[0]) {
+		if (event.target.files && event.target.files[0]) {
 			let fileReader = new FileReader();
-
+			this.newImage = event.target.files[0];
 			fileReader.readAsDataURL(event.target.files[0]);
 
 			fileReader.onload = (e) => {
 				if (e) {
-					this.defaultImage = e.target?.result;
+					this.user.profilePicture = e.target?.result;
 				}
 			};
 		}

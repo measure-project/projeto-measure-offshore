@@ -1,5 +1,5 @@
 export interface User {
-  uid?: string;
+  uid: string;
 
   name: string;
   phone: string;
@@ -12,12 +12,13 @@ export interface User {
   complement?: string;
   profilePicture?: any;
 
-  branches: Array<any>;
+  branches?: Array<any>;
 
-  services: Array<any>;
+  services?: Array<any>;
+
+  isAdmin?: boolean;
 
   email: string;
   emailVerified: boolean;
-
-  isAdmin: boolean;
-}
+} 
+      
