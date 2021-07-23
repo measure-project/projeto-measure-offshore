@@ -118,7 +118,9 @@ export class AuthService {
 					.then((result: any) => {
 						this.ngZone.run(
 							() => {
-								this.router.navigate(['/verPerfil']);
+								if (this.userLogado.isAdmin)
+									this.router.navigate(['/verPerfilAdm']);
+								else this.router.navigate(['/verPerfil']);
 							},
 							() => this.SetUserData(result.user)
 						);
