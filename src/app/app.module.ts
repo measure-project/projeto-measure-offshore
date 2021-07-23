@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TelaLoginComponent } from './components/Login-Components/tela-login/tela-login.component';
@@ -46,12 +47,13 @@ import { AdmVerPerfilComponent } from './components/Perfil-components/adm-ver-pe
 		TelaBottomComponent,
 		VerPerfilComponent,
 		EditarPerfilComponent,
-  AdmVerPerfilComponent,
+		AdmVerPerfilComponent,
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		AngularFireModule.initializeApp(environment.firebase),
+		AngularFireStorageModule,
 		AngularFireDatabaseModule,
 		BrowserAnimationsModule,
 		MatCardModule,
