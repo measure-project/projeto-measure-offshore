@@ -52,8 +52,8 @@ export class EditarPerfilComponent implements OnInit {
 			.downloadProfilePicture(this.user.uid)
 			.subscribe((imgUrl) => {
 				this.user.profilePicture = imgUrl;
+				this.authService.SetUserData(this.user);
 			});
-		this.authService.SetUserData(this.user);
 		this.router.navigate(['/verPerfil']);
 		this.authService.displayMessage('Perfil Atualizado!', false);
 	}
