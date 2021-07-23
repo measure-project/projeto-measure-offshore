@@ -56,21 +56,27 @@ export class AuthService {
 			`users/${user.uid}`
 		);
 		const userState: User = {
-			uid: user.uid,
+      uid: user.uid,
 
-			name: user.name,
-			phone: user.phone,
-			birthday: user.birthday,
-			cnpj: user.cnpj,
-			inscricaoEstadual: user.inscricaoEstadual,
-			adress: user.adress,
-			houseNumber: user.houseNumber,
-			district: user.district,
-			complement: user.complement,
+      name: user.name,
+      phone: user.phone,
+      birthday: user.birthday,
+      cnpj: user.cnpj,
+      inscricaoEstadual: user.inscricaoEstadual,
+      adress: user.adress,
+      houseNumber: user.houseNumber,
+      district: user.district,
+      complement: user.complement,
 
-			email: user.email,
-			emailVerified: user.emailVerified,
-		};
+      email: user.email,
+      emailVerified: user.emailVerified,
+
+      isAdmin: user.isAdmin,
+
+      branches: user.branches,
+
+      services: user.services,
+    };
 		localStorage.setItem('currentUser', JSON.stringify(userState));
 		return userRef.set(userState, {
 			merge: true,
