@@ -95,10 +95,7 @@ export class AuthService {
 			userLogadoCollection.valueChanges({ idField: 'uid' });
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
-			localStorage.setItem(
-				'currentUser',
-				JSON.stringify(this.userLogado)
-			);
+			localStorage.setItem('currentUser', JSON.stringify(this.userLogado));
 		});
 		return this.userLogado;
 	}
@@ -207,13 +204,14 @@ export class AuthService {
 		return this.afStorage.ref(`users/${uid}/profile.jpg`).getDownloadURL();
 	}
 
-	toLoginOrToUserView() {
+	toAdminOrToUserView() {
+		const currentUser: User = JSON.parse(localStorage.getItem('currentUser') || '{}');
 		this.afAuth.onAuthStateChanged((user) => {
 			if (user) {
-				if(!this.userLogado.isAdmin) this.router.navigate(['/verPerfil']);
-				else this.router.navigate(['/verPerfilAdm']);
-			}
-			else this.router.navigate(['/login']);
+				console.log(currentUser.isAdmin);
+				if (currentUser.isAdmin) this.router.navigate(['/verPerfilAdm']);
+				else this.router.navigate(['/verPerfil']);
+			} else this.router.navigate(['/login']);
 		});
 	}
 }
