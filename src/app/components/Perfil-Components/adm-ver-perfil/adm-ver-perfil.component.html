@@ -18,12 +18,28 @@
 				alt="Foto de perfil"
 			/>
 			<h3>{{ user.name }}</h3>
-			<h3>Nome do Setor</h3>
+			<h3>{{ user.branches }}</h3>
 		</mat-card-content>
 
 		<mat-card-actions>
 			<button mat-raised-button>Membros Atuais</button>
-			<button mat-raised-button>Cadastros</button>
+
+			<mat-expansion-panel class="cadastroPanel">
+				<mat-expansion-panel-header>
+					<mat-panel-title class="colorWhite">
+						Cadastros
+					</mat-panel-title>
+				</mat-expansion-panel-header>
+
+				<div class="panelContent colorWhite">
+					<a [routerLink]="['/cadastroFuncionario']">Funcionários</a>
+					<hr />
+					<a [routerLink]="['/cadastroCliente']">Clientes</a>
+					<hr />
+					<a [routerLink]="['/cadastroAdmin']">Administradores</a>
+				</div>
+			</mat-expansion-panel>
+
 			<button mat-raised-button>Incertezas</button>
 			<button mat-raised-button>Planilhas</button>
 			<button mat-raised-button (click)="signOut()">Sair</button>

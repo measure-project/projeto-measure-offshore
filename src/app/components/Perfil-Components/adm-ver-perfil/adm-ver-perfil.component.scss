@@ -84,6 +84,25 @@
 				margin-bottom: 1rem;
 				width: 10rem;
 			}
+
+			.cadastroPanel {
+				margin-bottom: 1rem;
+				background-color: $colorPrimary;
+				width: 10rem;
+				min-height: 2.5rem;
+
+				.panelContent {
+					text-align: center;
+
+					a {
+						display: block;
+						color: $colorSecondary;
+					}
+					a:hover {
+						cursor: pointer;
+					}
+				}
+			}
 		}
 	}
 }

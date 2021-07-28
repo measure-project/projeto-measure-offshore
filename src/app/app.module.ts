@@ -12,7 +12,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TelaLoginComponent } from './components/Login-Components/tela-login/tela-login.component';
-import { TelaCadastroComponent } from './components/Login-Components/tela-cadastro/tela-cadastro.component';
+import { TelaCadastroComponent } from './components/cadastro-components/tela-cadastro-cliente/tela-cadastro.component';
 import { TelaRecuperarSenhaComponent } from './components/Login-Components/tela-recuperar-senha/tela-recuperar-senha.component';
 
 import { MatCardModule } from '@angular/material/card';
@@ -35,6 +35,8 @@ import { VerPerfilComponent } from './components/Perfil-Components/ver-perfil/ve
 import { EditarPerfilComponent } from './components/Perfil-Components/editar-perfil/editar-perfil.component';
 import { AdmEditarPerfilComponent } from './components/Perfil-Components/adm-editar-perfil/adm-editar-perfil.component';
 import { AdmVerPerfilComponent } from './components/Perfil-Components/adm-ver-perfil/adm-ver-perfil.component';
+import { CadastroFuncionarioComponent } from './components/cadastro-components/cadastro-funcionario/cadastro-funcionario.component';
+import { CadastroAdmComponent } from './components/cadastro-components/cadastro-adm/cadastro-adm.component';
 
 @NgModule({
 	declarations: [
@@ -48,8 +50,10 @@ import { AdmVerPerfilComponent } from './components/Perfil-Components/adm-ver-pe
 		TelaBottomComponent,
 		VerPerfilComponent,
 		EditarPerfilComponent,
-  		AdmEditarPerfilComponent,
+		AdmEditarPerfilComponent,
 		AdmVerPerfilComponent,
+		CadastroFuncionarioComponent,
+  CadastroAdmComponent,
 	],
 	imports: [
 		BrowserModule,

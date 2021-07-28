@@ -59,7 +59,6 @@ export class VerPerfilComponent implements OnInit {
 				);
 			} else this.router.navigate(['/login']);
 		});
-
 	}
 
 	signOut() {
