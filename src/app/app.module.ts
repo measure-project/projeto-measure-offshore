@@ -22,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
@@ -73,6 +74,7 @@ import { CadastroAdmComponent } from './components/cadastro-components/cadastro-
 		MatToolbarModule,
 		IvyCarouselModule,
 		MatExpansionModule,
+		MatCheckboxModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],
