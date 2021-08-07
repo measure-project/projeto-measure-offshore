@@ -74,11 +74,11 @@ export class AuthService {
 			email: user.email,
 			emailVerified: user.emailVerified,
 
-			// isAdmin: user.isAdmin,
+			isAdmin: user.isAdmin,
 
-			// branches: user.branches,
+			branches: user.branches,
 
-			// services: user.services,
+			services: user.services,
 		};
 		localStorage.setItem('currentUser', JSON.stringify(userState));
 		return userRef.set(userState, {
@@ -95,7 +95,10 @@ export class AuthService {
 			userLogadoCollection.valueChanges({ idField: 'uid' });
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
-			localStorage.setItem('currentUser', JSON.stringify(this.userLogado));
+			localStorage.setItem(
+				'currentUser',
+				JSON.stringify(this.userLogado)
+			);
 		});
 		return this.userLogado;
 	}
@@ -205,11 +208,13 @@ export class AuthService {
 	}
 
 	toAdminOrToUserView() {
-		const currentUser: User = JSON.parse(localStorage.getItem('currentUser') || '{}');
+		const currentUser: User = JSON.parse(
+			localStorage.getItem('currentUser') || '{}'
+		);
 		this.afAuth.onAuthStateChanged((user) => {
 			if (user) {
-				console.log(currentUser.isAdmin);
-				if (currentUser.isAdmin) this.router.navigate(['/verPerfilAdm']);
+				if (currentUser.isAdmin)
+					this.router.navigate(['/verPerfilAdm']);
 				else this.router.navigate(['/verPerfil']);
 			} else this.router.navigate(['/login']);
 		});

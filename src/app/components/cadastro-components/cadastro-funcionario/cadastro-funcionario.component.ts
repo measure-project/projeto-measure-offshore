@@ -5,26 +5,25 @@ import { User } from './../../../models/user';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-cadastro-funcionario',
-  templateUrl: './cadastro-funcionario.component.html',
-  styleUrls: ['./cadastro-funcionario.component.scss']
+	selector: 'app-cadastro-funcionario',
+	templateUrl: './cadastro-funcionario.component.html',
+	styleUrls: ['./cadastro-funcionario.component.scss'],
 })
 export class CadastroFuncionarioComponent implements OnInit {
-  
-  funcionario!: Funcionario;
+	funcionario = {} as Funcionario;
 	defaultImage: any = '../../../../assets/manutencao.jpg';
 	newImage: any;
+	documentList: Array<File> = [];
+	documentSelected: any;
+
+	constructor(private authService: AuthService, private router: Router) {}
 
 	CELULAR = '(00) 0 0000-0000'; //Mask para celular
 	TELEFONE = '(00) 0000-0000'; //Mask para telefone
 	phoneMask = this.TELEFONE;
 	phoneLength = '';
 	previousLength = 0;
-
-  
-  constructor(private authService: AuthService, private router: Router) { }
-  
-  onPhoneChanged() {
+	onPhoneChanged() {
 		//Função que checa o tamanho do numero, se for maior que 10 é telefone, senão é celular
 		if (this.phoneLength.length <= 10 && this.phoneMask === this.CELULAR) {
 			this.phoneMask = this.TELEFONE;
@@ -39,15 +38,15 @@ export class CadastroFuncionarioComponent implements OnInit {
 		this.previousLength = this.phoneLength.length;
 	}
 
-  ngOnInit(): void {
-		
-  }
+	ngOnInit(): void {
+		this.documentSelected = document.querySelector('#documentList');
+	}
 
-  setFuncionarioData(funcionario: Funcionario){
-    console.log(funcionario)
-  }
+	setFuncionarioData(funcionario: Funcionario) {
+		console.log(funcionario); //Não ta passando o array de documents pra cá, ver o por quê
+	}
 
-  returnToProfile() {
+	returnToProfile() {
 		this.router.navigate(['/verPerfilAdm']);
 	}
 
@@ -65,4 +64,14 @@ export class CadastroFuncionarioComponent implements OnInit {
 		}
 	}
 
+	addDocument(event: any) {
+		if (!this.funcionario.documents) this.funcionario.documents = [];
+
+		if (event.target.files && event.target.files[0]) {
+			for (let i = 0; i < event.target.files.length; i++) {
+				this.funcionario.documents.push(event.target.files[i]);
+				this.documentSelected.innerHTML += `<p style="background-color: #4abdb7;border-radius: 5px">${event.target.files[i].name} </p>`;
+			}
+		}
+	}
 }
