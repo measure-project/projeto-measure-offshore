@@ -13,6 +13,8 @@ export interface Admin {
 
 	email: string;
 
+	isAdmin: boolean;
+
 	funcao: string;
 
 	documents: Array<File>;

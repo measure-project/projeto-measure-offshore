@@ -1,3 +1,5 @@
+import { User } from './../models/user';
+import { Admin } from './../models/admin';
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -9,7 +11,6 @@ import {
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
 import firebase from 'firebase/app';
-import { User } from '../models/user';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -53,11 +54,19 @@ export class AuthService {
 		});
 	}
 
+	SetAdminData(admin: Admin) {
+		const adminRef: AngularFirestoreDocument<any> = this.afs.doc(
+			`admins/${admin.uid}`
+		);
+
+		const adminState: any = {};
+	}
+
 	SetUserData(user: any): any {
 		const userRef: AngularFirestoreDocument<any> = this.afs.doc(
 			`users/${user.uid}`
 		);
-		const userState: User = {
+		const userState: any = {
 			uid: user.uid,
 
 			name: user.name,
@@ -74,7 +83,7 @@ export class AuthService {
 			email: user.email,
 			emailVerified: user.emailVerified,
 
-			isAdmin: user.isAdmin,
+			isAdmin: false,
 
 			branches: user.branches,
 
@@ -95,10 +104,7 @@ export class AuthService {
 			userLogadoCollection.valueChanges({ idField: 'uid' });
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
-			localStorage.setItem(
-				'currentUser',
-				JSON.stringify(this.userLogado)
-			);
+			localStorage.setItem('currentUser', JSON.stringify(this.userLogado));
 		});
 		return this.userLogado;
 	}
@@ -133,14 +139,16 @@ export class AuthService {
 			);
 	}
 
-	signUp(user: User, password: string): any {
+	signUp(user: User | Admin, password: string): any {
 		return this.afAuth
 			.createUserWithEmailAndPassword(user.email, password)
 			.then((result: any) => {
-				this.SendVerificationMail();
-				user.uid = result.user.uid;
-				user.emailVerified = result.user.emailVerified;
-				this.SetUserData(user);
+				if (!user.isAdmin) {
+					this.SendVerificationMail();
+					user.uid = result.user.uid;
+					// user.emailVerified? = result.user.emailVerified;
+					this.SetUserData(user);
+				}
 			})
 			.catch((error: any) => {
 				window.alert(error.message);
@@ -213,8 +221,7 @@ export class AuthService {
 		);
 		this.afAuth.onAuthStateChanged((user) => {
 			if (user) {
-				if (currentUser.isAdmin)
-					this.router.navigate(['/verPerfilAdm']);
+				if (currentUser.isAdmin) this.router.navigate(['/verPerfilAdm']);
 				else this.router.navigate(['/verPerfil']);
 			} else this.router.navigate(['/login']);
 		});

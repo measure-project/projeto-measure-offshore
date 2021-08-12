@@ -35,6 +35,8 @@ export class AdminService {
 			complement: admin.complement,
 			profilePicture: admin.profilePicture,
 
+			isAdmin: true,
+
 			email: admin.email,
 
 			funcao: admin.funcao,
@@ -59,9 +61,19 @@ export class AdminService {
 
 	uploadFile(file: File, admin: Admin): void {
 		this.asfStorage
-			.ref(`admins/${admin.uid}/${file.name}`)
+			.ref(`admins/${admin.uid}/documents.pdf`)
 			.put(admin.documents)
 			.then(() => console.log(`Arquivo ${file.name} upado`))
 			.catch(() => console.log(`Falha ao upar ${file.name}`));
+	}
+
+	singUpAdmin(admin: Admin, password: string) {
+		try {
+			this.setAdmin(admin);
+			this.auth.signUp(admin, password);
+			this.auth.displayMessage("Cadastro efetuado com sucesso!", false);
+		} catch (error: any) {
+			this.auth.displayMessage(`Erro ao cadastrar administrador: ${error}`, true)
+		}
 	}
 }
