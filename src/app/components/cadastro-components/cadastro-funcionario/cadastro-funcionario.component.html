@@ -10,7 +10,7 @@
 		<mat-card-content class="profileCardContent">
 			<img
 				class="profilePicture"
-				[src]="defaultImage"
+				[src]="funcionario.profilePicture || defaultImage"
 				alt="Foto de perfil"
 			/>
 			<button mat-raised-button class="editPhoto">
@@ -148,7 +148,7 @@
 						<input
 							matInput
 							type="text"
-							name="function"
+							name="func"
 							ngModel
 							required
 							placeholder="analista"

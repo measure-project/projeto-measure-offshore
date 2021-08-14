@@ -2,7 +2,6 @@ export interface Funcionario {
 	uid: string;
 	name: string;
 	phone: string;
-	cnpj: string;
 	adress: string;
 	houseNumber: string;
 	birthday: string;

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import {
 	AngularFirestore,
 	AngularFirestoreDocument,
+	DocumentData,
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -18,15 +19,17 @@ export class FuncionarioService {
 	) {}
 
 	setFuncionario(funcionario: Funcionario) {
-		//Ainda não testei
-		const docRef: AngularFirestoreDocument<any> = this.afs.doc(
-			`funcionarios/${funcionario.uid}`
-		);
+		const docRef: AngularFirestoreDocument<DocumentData> = this.afs
+			.collection(`funcionarios`)
+			.doc();
+		let id: string;
+		funcionario.uid != undefined
+			? (id = funcionario.uid)
+			: (id = docRef.ref.id);
 		const funcionarioState: Funcionario = {
-			uid: funcionario.uid,
+			uid: id,
 			name: funcionario.name,
 			phone: funcionario.phone,
-			cnpj: funcionario.cnpj,
 			adress: funcionario.adress,
 			houseNumber: funcionario.houseNumber,
 			birthday: funcionario.birthday,
@@ -38,6 +41,7 @@ export class FuncionarioService {
 			email: funcionario.email,
 			documents: funcionario.documents,
 		};
+
 		return docRef.set(funcionarioState, {
 			merge: true,
 		});
@@ -45,9 +49,9 @@ export class FuncionarioService {
 
 	getFuncionario() {}
 
-	uploadFiles(profilePic: File, documents: Array<File>, uid: string) {
+	uploadFiles(profilePic: File, documents: Array<File>, email: string) {
 		this.afStorage
-			.ref(`funcionario/${uid}/profile.jpg`)
+			.ref(`funcionarios/${email}/profileImage/profile.jpg`)
 			.put(profilePic)
 			.then(() => {
 				console.log('Imagem upada!');
@@ -56,23 +60,27 @@ export class FuncionarioService {
 				console.log(`Houve um erro: ${err}`);
 			});
 
-		this.afStorage
-			.ref(`funcionario/${uid}/document.pdf`)
-			.put(documents)
-			.then(() => {
-				console.log('Documentos upados!');
-			})
-			.catch((err) => {
-				console.log(`Houve um erro: ${err}`);
-			});
+		documents.forEach((file) => {
+			this.afStorage
+				.ref(`funcionarios/${email}/documents/${file.name}`)
+				.put(file)
+				.then(() => {
+					console.log('Documentos upados!');
+				})
+				.catch((err) => {
+					console.log(`Houve um erro: ${err}`);
+				});
+		});
 	}
 
-	downloadFiles(uid: string) {
+	downloadFiles(email: string) {
 		return [
 			this.afStorage
-				.ref(`funcionario/${uid}/profile.jpg`)
+				.ref(`funcionarios/${email}/profile.jpg`)
 				.getDownloadURL(),
-			this.afStorage.ref(`funcionario/${uid}/document.pdf`),
+			this.afStorage
+				.ref(`funcionarios/${email}/document.pdf`)
+				.getDownloadURL(),
 		];
 	}
 }

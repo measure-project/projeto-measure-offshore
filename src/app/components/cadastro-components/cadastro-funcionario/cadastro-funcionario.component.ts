@@ -1,3 +1,4 @@
+import { FuncionarioService } from './../../../services/funcionario.service';
 import { Funcionario } from './../../../models/funcionario';
 import { AuthService } from './../../../services/auth.service';
 import { Router } from '@angular/router';
@@ -13,10 +14,12 @@ export class CadastroFuncionarioComponent implements OnInit {
 	funcionario = {} as Funcionario;
 	defaultImage: any = '../../../../assets/manutencao.jpg';
 	newImage: any;
-	documentList: Array<File> = [];
 	documentSelected: any;
 
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(
+		private funcionarioService: FuncionarioService,
+		private router: Router
+	) {}
 
 	CELULAR = '(00) 0 0000-0000'; //Mask para celular
 	TELEFONE = '(00) 0000-0000'; //Mask para telefone
@@ -43,7 +46,15 @@ export class CadastroFuncionarioComponent implements OnInit {
 	}
 
 	setFuncionarioData(funcionario: Funcionario) {
-		console.log(funcionario); //Não ta passando o array de documents pra cá, ver o por quê
+		this.funcionarioService.uploadFiles(
+			this.newImage,
+			this.funcionario.documents,
+			funcionario.email
+		);
+
+		funcionario.profilePicture = 'placeholder'; //Por enquanto deixar assim
+		funcionario.documents = [];
+		this.funcionarioService.setFuncionario(funcionario);
 	}
 
 	returnToProfile() {
