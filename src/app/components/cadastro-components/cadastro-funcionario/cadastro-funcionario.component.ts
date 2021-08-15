@@ -55,6 +55,7 @@ export class CadastroFuncionarioComponent implements OnInit {
 		funcionario.profilePicture = 'placeholder'; //Por enquanto deixar assim
 		funcionario.documents = [];
 		this.funcionarioService.setFuncionario(funcionario);
+		this.returnToProfile();
 	}
 
 	returnToProfile() {
@@ -81,7 +82,6 @@ export class CadastroFuncionarioComponent implements OnInit {
 		if (event.target.files && event.target.files[0]) {
 			for (let i = 0; i < event.target.files.length; i++) {
 				this.funcionario.documents.push(event.target.files[i]);
-				this.documentSelected.innerHTML += `<p style="background-color: #4abdb7;border-radius: 5px">${event.target.files[i].name} </p>`;
 			}
 		}
 	}
