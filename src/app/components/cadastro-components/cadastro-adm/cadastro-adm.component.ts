@@ -1,4 +1,3 @@
-import { AuthService } from './../../../services/auth.service';
 import { AdminService } from './../../../services/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { Admin } from 'src/app/models/admin';
