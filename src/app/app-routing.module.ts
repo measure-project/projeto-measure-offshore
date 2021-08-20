@@ -10,6 +10,7 @@ import { TelaLoginComponent } from './components/Login-Components/tela-login/tel
 import { TelaRecuperarSenhaComponent } from './components/Login-Components/tela-recuperar-senha/tela-recuperar-senha.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MembrosAtuaisComponent } from './components/membros-atuais/membros-atuais.component';
 
 const routes: Routes = [
 	{
@@ -51,6 +52,10 @@ const routes: Routes = [
 	{
 		path: 'editarPerfilAdm',
 		component: AdmEditarPerfilComponent,
+	},
+	{
+		path: 'membros',
+		component: MembrosAtuaisComponent,
 	},
 ];
 

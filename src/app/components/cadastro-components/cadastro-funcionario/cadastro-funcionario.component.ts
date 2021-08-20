@@ -1,8 +1,6 @@
 import { FuncionarioService } from './../../../services/funcionario.service';
 import { Funcionario } from './../../../models/funcionario';
-import { AuthService } from './../../../services/auth.service';
 import { Router } from '@angular/router';
-import { User } from './../../../models/user';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroFuncionarioComponent implements OnInit {
 	funcionario = {} as Funcionario;
-	defaultImage: any = '../../../../assets/manutencao.jpg';
+	defaultImage: any = '../../../../assets/perfil-padrao.jpg';
 	newImage: any;
 	documentSelected: any;
 

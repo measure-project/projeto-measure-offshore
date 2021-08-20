@@ -23,6 +23,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
@@ -38,6 +39,7 @@ import { AdmEditarPerfilComponent } from './components/Perfil-Components/adm-edi
 import { AdmVerPerfilComponent } from './components/Perfil-Components/adm-ver-perfil/adm-ver-perfil.component';
 import { CadastroFuncionarioComponent } from './components/cadastro-components/cadastro-funcionario/cadastro-funcionario.component';
 import { CadastroAdmComponent } from './components/cadastro-components/cadastro-adm/cadastro-adm.component';
+import { MembrosAtuaisComponent } from './components/membros-atuais/membros-atuais.component';
 
 @NgModule({
 	declarations: [
@@ -54,7 +56,8 @@ import { CadastroAdmComponent } from './components/cadastro-components/cadastro-
 		AdmEditarPerfilComponent,
 		AdmVerPerfilComponent,
 		CadastroFuncionarioComponent,
-  CadastroAdmComponent,
+		CadastroAdmComponent,
+		MembrosAtuaisComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -75,6 +78,7 @@ import { CadastroAdmComponent } from './components/cadastro-components/cadastro-
 		IvyCarouselModule,
 		MatExpansionModule,
 		MatRadioModule,
+		MatTabsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

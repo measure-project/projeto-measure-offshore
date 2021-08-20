@@ -18,12 +18,14 @@ export class AdmEditarPerfilComponent implements OnInit {
 	ngOnInit(): void {
 		this.authService.afAuth.onAuthStateChanged((user) => {
 			if (user)
-				this.user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+				this.user = JSON.parse(
+					localStorage.getItem('currentUser') || '{}'
+				);
 			else this.router.navigate(['/login']);
 		});
 	}
 
-	defaultImage: any = '../../../../assets/manutencao.jpg';
+	defaultImage: any = '../../../../assets/perfil-padrao.jpg';
 
 	CELULAR = '(00) 0 0000-0000'; //Mask para celular
 	TELEFONE = '(00) 0000-0000'; //Mask para telefone

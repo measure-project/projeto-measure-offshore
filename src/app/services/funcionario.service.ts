@@ -47,7 +47,20 @@ export class FuncionarioService {
 		});
 	}
 
-	getFuncionario() {}
+	getFuncionarios() {
+		const ref = this.afs.collection('funcionarios');
+		let funcionarioList = Array<Funcionario>();
+
+		ref.get().subscribe((snapShot) => {
+			snapShot.forEach((doc: any) => {
+				funcionarioList.push(doc.data());
+			});
+		});
+
+		return funcionarioList;
+	}
+
+	getFuncionarioById() {}
 
 	uploadFiles(profilePic: File, documents: Array<File>, email: string) {
 		this.afStorage
