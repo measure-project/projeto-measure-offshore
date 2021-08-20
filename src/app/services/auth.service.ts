@@ -104,7 +104,10 @@ export class AuthService {
 			userLogadoCollection.valueChanges({ idField: 'uid' });
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
-			localStorage.setItem('currentUser', JSON.stringify(this.userLogado));
+			localStorage.setItem(
+				'currentUser',
+				JSON.stringify(this.userLogado)
+			);
 		});
 		return this.userLogado;
 	}
@@ -143,15 +146,16 @@ export class AuthService {
 		return this.afAuth
 			.createUserWithEmailAndPassword(user.email, password)
 			.then((result: any) => {
-				if (!user.isAdmin) {
-					this.SendVerificationMail();
+				if (user.isAdmin) {
 					user.uid = result.user.uid;
-					// user.emailVerified? = result.user.emailVerified;
 					this.SetUserData(user);
 				}
+				this.SendVerificationMail();
+				// user.emailVerified? = result.user.emailVerified;
 			})
 			.catch((error: any) => {
 				window.alert(error.message);
+				console.log(error.message);
 			});
 	}
 
@@ -221,7 +225,8 @@ export class AuthService {
 		);
 		this.afAuth.onAuthStateChanged((user) => {
 			if (user) {
-				if (currentUser.isAdmin) this.router.navigate(['/verPerfilAdm']);
+				if (currentUser.isAdmin)
+					this.router.navigate(['/verPerfilAdm']);
 				else this.router.navigate(['/verPerfil']);
 			} else this.router.navigate(['/login']);
 		});

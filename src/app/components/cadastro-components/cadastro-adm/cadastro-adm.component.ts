@@ -54,7 +54,6 @@ export class CadastroAdmComponent implements OnInit {
 		if (event.target.files && event.target.files[0]) {
 			for (let i = 0; i < event.target.files.length; i++) {
 				this.admin.documents.push(event.target.files[i]);
-				this.documentSelected.innerHTML += `<p style="background-color: #4abdb7;border-radius: 5px">${event.target.files[i].name} </p>`;
 			}
 		}
 	}
@@ -64,7 +63,11 @@ export class CadastroAdmComponent implements OnInit {
 	}
 
 	cadastrarAdmin(adminData: Admin, password: string) {
+		adminData.profilePicture = '';
+		adminData.documents = [];
+		adminData.isAdmin = true;
+
 		this.adminService.singUpAdmin(adminData, password);
-		this.router.navigate(['/verPerfilAdm']);
+		//this.router.navigate(['/verPerfilAdm']);
 	}
 }

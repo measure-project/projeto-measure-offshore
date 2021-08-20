@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { FuncionarioService } from './../../services/funcionario.service';
 import { Component, OnInit } from '@angular/core';
 import { Funcionario } from 'src/app/models/funcionario';
@@ -10,7 +11,14 @@ import { Funcionario } from 'src/app/models/funcionario';
 export class MembrosAtuaisComponent implements OnInit {
 	funcionarios!: Array<Funcionario>;
 
-	constructor(private funcionarioService: FuncionarioService) {}
+	constructor(
+		private router: Router,
+		private funcionarioService: FuncionarioService
+	) {}
+
+	return() {
+		this.router.navigate(['/verPerfilAdm']);
+	}
 
 	ngOnInit(): void {
 		this.funcionarios = this.funcionarioService.getFuncionarios();

@@ -22,12 +22,14 @@ export class AdminService {
 		const docRef: AngularFirestoreDocument<any> = this.afs.doc(
 			`admins/${admin.uid}`
 		);
+		let id: string;
+		admin.uid != undefined ? (id = admin.uid) : (id = docRef.ref.id);
 		const adminState: Admin = {
-			uid: admin.uid,
+			uid: id,
 
 			name: admin.name,
 			phone: admin.phone,
-			cpf: admin.cpf,
+			//cpf: admin.cpf,
 			adress: admin.adress,
 			houseNumber: admin.houseNumber,
 			birthday: admin.birthday,
@@ -71,9 +73,13 @@ export class AdminService {
 		try {
 			this.setAdmin(admin);
 			this.auth.signUp(admin, password);
-			this.auth.displayMessage("Cadastro efetuado com sucesso!", false);
+			this.auth.displayMessage('Cadastro efetuado com sucesso!', false);
 		} catch (error: any) {
-			this.auth.displayMessage(`Erro ao cadastrar administrador: ${error}`, true)
+			this.auth.displayMessage(
+				`Erro ao cadastrar administrador: ${error}`,
+				true
+			);
+			console.log(error);
 		}
 	}
 }
