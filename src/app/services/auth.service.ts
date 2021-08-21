@@ -54,14 +54,6 @@ export class AuthService {
 		});
 	}
 
-	SetAdminData(admin: Admin) {
-		const adminRef: AngularFirestoreDocument<any> = this.afs.doc(
-			`admins/${admin.uid}`
-		);
-
-		const adminState: any = {};
-	}
-
 	SetUserData(user: any): any {
 		const userRef: AngularFirestoreDocument<any> = this.afs.doc(
 			`users/${user.uid}`
@@ -112,6 +104,19 @@ export class AuthService {
 		return this.userLogado;
 	}
 
+	getAllUsers() {
+		const ref = this.afs.collection('users');
+		let clienteList = Array<User>();
+
+		ref.get().subscribe((snapShot) => {
+			snapShot.forEach((doc: any) => {
+				clienteList.push(doc.data());
+			});
+		});
+
+		return clienteList;
+	}
+
 	get isLoggedIn(): boolean {
 		const user = JSON.parse(localStorage.getItem('user') || '{}');
 		return user !== null && user.emailVerified !== false ? true : false;
@@ -130,8 +135,6 @@ export class AuthService {
 								if (this.userLogado.isAdmin)
 									this.router.navigate(['/verPerfilAdm']);
 								else this.router.navigate(['/verPerfil']);
-
-								console.log(this.userLogado);
 							},
 							() => this.SetUserData(result.user)
 						);
@@ -142,16 +145,15 @@ export class AuthService {
 			);
 	}
 
-	signUp(user: User | Admin, password: string): any {
+	signUp(user: User, password: string): any {
 		return this.afAuth
 			.createUserWithEmailAndPassword(user.email, password)
 			.then((result: any) => {
-				if (user.isAdmin) {
-					user.uid = result.user.uid;
-					this.SetUserData(user);
-				}
 				this.SendVerificationMail();
-				// user.emailVerified? = result.user.emailVerified;
+				user.uid = result.user.uid;
+				user.emailVerified = result.user.emailVerified;
+
+				this.SetUserData(user);
 			})
 			.catch((error: any) => {
 				window.alert(error.message);
@@ -168,11 +170,9 @@ export class AuthService {
 	}
 
 	async SendVerificationMail() {
-		return await this.afAuth.currentUser
-			.then((u) => u?.sendEmailVerification())
-			.then(() => {
-				this.router.navigate(['email-verification']);
-			});
+		return await this.afAuth.currentUser.then((u) =>
+			u?.sendEmailVerification()
+		);
 	}
 
 	ForgotPassword(passwordResetEmail: any): any {
@@ -220,7 +220,7 @@ export class AuthService {
 	}
 
 	toAdminOrToUserView() {
-		const currentUser: User = JSON.parse(
+		const currentUser: User | Admin = JSON.parse(
 			localStorage.getItem('currentUser') || '{}'
 		);
 		this.afAuth.onAuthStateChanged((user) => {

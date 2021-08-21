@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth.service';
+import { User } from './../../models/user';
 import { Router } from '@angular/router';
 import { FuncionarioService } from './../../services/funcionario.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,10 +12,12 @@ import { Funcionario } from 'src/app/models/funcionario';
 })
 export class MembrosAtuaisComponent implements OnInit {
 	funcionarios!: Array<Funcionario>;
+	clientes!: Array<User>;
 
 	constructor(
 		private router: Router,
-		private funcionarioService: FuncionarioService
+		private funcionarioService: FuncionarioService,
+		private authService: AuthService
 	) {}
 
 	return() {
@@ -22,5 +26,6 @@ export class MembrosAtuaisComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.funcionarios = this.funcionarioService.getFuncionarios();
+		this.clientes = this.authService.getAllUsers();
 	}
 }

@@ -6,6 +6,7 @@ import {
 	AngularFirestore,
 	AngularFirestoreDocument,
 } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
 	providedIn: 'root',
@@ -15,17 +16,16 @@ export class AdminService {
 	constructor(
 		private afs: AngularFirestore,
 		private asfStorage: AngularFireStorage,
-		private auth: AuthService
+		private auth: AuthService,
+		private afAuth: AngularFireAuth
 	) {}
 
 	setAdmin(admin: Admin): any {
 		const docRef: AngularFirestoreDocument<any> = this.afs.doc(
 			`admins/${admin.uid}`
 		);
-		let id: string;
-		admin.uid != undefined ? (id = admin.uid) : (id = docRef.ref.id);
 		const adminState: Admin = {
-			uid: id,
+			uid: admin.uid,
 
 			name: admin.name,
 			phone: admin.phone,
@@ -40,6 +40,7 @@ export class AdminService {
 			isAdmin: true,
 
 			email: admin.email,
+			emailVerified: admin.emailVerified,
 
 			funcao: admin.funcao,
 
@@ -69,17 +70,19 @@ export class AdminService {
 			.catch(() => console.log(`Falha ao upar ${file.name}`));
 	}
 
-	singUpAdmin(admin: Admin, password: string) {
-		try {
-			this.setAdmin(admin);
-			this.auth.signUp(admin, password);
-			this.auth.displayMessage('Cadastro efetuado com sucesso!', false);
-		} catch (error: any) {
-			this.auth.displayMessage(
-				`Erro ao cadastrar administrador: ${error}`,
-				true
-			);
-			console.log(error);
-		}
+	signUpAdmin(admin: Admin, password: string): any {
+		return this.afAuth
+			.createUserWithEmailAndPassword(admin.email, password)
+			.then((result: any) => {
+				this.auth.SendVerificationMail();
+				admin.uid = result.user.uid;
+				admin.emailVerified = result.user.emailVerified;
+
+				this.setAdmin(admin);
+			})
+			.catch((error: any) => {
+				window.alert(error.message);
+				console.log(error.message);
+			});
 	}
 }

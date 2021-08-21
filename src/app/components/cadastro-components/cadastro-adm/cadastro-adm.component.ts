@@ -13,7 +13,6 @@ export class CadastroAdmComponent implements OnInit {
 	password: string;
 	confirmPassword: string;
 	profilePic: any;
-	documentSelected: any;
 	phoneMask: string = '(00) 0 0000-0000';
 	constructor(private adminService: AdminService, private router: Router) {
 		this.profilePic =
@@ -22,9 +21,7 @@ export class CadastroAdmComponent implements OnInit {
 		this.confirmPassword = '';
 	}
 
-	ngOnInit(): void {
-		this.documentSelected = document.querySelector('#documentList');
-	}
+	ngOnInit(): void {}
 
 	setAdmin(admin: Admin): void {
 		try {
@@ -67,7 +64,7 @@ export class CadastroAdmComponent implements OnInit {
 		adminData.documents = [];
 		adminData.isAdmin = true;
 
-		this.adminService.singUpAdmin(adminData, password);
+		this.adminService.signUpAdmin(adminData, password);
 		//this.router.navigate(['/verPerfilAdm']);
 	}
 }

@@ -12,6 +12,7 @@ export interface Admin {
 	profilePicture?: any;
 
 	email: string;
+	emailVerified: boolean;
 
 	isAdmin: boolean;
 

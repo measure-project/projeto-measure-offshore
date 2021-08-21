@@ -9,17 +9,61 @@
 			<h1>Membros Atuais</h1>
 		</mat-card-title>
 		<mat-card-content>
-			<mat-tab-group dynamicHeight mat-align-tabs="center">
-				<mat-tab label="Clientes"> Content 1 </mat-tab>
-				<mat-tab label="Funcionarios">
-					<mat-card
-						class="funcionarioList mat-elevation-z4"
-						*ngFor="let funcionario of funcionarios"
-					>
-						{{ funcionario.name }}
-					</mat-card>
+			<mat-tab-group mat-align-tabs="center">
+				<mat-tab label="Clientes">
+					<div class="tabContent">
+						<mat-form-field appearance="outline">
+							<mat-label>Pesquisar</mat-label>
+							<input matInput type="text" />
+							<i matSuffix class="material-icons">search</i>
+						</mat-form-field>
+						<mat-card
+							class="funcionarioList mat-elevation-z4"
+							*ngFor="let cliente of clientes"
+						>
+							<div class="info">
+								<p>
+									{{ cliente.name }},
+									{{ cliente.birthday }}
+								</p>
+								<p>{{ cliente.adress }}</p>
+							</div>
+							<button mat-raised-button>Ver</button>
+						</mat-card>
+					</div>
 				</mat-tab>
-				<mat-tab label="ADM's"> Content 3 </mat-tab>
+				<mat-tab label="Funcionarios">
+					<div class="tabContent">
+						<mat-form-field appearance="outline">
+							<mat-label>Pesquisar</mat-label>
+							<input matInput type="text" />
+							<i matSuffix class="material-icons">search</i>
+						</mat-form-field>
+						<mat-card
+							class="funcionarioList mat-elevation-z4"
+							*ngFor="let funcionario of funcionarios"
+						>
+							<div class="info">
+								<p>
+									{{ funcionario.name }},
+									{{ funcionario.birthday }}
+								</p>
+								<p>{{ funcionario.adress }}</p>
+							</div>
+							<button mat-raised-button>Ver</button>
+						</mat-card>
+					</div>
+				</mat-tab>
+
+				<mat-tab label="ADM's">
+					<div class="tabContent">
+						<mat-form-field appearance="outline">
+							<mat-label>Pesquisar</mat-label>
+							<input matInput type="text" />
+							<i matSuffix class="material-icons">search</i>
+						</mat-form-field>
+					</div>
+				</mat-tab>
 			</mat-tab-group>
 		</mat-card-content>
 
