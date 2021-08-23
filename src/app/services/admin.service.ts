@@ -52,6 +52,19 @@ export class AdminService {
 		});
 	}
 
+	getAllAdmin() {
+		const ref = this.afs.collection('admins');
+		let adminList = Array<Admin>();
+
+		ref.get().subscribe((snapShot) => {
+			snapShot.forEach((doc: any) => {
+				adminList.push(doc.data());
+			});
+		});
+
+		return adminList;
+	}
+
 	uploadProfilePic(profilePic: File, admin: Admin): void {
 		this.asfStorage
 			.ref(`admins/${admin.uid}/profile.jpg`)

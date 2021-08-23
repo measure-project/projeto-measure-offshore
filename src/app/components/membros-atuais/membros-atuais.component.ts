@@ -1,3 +1,5 @@
+import { Admin } from './../../models/admin';
+import { AdminService } from './../../services/admin.service';
 import { AuthService } from './../../services/auth.service';
 import { User } from './../../models/user';
 import { Router } from '@angular/router';
@@ -13,10 +15,13 @@ import { Funcionario } from 'src/app/models/funcionario';
 export class MembrosAtuaisComponent implements OnInit {
 	funcionarios!: Array<Funcionario>;
 	clientes!: Array<User>;
+	admins!: Array<Admin>;
+	filterText!: string;
 
 	constructor(
 		private router: Router,
 		private funcionarioService: FuncionarioService,
+		private adminService: AdminService,
 		private authService: AuthService
 	) {}
 
@@ -25,7 +30,8 @@ export class MembrosAtuaisComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.funcionarios = this.funcionarioService.getFuncionarios();
+		this.funcionarios = this.funcionarioService.getAllFuncionarios();
 		this.clientes = this.authService.getAllUsers();
+		this.admins = this.adminService.getAllAdmin();
 	}
 }

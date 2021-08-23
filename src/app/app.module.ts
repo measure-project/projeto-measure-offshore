@@ -41,6 +41,8 @@ import { CadastroFuncionarioComponent } from './components/cadastro-components/c
 import { CadastroAdmComponent } from './components/cadastro-components/cadastro-adm/cadastro-adm.component';
 import { MembrosAtuaisComponent } from './components/membros-atuais/membros-atuais.component';
 
+import { FilterPipe } from './components/membros-atuais/filter.pipe';
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -58,6 +60,7 @@ import { MembrosAtuaisComponent } from './components/membros-atuais/membros-atua
 		CadastroFuncionarioComponent,
 		CadastroAdmComponent,
 		MembrosAtuaisComponent,
+		FilterPipe,
 	],
 	imports: [
 		BrowserModule,

@@ -47,7 +47,7 @@ export class FuncionarioService {
 		});
 	}
 
-	getFuncionarios() {
+	getAllFuncionarios() {
 		const ref = this.afs.collection('funcionarios');
 		let funcionarioList = Array<Funcionario>();
 

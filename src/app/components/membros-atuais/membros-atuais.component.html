@@ -14,12 +14,19 @@
 					<div class="tabContent">
 						<mat-form-field appearance="outline">
 							<mat-label>Pesquisar</mat-label>
-							<input matInput type="text" />
+							<input
+								matInput
+								type="text"
+								[(ngModel)]="filterText"
+							/>
 							<i matSuffix class="material-icons">search</i>
 						</mat-form-field>
 						<mat-card
 							class="funcionarioList mat-elevation-z4"
-							*ngFor="let cliente of clientes"
+							*ngFor="
+								let cliente of clientes
+									| searchFilter: filterText
+							"
 						>
 							<div class="info">
 								<p>
@@ -36,12 +43,19 @@
 					<div class="tabContent">
 						<mat-form-field appearance="outline">
 							<mat-label>Pesquisar</mat-label>
-							<input matInput type="text" />
+							<input
+								matInput
+								type="text"
+								[(ngModel)]="filterText"
+							/>
 							<i matSuffix class="material-icons">search</i>
 						</mat-form-field>
 						<mat-card
 							class="funcionarioList mat-elevation-z4"
-							*ngFor="let funcionario of funcionarios"
+							*ngFor="
+								let funcionario of funcionarios
+									| searchFilter: filterText
+							"
 						>
 							<div class="info">
 								<p>
@@ -59,9 +73,25 @@
 					<div class="tabContent">
 						<mat-form-field appearance="outline">
 							<mat-label>Pesquisar</mat-label>
-							<input matInput type="text" />
+							<input matInput type="text" [(ngModel)]="filterText"/>
 							<i matSuffix class="material-icons">search</i>
 						</mat-form-field>
+						<mat-card
+							class="funcionarioList mat-elevation-z4"
+							*ngFor="
+								let admin of admins
+									| searchFilter: filterText
+							"
+						>
+							<div class="info">
+								<p>
+									{{ admin.name }},
+									{{ admin.birthday }}
+								</p>
+								<p>{{ admin.adress }}</p>
+							</div>
+							<button mat-raised-button>Ver</button>
+						</mat-card>
 					</div>
 				</mat-tab>
 			</mat-tab-group>
