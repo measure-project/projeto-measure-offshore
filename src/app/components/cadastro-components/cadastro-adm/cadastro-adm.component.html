@@ -86,6 +86,36 @@
 					/>
 					<mat-error>Insira um numero de telefone válido!</mat-error>
 				</mat-form-field>
+				
+				<!--CEP-->
+				<mat-form-field appearance="outline">
+					<mat-label>CEP</mat-label>
+					<input
+						matInput
+						type="text"
+						name="cep"
+						ngModel
+						required
+						placeholder="11111-111"
+						mask="00000-000"
+					/>
+					<mat-error>Insira um numero de telefone válido!</mat-error>
+				</mat-form-field>
+
+				<!--CPF do admin-->
+				<mat-form-field appearance="outline">
+					<mat-label>CPF</mat-label>
+					<input
+						matInput
+						type="text"
+						name="cpf"
+						ngModel
+						required
+						placeholder="123.456.789-10"
+						mask="000.000.000-00"
+					/>
+					<mat-error>Insira um numero de telefone válido!</mat-error>
+				</mat-form-field>
 				<!-- Endereço -->
 				<mat-form-field appearance="outline">
 					<mat-label>Endereço</mat-label>
@@ -100,6 +130,23 @@
 					<mat-error>Insira um endereço válido!</mat-error>
 				</mat-form-field>
 				<!-- Bairro e número -->
+				<mat-form-field
+					appearance="outline"
+					style="width: 5rem; justify-self: end"
+				>
+					<mat-label>Nº</mat-label>
+					<input
+						matInput
+						type="text"
+						name="houseNumber"
+						ngModel
+						required
+						placeholder="00"
+						mask="0*"
+					/>
+					<mat-error>Insira um nº válido!</mat-error>
+				</mat-form-field>
+
 				<mat-form-field appearance="outline">
 					<mat-label>Bairro</mat-label>
 					<input
@@ -123,22 +170,7 @@
 						placeholder="Nome da rua"
 					/>
 				</mat-form-field>
-				<mat-form-field
-					appearance="outline"
-					style="width: 5rem; justify-self: end"
-				>
-					<mat-label>Nº</mat-label>
-					<input
-						matInput
-						type="text"
-						name="houseNumber"
-						ngModel
-						required
-						placeholder="00"
-						mask="0*"
-					/>
-					<mat-error>Insira um nº válido!</mat-error>
-				</mat-form-field>
+				
 
 				<div style="grid-column-start: 1; grid-column-end: 3">
 					<h2>Função</h2>
@@ -257,5 +289,4 @@
 		</mat-card-content>
 	</mat-card>
 
-	<form></form>
 </div>

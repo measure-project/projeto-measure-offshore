@@ -29,7 +29,7 @@ export class AdminService {
 
 			name: admin.name,
 			phone: admin.phone,
-			//cpf: admin.cpf,
+			cpf: admin.cpf,
 			adress: admin.adress,
 			houseNumber: admin.houseNumber,
 			birthday: admin.birthday,

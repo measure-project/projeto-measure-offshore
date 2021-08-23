@@ -3,7 +3,7 @@ export interface Admin {
 
 	name: string;
 	phone: string;
-	//cpf: string;
+	cpf: string;
 	adress: string;
 	houseNumber: string;
 	birthday: string;
