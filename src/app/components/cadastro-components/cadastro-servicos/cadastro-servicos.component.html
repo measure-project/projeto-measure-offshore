@@ -1,0 +1,41 @@
+<mat-card>
+	<mat-card-title>
+		<h1>CADASTRO DE SERVIÇOS</h1>
+	</mat-card-title>
+	<mat-card-content class="servicoCardContent">
+		<form
+			#serviceData="ngForm"
+			(ngSubmit)="cadastrarServico()"
+			class="edit-form"
+		>
+			<mat-form-field appearance="outline">
+                <mat-label>
+                    Título/Tipo do Serviço
+                </mat-label>
+
+                <input
+                    matInput
+                    type="text"
+                    name="title"
+                    ngModel
+                    required
+                    placeholder="Ex: Jardinagem Especializada"
+                />
+                <mat-error>Insira um título válido</mat-error>
+            </mat-form-field>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Selecionar pré-definido
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class = "pre-defined-types">
+                    <a (click)="fillFormWithPreDefined()" *ngFor="let tipo of tipos"></a>
+                </div>
+            </mat-expansion-panel>
+
+		</form>
+	</mat-card-content>
+</mat-card>
