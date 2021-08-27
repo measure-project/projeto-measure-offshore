@@ -1,41 +1,106 @@
-<mat-card>
-	<mat-card-title>
-		<h1>CADASTRO DE SERVIÇOS</h1>
-	</mat-card-title>
-	<mat-card-content class="servicoCardContent">
-		<form
-			#serviceData="ngForm"
-			(ngSubmit)="cadastrarServico()"
-			class="edit-form"
-		>
-			<mat-form-field appearance="outline">
-                <mat-label>
-                    Título/Tipo do Serviço
-                </mat-label>
+<div class="content">
+	<mat-toolbar class="toolBar">
+		<img src="../../../../assets/measure-logo.png" />
+		<span class="material-icons profileIcon">account_circle</span>
+	</mat-toolbar>
 
-                <input
-                    matInput
-                    type="text"
-                    name="title"
-                    ngModel
-                    required
-                    placeholder="Ex: Jardinagem Especializada"
-                />
-                <mat-error>Insira um título válido</mat-error>
-            </mat-form-field>
+	<mat-card class="servicoCard">
+		<mat-card-title style="margin-bottom: 2rem">
+			<h1>CADASTRO DE SERVIÇOS</h1>
+		</mat-card-title>
 
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Selecionar pré-definido
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+		<mat-card-content class="servicoCardContent">
+			<form
+				#serviceData="ngForm"
+				(ngSubmit)="cadastrarServico()"
+				class="edit-form"
+			>
+				<h2>Título/Tipo do serviço</h2>
+				<div class="serviceInfo">
+					<mat-form-field appearance="outline">
+						<mat-label> Nome do serviço </mat-label>
 
-                <div class = "pre-defined-types">
-                    <a (click)="fillFormWithPreDefined()" *ngFor="let tipo of tipos"></a>
-                </div>
-            </mat-expansion-panel>
+						<input
+							matInput
+							type="text"
+							name="title"
+							ngModel
+							required
+							placeholder="Ex: Jardinagem Especializada"
+						/>
+						<mat-error>Insira um título válido</mat-error>
+					</mat-form-field>
 
-		</form>
-	</mat-card-content>
-</mat-card>
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								Selecionar pré-definido
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<div class="pre-defined-types">
+							<a
+								(click)="fillFormWithPreDefined()"
+								*ngFor="let tipo of tipos"
+							></a>
+						</div>
+					</mat-expansion-panel>
+
+					<mat-form-field
+						style="grid-column: 1 / 3; margin-top: 1rem"
+						appearance="outline"
+					>
+						<mat-label> Descrição </mat-label>
+						<textarea
+							matInput
+							ngModel
+							name="description"
+							id="description"
+							cols="30"
+							rows="10"
+						></textarea>
+					</mat-form-field>
+				</div>
+
+				<!------------------------------------------------------>
+
+				<h2>Documentos</h2>
+				<div class="documents"></div>
+				<h2>Funcionarios</h2>
+				<div class="funcionariosList">
+					<mat-form-field
+						style="grid-column: 1 / 3"
+						appearance="outline"
+					>
+						<mat-label>Pesquisar</mat-label>
+						<input matInput type="text" [(ngModel)]="filterText" />
+						<i matSuffix class="material-icons">search</i>
+					</mat-form-field>
+					<mat-card
+						style="
+							width: 10rem;
+							display: flex;
+							justify-content: space-between;
+						"
+						*ngFor="let funcionario of funcionarios"
+					>
+						{{ funcionario.name }}
+						<i class="material-icons">add</i>
+					</mat-card>
+				</div>
+
+				<!------------------------------------------------------>
+
+				<h2>Equipamento</h2>
+				<div class="equipamento"></div>
+
+				<!------------------------------------------------------>
+
+				<div style="display: flex; justify-content: space-between">
+					<button mat-raised-button>Voltar</button>
+					<button mat-raised-button>Salvar</button>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>

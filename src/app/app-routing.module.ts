@@ -1,3 +1,4 @@
+import { CadastroServicosComponent } from './components/cadastro-components/cadastro-servicos/cadastro-servicos.component';
 import { CadastroAdmComponent } from './components/cadastro-components/cadastro-adm/cadastro-adm.component';
 import { CadastroFuncionarioComponent } from './components/cadastro-components/cadastro-funcionario/cadastro-funcionario.component';
 import { AdmEditarPerfilComponent } from './components/Perfil-Components/adm-editar-perfil/adm-editar-perfil.component';
@@ -32,6 +33,10 @@ const routes: Routes = [
 	{
 		path: 'cadastroAdmin',
 		component: CadastroAdmComponent,
+	},
+	{
+		path: 'cadastroServico',
+		component: CadastroServicosComponent,
 	},
 	{
 		path: 'passwordRecovery',

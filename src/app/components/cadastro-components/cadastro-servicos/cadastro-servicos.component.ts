@@ -1,6 +1,8 @@
+import { FuncionarioService } from './../../../services/funcionario.service';
+import { Router } from '@angular/router';
 import { Servico } from './../../../models/servico';
-import { User } from './../../../models/user';
 import { Component, OnInit } from '@angular/core';
+import { Funcionario } from 'src/app/models/funcionario';
 
 @Component({
 	selector: 'app-cadastro-servicos',
@@ -8,15 +10,21 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./cadastro-servicos.component.scss'],
 })
 export class CadastroServicosComponent implements OnInit {
-	constructor() {}
+	constructor(
+		private router: Router,
+		private funcionarioService: FuncionarioService
+	) {}
 
-  tipos: Servico[] = [];
+	tipos: Servico[] = [];
+	funcionarios!: Array<Funcionario>;
+	servico!: Servico;
+	filterText!: string;
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.funcionarios = this.funcionarioService.getAllFuncionarios();
+	}
 
 	cadastrarServico() {}
 
-	fillFormWithPreDefined() {
-    
-  }
+	fillFormWithPreDefined() {}
 }
