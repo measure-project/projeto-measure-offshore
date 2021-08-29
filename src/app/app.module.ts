@@ -61,8 +61,8 @@ import { CadastroServicosComponent } from './components/cadastro-components/cada
 		CadastroFuncionarioComponent,
 		CadastroAdmComponent,
 		MembrosAtuaisComponent,
+		CadastroServicosComponent,
 		FilterPipe,
-  CadastroServicosComponent,
 	],
 	imports: [
 		BrowserModule,

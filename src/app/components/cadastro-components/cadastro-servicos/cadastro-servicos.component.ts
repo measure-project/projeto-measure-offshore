@@ -18,7 +18,8 @@ export class CadastroServicosComponent implements OnInit {
 	tipos: Servico[] = [];
 	funcionarios!: Array<Funcionario>;
 	servico!: Servico;
-	filterText!: string;
+	docTypes: Array<string> = [];
+	documentType!: string;
 
 	ngOnInit(): void {
 		this.funcionarios = this.funcionarioService.getAllFuncionarios();
@@ -27,4 +28,16 @@ export class CadastroServicosComponent implements OnInit {
 	cadastrarServico() {}
 
 	fillFormWithPreDefined() {}
+
+	addDocumentType(typeName: string) {
+		this.docTypes.push(typeName);
+	}
+
+	addDocuments(docType: string, event: any) {
+		console.log(event.target);
+		console.log(docType);
+
+		// Ver um jeito de separar o preview dos docs
+		// de acordo com os tipos
+	}
 }
