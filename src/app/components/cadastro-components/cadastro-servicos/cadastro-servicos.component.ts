@@ -1,3 +1,4 @@
+import { Equipamento } from './../../../models/equipamento';
 import { FuncionarioService } from './../../../services/funcionario.service';
 import { Router } from '@angular/router';
 import { Servico } from './../../../models/servico';
@@ -17,9 +18,11 @@ export class CadastroServicosComponent implements OnInit {
 
 	tipos: Servico[] = [];
 	funcionarios!: Array<Funcionario>;
+	equipamentos!: Array<Equipamento>;
 	servico!: Servico;
 	docTypes: Array<string> = [];
-	documentType!: string;
+	documentList: Array<Array<any>> = [[]];
+	funcionarioSelected: Array<Funcionario> = [];
 
 	ngOnInit(): void {
 		this.funcionarios = this.funcionarioService.getAllFuncionarios();
@@ -34,10 +37,14 @@ export class CadastroServicosComponent implements OnInit {
 	}
 
 	addDocuments(docType: string, event: any) {
-		console.log(event.target);
-		console.log(docType);
+		if (event.target.files) {
+			for (let i = 0; i < event.target.files.length; i++) {
+				this.documentList.push([docType, event.target.files[i].name]);
+			}
+		}
+	}
 
-		// Ver um jeito de separar o preview dos docs
-		// de acordo com os tipos
+	addFuncionario(funcionario: Funcionario) {
+		this.funcionarioSelected.push(funcionario);
 	}
 }
