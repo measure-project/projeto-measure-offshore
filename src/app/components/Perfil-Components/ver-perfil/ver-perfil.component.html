@@ -46,7 +46,9 @@
 	<div class="servicos">
 		<div class="header">
 			<h3>Serviços Contratados</h3>
-			<button mat-raised-button>Adicionar serviço</button>
+			<button (click)="toAdicionarServico()" mat-raised-button>
+				Adicionar serviço
+			</button>
 		</div>
 
 		<mat-card class="servicosLista" *ngFor="let service of services">

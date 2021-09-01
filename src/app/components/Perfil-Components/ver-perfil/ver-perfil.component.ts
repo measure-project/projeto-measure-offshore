@@ -65,6 +65,10 @@ export class VerPerfilComponent implements OnInit {
 		this.authService.SignOut();
 	}
 
+	toAdicionarServico() {
+		this.router.navigate(['/cadastroServico']);
+	}
+
 	filialDialog() {
 		// Mat dialog para as filiais
 	}
