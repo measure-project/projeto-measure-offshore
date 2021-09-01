@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AuthService {
 	userLogado = {} as User;
-
+	adminLogado = {} as Admin;
 	userState: any;
 	currentUserEmail!: string;
 	dadosUser!: AngularFirestoreCollection<User>;
@@ -96,13 +96,49 @@ export class AuthService {
 			userLogadoCollection.valueChanges({ idField: 'uid' });
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
-			localStorage.setItem(
-				'currentUser',
-				JSON.stringify(this.userLogado)
-			);
+			localStorage.setItem('currentUser', JSON.stringify(this.userLogado));
 		});
 		return this.userLogado;
 	}
+
+	// função análoga para pegar dados do admin
+
+	getAdminData(email: string): void {
+		const adminLogadoCollection: AngularFirestoreCollection<Admin> =
+			this.afs.collection<Admin>('/admins', (ref: CollectionReference) =>
+				ref.where('email', '==', email)
+			);
+
+		const adminLogadoCollection$: Observable<Admin[]> =
+			adminLogadoCollection.valueChanges({ idField: 'uid' });
+
+		adminLogadoCollection$.subscribe((admin) => {
+			this.adminLogado = admin[0];
+			localStorage.setItem('currentUser', JSON.stringify(this.adminLogado));
+		});
+	}
+
+	// **tentativa de juntar ambas as funções em uma só** -> está dando alguns erros na variável refPessoaLogada
+
+	// getData(email: string): User | Admin {
+	// 	let refPessoaLogada: AngularFirestoreCollection<User[] | Admin[]> =
+	// 		this.afs.collection('/users', (ref: CollectionReference) =>
+	// 			ref.where('email', '==', email)
+	// 		);
+
+	// 	if (!refPessoaLogada)
+	// 		refPessoaLogada = this.afs.collection(
+	// 			'/admins',
+	// 			(ref: CollectionReference) => ref.where('email', '==', email)
+	// 		);
+
+	// 	const refPessoaLogada$: Observable<User[] | Admin[]> =
+	// 		refPessoaLogada.valueChanges({ idField: 'uid' });
+
+	// 	refPessoaLogada$.subscribe((pessoaLogada) => {});
+
+	// 	return this.adminLogado || this.userLogado;
+	// }
 
 	getAllUsers() {
 		const ref = this.afs.collection('users');
@@ -119,11 +155,14 @@ export class AuthService {
 
 	get isLoggedIn(): boolean {
 		const user = JSON.parse(localStorage.getItem('user') || '{}');
-		return user !== null && user.emailVerified !== false ? true : false;
+		return user && user.emailVerified;
 	}
 
 	singIn(email: string, password: string): any {
+		// Chamando ambas para garantir
 		this.getUserData(email);
+		this.getAdminData(email);
+
 		this.afAuth
 			.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 			.then(() => {
@@ -132,17 +171,18 @@ export class AuthService {
 					.then((result: any) => {
 						this.ngZone.run(
 							() => {
-								if (this.userLogado.isAdmin)
-									this.router.navigate(['/verPerfilAdm']);
+								// Tem que trocar para this.adminLogado para funcionar como admin
+								if (this.adminLogado) this.router.navigate(['/verPerfilAdm']);
 								else this.router.navigate(['/verPerfil']);
 							},
 							() => this.SetUserData(result.user)
 						);
 					});
 			})
-			.catch((error: any) =>
-				this.displayMessage('Usuário ou senha incorretos', true)
-			);
+			.catch((error: any) => {
+				this.displayMessage('Usuário ou senha incorretos', true);
+				console.log(error);
+			});
 	}
 
 	signUp(user: User, password: string): any {
@@ -220,13 +260,13 @@ export class AuthService {
 	}
 
 	toAdminOrToUserView() {
-		const currentUser: User | Admin = JSON.parse(
-			localStorage.getItem('currentUser') || '{}'
-		);
+		// const currentUser: User = JSON.parse(
+		// 	localStorage.getItem('currentUser') || '{}'
+		// );
+
 		this.afAuth.onAuthStateChanged((user) => {
 			if (user) {
-				if (currentUser.isAdmin)
-					this.router.navigate(['/verPerfilAdm']);
+				if (this.userLogado) this.router.navigate(['/verPerfilAdm']);
 				else this.router.navigate(['/verPerfil']);
 			} else this.router.navigate(['/login']);
 		});

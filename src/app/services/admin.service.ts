@@ -15,7 +15,7 @@ export class AdminService {
 	admin = {} as Admin;
 	constructor(
 		private afs: AngularFirestore,
-		private asfStorage: AngularFireStorage,
+		private afStorage: AngularFireStorage,
 		private auth: AuthService,
 		private afAuth: AngularFireAuth
 	) {}
@@ -66,7 +66,7 @@ export class AdminService {
 	}
 
 	uploadProfilePic(profilePic: File, admin: Admin): void {
-		this.asfStorage
+		this.afStorage
 			.ref(`admins/${admin.uid}/profile.jpg`)
 			.put(profilePic)
 			.then(() => {
@@ -76,7 +76,7 @@ export class AdminService {
 	}
 
 	uploadFile(file: File, admin: Admin): void {
-		this.asfStorage
+		this.afStorage
 			.ref(`admins/${admin.uid}/documents.pdf`)
 			.put(admin.documents)
 			.then(() => console.log(`Arquivo ${file.name} upado`))
@@ -97,5 +97,12 @@ export class AdminService {
 				window.alert(error.message);
 				console.log(error.message);
 			});
+	}
+
+	async downloadProfilePic(admin: Admin): Promise<any> {
+		return await this.afStorage
+			.ref(`admins/${admin.uid}/profile.jpg`)
+			.getDownloadURL()
+			.toPromise();
 	}
 }

@@ -54,9 +54,7 @@ export class VerPerfilComponent implements OnInit {
 	ngOnInit(): void {
 		this.authService.afAuth.onAuthStateChanged((user) => {
 			if (user) {
-				this.user = JSON.parse(
-					localStorage.getItem('currentUser') || '{}'
-				);
+				this.user = JSON.parse(localStorage.getItem('currentUser') || '{}');
 			} else this.router.navigate(['/login']);
 		});
 	}
