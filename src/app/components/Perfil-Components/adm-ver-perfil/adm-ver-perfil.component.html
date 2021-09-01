@@ -14,23 +14,19 @@
 		<mat-card-content class="profileCardContent">
 			<img
 				class="profilePicture"
-				[src]="user.profilePicture || defaultImage"
+				src="{{ user?.profilePicture || defaultImage }}"
 				alt="Foto de perfil"
 			/>
-			<h3>{{ user.name }}</h3>
-			<h3>{{ user.branches }}</h3>
+			<h3>{{ user?.name }}</h3>
+			<h3>{{ user?.branches }}</h3>
 		</mat-card-content>
 
 		<mat-card-actions>
-			<button mat-raised-button (click)="toMembers()">
-				Membros Atuais
-			</button>
+			<button mat-raised-button (click)="toMembers()">Membros Atuais</button>
 
 			<mat-expansion-panel class="cadastroPanel">
 				<mat-expansion-panel-header>
-					<mat-panel-title class="colorWhite">
-						Cadastros
-					</mat-panel-title>
+					<mat-panel-title class="colorWhite"> Cadastros </mat-panel-title>
 				</mat-expansion-panel-header>
 
 				<div class="panelContent colorWhite">

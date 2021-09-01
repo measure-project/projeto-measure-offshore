@@ -118,7 +118,7 @@ export class AuthService {
 		});
 	}
 
-	// **tentativa de juntar ambas as funções em uma só**
+	// **tentativa de juntar ambas as funções em uma só** -> está dando alguns erros na variável refPessoaLogada
 
 	// getData(email: string): User | Admin {
 	// 	let refPessoaLogada: AngularFirestoreCollection<User[] | Admin[]> =
@@ -172,7 +172,7 @@ export class AuthService {
 						this.ngZone.run(
 							() => {
 								// Tem que trocar para this.adminLogado para funcionar como admin
-								if (this.userLogado) this.router.navigate(['/verPerfilAdm']);
+								if (this.adminLogado) this.router.navigate(['/verPerfilAdm']);
 								else this.router.navigate(['/verPerfil']);
 							},
 							() => this.SetUserData(result.user)
@@ -260,13 +260,13 @@ export class AuthService {
 	}
 
 	toAdminOrToUserView() {
-		const currentUser: User = JSON.parse(
-			localStorage.getItem('currentUser') || '{}'
-		);
+		// const currentUser: User = JSON.parse(
+		// 	localStorage.getItem('currentUser') || '{}'
+		// );
 
 		this.afAuth.onAuthStateChanged((user) => {
 			if (user) {
-				if (this.adminLogado) this.router.navigate(['/verPerfilAdm']);
+				if (this.userLogado) this.router.navigate(['/verPerfilAdm']);
 				else this.router.navigate(['/verPerfil']);
 			} else this.router.navigate(['/login']);
 		});

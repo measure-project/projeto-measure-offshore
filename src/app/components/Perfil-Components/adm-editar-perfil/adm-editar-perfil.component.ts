@@ -1,7 +1,9 @@
+import { AdminService } from './../../../services/admin.service';
 import { User } from './../../../models/user';
 import { AuthService } from './../../../services/auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Admin } from 'src/app/models/admin';
 
 @Component({
 	selector: 'app-adm-editar-perfil',
@@ -9,18 +11,20 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./adm-editar-perfil.component.scss'],
 })
 export class AdmEditarPerfilComponent implements OnInit {
-	user!: User;
+	admin: Admin = {} as Admin;
 
 	newImage: any;
 
-	constructor(private router: Router, private authService: AuthService) {}
+	constructor(
+		private router: Router,
+		private authService: AuthService,
+		private adminService: AdminService
+	) {}
 
 	ngOnInit(): void {
 		this.authService.afAuth.onAuthStateChanged((user) => {
 			if (user)
-				this.user = JSON.parse(
-					localStorage.getItem('currentUser') || '{}'
-				);
+				this.admin = JSON.parse(localStorage.getItem('currentUser') || '{}');
 			else this.router.navigate(['/login']);
 		});
 	}
@@ -60,20 +64,18 @@ export class AdmEditarPerfilComponent implements OnInit {
 
 			fileReader.onload = (e) => {
 				if (e) {
-					this.user.profilePicture = e.target?.result;
+					this.admin.profilePicture = e.target?.result;
 				}
 			};
 		}
 	}
 
 	editUserData() {
-		this.authService.uploadProfilePicture(this.user.uid, this.newImage);
-		this.authService
-			.downloadProfilePicture(this.user.uid)
-			.subscribe((imgUrl) => {
-				this.user.profilePicture = imgUrl;
-				this.authService.SetUserData(this.user);
-			});
+		this.adminService.uploadProfilePic(this.newImage, this.admin);
+		this.adminService.downloadProfilePic(this.admin).then((imgUrl: any) => {
+			this.admin.profilePicture = imgUrl;
+			this.adminService.setAdmin(this.admin);
+		});
 		this.returnToProfile();
 		this.authService.displayMessage('Perfil Atualizado!', false);
 	}
