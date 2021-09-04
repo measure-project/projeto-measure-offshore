@@ -1,6 +1,6 @@
 export interface Equipamento {
-	nome: string;
-	codigo: string;
-	marca: string;
-	descricao: string;
+	name: string;
+	code: string;
+	brand: string;
+	description: string;
 }

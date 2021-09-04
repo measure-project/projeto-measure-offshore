@@ -12,7 +12,6 @@ export class FilterPipe implements PipeTransform {
 		}
 		searchText = searchText.toLocaleLowerCase();
 
-		//O filtro busca o nome ou o endereço(dps acho que tem que mudar)
 		return items.filter((item) => {
 			return (
 				item.name.toLocaleLowerCase().includes(searchText) ||

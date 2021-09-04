@@ -1,9 +1,12 @@
+import { ServicosService } from './../../../services/servicos.service';
 import { Equipamento } from './../../../models/equipamento';
 import { FuncionarioService } from './../../../services/funcionario.service';
 import { Router } from '@angular/router';
 import { Servico } from './../../../models/servico';
 import { Component, OnInit } from '@angular/core';
 import { Funcionario } from 'src/app/models/funcionario';
+import { MatDialog } from '@angular/material/dialog';
+import { CriarEquipamentoComponent } from './criar-equipamento/criar-equipamento.component';
 
 @Component({
 	selector: 'app-cadastro-servicos',
@@ -13,7 +16,9 @@ import { Funcionario } from 'src/app/models/funcionario';
 export class CadastroServicosComponent implements OnInit {
 	constructor(
 		private router: Router,
-		private funcionarioService: FuncionarioService
+		private funcionarioService: FuncionarioService,
+		private servicoService: ServicosService,
+		public dialog: MatDialog
 	) {}
 
 	tipos: Servico[] = [];
@@ -23,9 +28,11 @@ export class CadastroServicosComponent implements OnInit {
 	docTypes: Array<string> = [];
 	documentList: Array<Array<any>> = [[]];
 	funcionarioSelected: Array<Funcionario> = [];
+	equipamentoSelected: Array<Equipamento> = [];
 
 	ngOnInit(): void {
 		this.funcionarios = this.funcionarioService.getAllFuncionarios();
+		this.equipamentos = this.servicoService.getAllEquipments();
 	}
 
 	cadastrarServico() {}
@@ -46,5 +53,15 @@ export class CadastroServicosComponent implements OnInit {
 
 	addFuncionario(funcionario: Funcionario) {
 		this.funcionarioSelected.push(funcionario);
+	}
+
+	addEquipamento(equipamento: Equipamento) {
+		this.equipamentoSelected.push(equipamento);
+	}
+
+	openDialog() {
+		this.dialog.open(CriarEquipamentoComponent, {
+			width: '75%',
+		});
 	}
 }

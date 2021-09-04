@@ -24,6 +24,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
@@ -43,6 +44,7 @@ import { MembrosAtuaisComponent } from './components/membros-atuais/membros-atua
 
 import { FilterPipe } from './components/membros-atuais/filter.pipe';
 import { CadastroServicosComponent } from './components/cadastro-components/cadastro-servicos/cadastro-servicos.component';
+import { CriarEquipamentoComponent } from './components/cadastro-components/cadastro-servicos/criar-equipamento/criar-equipamento.component';
 
 @NgModule({
 	declarations: [
@@ -63,6 +65,7 @@ import { CadastroServicosComponent } from './components/cadastro-components/cada
 		MembrosAtuaisComponent,
 		CadastroServicosComponent,
 		FilterPipe,
+  CriarEquipamentoComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -84,6 +87,7 @@ import { CadastroServicosComponent } from './components/cadastro-components/cada
 		MatExpansionModule,
 		MatRadioModule,
 		MatTabsModule,
+		MatDialogModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

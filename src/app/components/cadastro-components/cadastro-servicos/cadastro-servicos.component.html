@@ -127,7 +127,7 @@
 
 				<h2>Funcionarios</h2>
 
-				<div class="funcionarioSelected">
+				<div class="itemsSelected">
 					<ng-container
 						*ngFor="let funcionario of funcionarioSelected"
 					>
@@ -135,7 +135,7 @@
 					</ng-container>
 				</div>
 
-				<div class="funcionariosList">
+				<div class="bdList">
 					<mat-form-field
 						style="grid-column: 1 / 3; width: 20rem"
 						appearance="outline"
@@ -165,7 +165,16 @@
 				<!------------------------------------------------------>
 
 				<h2>Equipamento</h2>
-				<div class="funcionariosList">
+
+				<div class="itemsSelected">
+					<ng-container
+						*ngFor="let equipamento of equipamentoSelected"
+					>
+						<p>{{ equipamento.name }}</p>
+					</ng-container>
+				</div>
+
+				<div class="bdList">
 					<mat-form-field
 						style="grid-column: 1 / 3; width: 20rem"
 						appearance="outline"
@@ -186,8 +195,17 @@
 						"
 					>
 						{{ equipamento.name }}
-						<i class="material-icons">add</i>
+						<a (click)="addEquipamento(equipamento)"
+							><i class="material-icons">add</i></a
+						>
 					</mat-card>
+					<button
+						mat-raised-button
+						type="button"
+						(click)="openDialog()"
+					>
+						Criar equipamento
+					</button>
 				</div>
 
 				<!------------------------------------------------------>
