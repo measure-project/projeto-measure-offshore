@@ -1,3 +1,4 @@
+import { Servico } from './../models/servico';
 import { Equipamento } from './../models/equipamento';
 import { Injectable } from '@angular/core';
 import {
@@ -15,6 +16,26 @@ export class ServicosService {
 		private afs: AngularFirestore,
 		private afStorage: AngularFireStorage
 	) {}
+
+	setService(service: Servico) {
+		const docRef: AngularFirestoreDocument<DocumentData> = this.afs
+			.collection(`servicos`)
+			.doc();
+
+		const id = service.uid != undefined ? service.uid : docRef.ref.id;
+
+		const serviceState: Servico = {
+			title: service.title,
+			description: service.description,
+			equipamentos: service.equipamentos,
+			funcionarios: service.funcionarios,
+			uid: id,
+		};
+
+		return docRef.set(serviceState, {
+			merge: true,
+		});
+	}
 
 	setEquipment(equipment: Equipamento) {
 		const docRef: AngularFirestoreDocument<DocumentData> = this.afs
@@ -44,6 +65,19 @@ export class ServicosService {
 		});
 
 		return equipamentList;
+	}
+
+	getAllServices() {
+		const ref = this.afs.collection('servicos');
+		let serviceList = Array<Servico>();
+
+		ref.get().subscribe((snapShot) => {
+			snapShot.forEach((doc: any) => {
+				serviceList.push(doc.data());
+			});
+		});
+
+		return serviceList;
 	}
 
 	uploadFiles() {}

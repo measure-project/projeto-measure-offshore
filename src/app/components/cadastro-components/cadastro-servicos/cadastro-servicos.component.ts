@@ -21,7 +21,8 @@ export class CadastroServicosComponent implements OnInit {
 		public dialog: MatDialog
 	) {}
 
-	tipos: Servico[] = [];
+	tipos!: Array<Servico>;
+	saveModel: boolean = false;
 	funcionarios!: Array<Funcionario>;
 	equipamentos!: Array<Equipamento>;
 	servico!: Servico;
@@ -29,15 +30,27 @@ export class CadastroServicosComponent implements OnInit {
 	documentList: Array<Array<any>> = [[]];
 	funcionarioSelected: Array<Funcionario> = [];
 	equipamentoSelected: Array<Equipamento> = [];
+	preDefinedType!: Servico;
 
 	ngOnInit(): void {
 		this.funcionarios = this.funcionarioService.getAllFuncionarios();
 		this.equipamentos = this.servicoService.getAllEquipments();
+		this.tipos = this.servicoService.getAllServices();
 	}
 
-	cadastrarServico() {}
+	cadastrarServico(servico: Servico) {
+		servico.funcionarios = this.funcionarioSelected;
+		servico.equipamentos = this.equipamentoSelected;
 
-	fillFormWithPreDefined() {}
+		if (this.saveModel) {
+			this.servicoService.setService(servico);
+		}
+	}
+
+	fillFormWithPreDefined(service: Servico) {
+		this.preDefinedType = service;
+		console.log(this.preDefinedType.title);
+	}
 
 	addDocumentType(typeName: string) {
 		this.docTypes.push(typeName);
@@ -63,5 +76,9 @@ export class CadastroServicosComponent implements OnInit {
 		this.dialog.open(CriarEquipamentoComponent, {
 			width: '75%',
 		});
+	}
+
+	backToProfile() {
+		this.router.navigate(['/verPerfil']);
 	}
 }

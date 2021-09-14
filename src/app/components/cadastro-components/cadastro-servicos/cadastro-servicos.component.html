@@ -12,7 +12,7 @@
 		<mat-card-content class="servicoCardContent">
 			<form
 				#serviceData="ngForm"
-				(ngSubmit)="cadastrarServico()"
+				(ngSubmit)="cadastrarServico(serviceData.value)"
 				class="edit-form"
 			>
 				<h2>Título/Tipo do serviço</h2>
@@ -31,7 +31,7 @@
 						<mat-error>Insira um título válido</mat-error>
 					</mat-form-field>
 
-					<mat-expansion-panel>
+					<mat-expansion-panel style="height: min-content">
 						<mat-expansion-panel-header>
 							<mat-panel-title>
 								Selecionar pré-definido
@@ -40,9 +40,10 @@
 
 						<div class="pre-defined-types">
 							<a
-								(click)="fillFormWithPreDefined()"
+								(click)="fillFormWithPreDefined(tipo)"
 								*ngFor="let tipo of tipos"
-							></a>
+								>{{ tipo.title }}</a
+							>
 						</div>
 					</mat-expansion-panel>
 
@@ -56,6 +57,8 @@
 							ngModel
 							name="description"
 							id="description"
+							ngModel
+							required
 							cols="30"
 							rows="10"
 						></textarea>
@@ -107,6 +110,7 @@
 								type="file"
 								name="serviceDocuments"
 								multiple
+								required
 								id="{{ docType }}"
 								(change)="addDocuments(docType, $event)"
 							/>
@@ -209,15 +213,21 @@
 				</div>
 
 				<!------------------------------------------------------>
-
-				<div style="display: flex; justify-content: space-between">
-					<button mat-raised-button>Voltar</button>
-					<button mat-raised-button>Salvar</button>
-				</div>
-				<input id="preDefine" type="checkbox" />
+				<input
+					id="preDefine"
+					[(ngModel)]="saveModel"
+					name="preDefine"
+					[ngModelOptions]="{ standalone: true }"
+					type="checkbox"
+				/>
 				<label for="preDefine"
 					>Definir como modelo pré-estabelecido</label
 				>
+
+				<div style="display: flex; justify-content: space-between">
+					<button type="button" (click)="backToProfile()" mat-raised-button>Voltar</button>
+					<button type="submit" mat-raised-button>Salvar</button>
+				</div>
 			</form>
 		</mat-card-content>
 	</mat-card>
