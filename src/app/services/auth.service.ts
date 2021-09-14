@@ -96,7 +96,10 @@ export class AuthService {
 			userLogadoCollection.valueChanges({ idField: 'uid' });
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
-			localStorage.setItem('currentUser', JSON.stringify(this.userLogado));
+			localStorage.setItem(
+				'currentUser',
+				JSON.stringify(this.userLogado)
+			);
 		});
 		return this.userLogado;
 	}
@@ -114,7 +117,10 @@ export class AuthService {
 
 		adminLogadoCollection$.subscribe((admin) => {
 			this.adminLogado = admin[0];
-			localStorage.setItem('currentUser', JSON.stringify(this.adminLogado));
+			localStorage.setItem(
+				'currentUser',
+				JSON.stringify(this.adminLogado)
+			);
 		});
 	}
 
@@ -153,9 +159,9 @@ export class AuthService {
 		return clienteList;
 	}
 
-	get isLoggedIn(): boolean {
-		const user = JSON.parse(localStorage.getItem('user') || '{}');
-		return user && user.emailVerified;
+	loggedIn(): boolean {
+		if (localStorage.getItem('currentUser')) return true;
+		else return false;
 	}
 
 	singIn(email: string, password: string): any {
@@ -172,7 +178,8 @@ export class AuthService {
 						this.ngZone.run(
 							() => {
 								// Tem que trocar para this.adminLogado para funcionar como admin
-								if (this.adminLogado) this.router.navigate(['/verPerfilAdm']);
+								if (this.adminLogado)
+									this.router.navigate(['/verPerfilAdm']);
 								else this.router.navigate(['/verPerfil']);
 							},
 							() => this.SetUserData(result.user)
@@ -257,18 +264,5 @@ export class AuthService {
 
 	downloadProfilePicture(uid: string) {
 		return this.afStorage.ref(`users/${uid}/profile.jpg`).getDownloadURL();
-	}
-
-	toAdminOrToUserView() {
-		// const currentUser: User = JSON.parse(
-		// 	localStorage.getItem('currentUser') || '{}'
-		// );
-
-		this.afAuth.onAuthStateChanged((user) => {
-			if (user) {
-				if (this.userLogado) this.router.navigate(['/verPerfilAdm']);
-				else this.router.navigate(['/verPerfil']);
-			} else this.router.navigate(['/login']);
-		});
 	}
 }
