@@ -1,3 +1,4 @@
+import { Admin } from './../../../models/admin';
 import { Router } from '@angular/router';
 import { AuthService } from './../../../services/auth.service';
 import { User } from './../../../models/user';
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./adm-ver-perfil.component.scss'],
 })
 export class AdmVerPerfilComponent implements OnInit {
-	user!: User;
+	admin!: Admin;
 	defaultImage = '../../../../assets/manutencao.jpg';
 
 	constructor(private router: Router, private authService: AuthService) {}
@@ -17,12 +18,11 @@ export class AdmVerPerfilComponent implements OnInit {
 	ngOnInit(): void {
 		this.authService.afAuth.onAuthStateChanged((user) => {
 			if (user)
-				this.user = JSON.parse(
+				this.admin = JSON.parse(
 					localStorage.getItem('currentUser') || '{}'
 				);
 			else this.router.navigate(['/login']);
 		});
-		console.log(this.user);
 	}
 
 	// Por alguma razão, essa função não funciona e retorna um erro de "não é possível ler name de undefined no console". Precisamos checar depois
