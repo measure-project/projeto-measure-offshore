@@ -1,4 +1,6 @@
-import { Router } from '@angular/router';
+import { Admin } from 'src/app/models/admin';
+import { AdminService } from './../../../services/admin.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './../../../models/user';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class VerPerfilComponent implements OnInit {
 	defaultImage = '../../../../assets/perfil-padrao.jpg';
 	user!: User;
+	admin!: Admin;
 
 	// Array para teste
 	services: Array<any> = [
@@ -49,10 +52,30 @@ export class VerPerfilComponent implements OnInit {
 		},
 	];
 
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(
+		private authService: AuthService,
+		private router: Router,
+		private currentRoute: ActivatedRoute,
+		private adminService: AdminService
+	) {}
 
 	ngOnInit(): void {
 		this.user = JSON.parse(localStorage.getItem('currentUser') || '{ }');
+
+		if (this.user.isAdmin) {
+			this.admin = JSON.parse(
+				localStorage.getItem('currentUser') || '{ }'
+			);
+			this.adminService
+				.consultClient(
+					this.currentRoute.snapshot.paramMap.get('uid') || ''
+				)
+				.then((users) => {
+					users.forEach((user: any) => {
+						this.user = user.data();
+					});
+				});
+		}
 	}
 
 	signOut() {

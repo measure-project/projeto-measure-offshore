@@ -34,4 +34,8 @@ export class MembrosAtuaisComponent implements OnInit {
 		this.clientes = this.authService.getAllUsers();
 		this.admins = this.adminService.getAllAdmin();
 	}
+
+	verMembro(membro: User) {
+		this.router.navigate([`/verPerfil`, membro.uid]);
+	}
 }
