@@ -31,18 +31,7 @@ export class AuthService {
 		public afs: AngularFirestore,
 		public afStorage: AngularFireStorage,
 		private snackBar: MatSnackBar
-	) {
-		this.afAuth.authState.subscribe((user: any) => {
-			if (user) {
-				this.userState = user;
-				localStorage.setItem('user', JSON.stringify(this.userState));
-				JSON.parse(localStorage.getItem('user') || '{ }');
-			} else {
-				localStorage.setItem('user', '');
-				JSON.parse(localStorage.getItem('user') || '{ }');
-			}
-		});
-	}
+	) {}
 
 	// Para usar a função de displayMessage, passar true para o segundo argumento mostra fundo vermelho e false fundo verde.
 	displayMessage(msg: string, isError: boolean = false): void {
@@ -70,16 +59,16 @@ export class AuthService {
 			houseNumber: user.houseNumber,
 			district: user.district,
 			complement: user.complement,
-			profilePicture: user.profilePicture,
+			profilePicture: user.profilePicture ?? '',
 
 			email: user.email,
 			emailVerified: user.emailVerified,
 
 			isAdmin: false,
 
-			branches: user.branches,
+			branches: user.branches ?? '',
 
-			services: user.services,
+			services: user.services ?? [],
 		};
 		localStorage.setItem('currentUser', JSON.stringify(userState));
 		return userRef.set(userState, {
@@ -117,10 +106,12 @@ export class AuthService {
 
 		adminLogadoCollection$.subscribe((admin) => {
 			this.adminLogado = admin[0];
-			localStorage.setItem(
-				'currentUser',
-				JSON.stringify(this.adminLogado)
-			);
+			if (this.adminLogado) {
+				localStorage.setItem(
+					'currentUser',
+					JSON.stringify(this.adminLogado)
+				);
+			}
 		});
 	}
 
@@ -160,8 +151,10 @@ export class AuthService {
 	}
 
 	loggedIn(): boolean {
-		if (localStorage.getItem('currentUser')) return true;
-		else return false;
+		if (localStorage.getItem('currentUser') ?? false) {
+			return true;
+		}
+		return false;
 	}
 
 	singIn(email: string, password: string): any {
@@ -175,15 +168,15 @@ export class AuthService {
 				return this.afAuth
 					.signInWithEmailAndPassword(email, password)
 					.then((result: any) => {
-						this.ngZone.run(
-							() => {
-								// Tem que trocar para this.adminLogado para funcionar como admin
-								if (this.adminLogado)
-									this.router.navigate(['/verPerfilAdm']);
-								else this.router.navigate(['/verPerfil']);
-							},
-							() => this.SetUserData(result.user)
-						);
+						this.ngZone.run(() => {
+							// Tem que trocar para this.adminLogado para funcionar como admin
+							if (this.adminLogado)
+								this.router.navigate(['/verPerfilAdm']);
+							else
+								this.router.navigate([
+									`/verPerfil/${this.userLogado.uid}`,
+								]);
+						});
 					});
 			})
 			.catch((error: any) => {
@@ -208,12 +201,15 @@ export class AuthService {
 			});
 	}
 
-	SignOut(): any {
-		return this.afAuth.signOut().then(() => {
-			localStorage.removeItem('user');
-			localStorage.removeItem('currentUser');
-			this.router.navigate(['/login']);
-		});
+	async SignOut(): Promise<any> {
+		return await this.afAuth
+			.signOut()
+			.then(() => {
+				localStorage.removeItem('currentUser');
+			})
+			.finally(() => {
+				this.router.navigate(['/login']);
+			});
 	}
 
 	async SendVerificationMail() {

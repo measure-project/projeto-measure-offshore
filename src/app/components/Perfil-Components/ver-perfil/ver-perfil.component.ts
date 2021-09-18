@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./ver-perfil.component.scss'],
 })
 export class VerPerfilComponent implements OnInit {
-	defaultImage = '../../../../assets/manutencao.jpg';
+	defaultImage = '../../../../assets/perfil-padrao.jpg';
 	user!: User;
 
 	// Array para teste
@@ -52,11 +52,7 @@ export class VerPerfilComponent implements OnInit {
 	constructor(private authService: AuthService, private router: Router) {}
 
 	ngOnInit(): void {
-		this.authService.afAuth.onAuthStateChanged((user) => {
-			if (user) {
-				this.user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-			} else this.router.navigate(['/login']);
-		});
+		this.user = JSON.parse(localStorage.getItem('currentUser') || '{ }');
 	}
 
 	signOut() {
