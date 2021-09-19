@@ -1,8 +1,9 @@
-import { LoadinfoService } from './../../../services/loadinfo.service';
-import { Router } from '@angular/router';
+import { Admin } from 'src/app/models/admin';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './../../../models/user';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
 	selector: 'app-ver-perfil',
@@ -10,8 +11,9 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./ver-perfil.component.scss'],
 })
 export class VerPerfilComponent implements OnInit {
-	defaultImage = '../../../../assets/manutencao.jpg';
+	defaultImage = '../../../../assets/perfil-padrao.jpg';
 	user!: User;
+	admin!: Admin;
 
 	// Array para teste
 	services: Array<any> = [
@@ -50,16 +52,30 @@ export class VerPerfilComponent implements OnInit {
 		},
 	];
 
-	constructor(private authService: AuthService, private router: Router, private loadinfoService: LoadinfoService) {}
+	constructor(
+		private authService: AuthService,
+		private router: Router,
+		private currentRoute: ActivatedRoute,
+		private adminService: AdminService
+	) {}
 
 	ngOnInit(): void {
-		this.authService.afAuth.onAuthStateChanged(async (user) => {
-			if (user) {
-				this.loadinfoService.loadInfoFromPageCache().then((user) => {
-					this.user = user;
-				})
-			} else this.router.navigate(['/login']);
-		});
+		this.user = JSON.parse(localStorage.getItem('currentUser') || '{ }');
+
+		if (this.user.isAdmin) {
+			this.admin = JSON.parse(
+				localStorage.getItem('currentUser') || '{ }'
+			);
+			this.adminService
+				.consultClient(
+					this.currentRoute.snapshot.paramMap.get('uid') || ''
+				)
+				.then((users) => {
+					users.forEach((user: any) => {
+						this.user = user.data();
+					});
+				});
+		}
 	}
 
 

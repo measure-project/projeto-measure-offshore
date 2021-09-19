@@ -51,7 +51,7 @@ const routes: Routes = [
 		component: TelaRecuperarSenhaComponent,
 	},
 	{
-		path: 'verPerfil',
+		path: 'verPerfil/:uid',
 		component: VerPerfilComponent,
 		canActivate: [RouteGuardService],
 	},
