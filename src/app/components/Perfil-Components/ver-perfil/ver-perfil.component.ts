@@ -1,3 +1,4 @@
+import { LoadinfoService } from './../../../services/loadinfo.service';
 import { Router } from '@angular/router';
 import { User } from './../../../models/user';
 import { AuthService } from './../../../services/auth.service';
@@ -49,15 +50,18 @@ export class VerPerfilComponent implements OnInit {
 		},
 	];
 
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(private authService: AuthService, private router: Router, private loadinfoService: LoadinfoService) {}
 
 	ngOnInit(): void {
-		this.authService.afAuth.onAuthStateChanged((user) => {
+		this.authService.afAuth.onAuthStateChanged(async (user) => {
 			if (user) {
-				this.user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+				this.loadinfoService.loadInfoFromPageCache().then((user) => {
+					this.user = user;
+				})
 			} else this.router.navigate(['/login']);
 		});
 	}
+
 
 	signOut() {
 		this.authService.SignOut();

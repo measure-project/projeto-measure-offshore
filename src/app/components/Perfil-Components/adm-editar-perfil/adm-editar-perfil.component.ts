@@ -13,13 +13,17 @@ import { Admin } from "src/app/models/admin";
 export class AdmEditarPerfilComponent implements OnInit {
   admin: Admin = {} as Admin;
 
+  profilePicChanged: boolean;
+
   newImage: any;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private adminService: AdminService
-  ) {}
+  ) {
+    this.profilePicChanged = false;
+  }
 
   ngOnInit(): void {
     this.authService.afAuth.onAuthStateChanged((user) => {
@@ -68,16 +72,21 @@ export class AdmEditarPerfilComponent implements OnInit {
         }
       };
     }
+    this.profilePicChanged = true;
   }
 
-  editUserData() {
-    this.adminService.uploadProfilePic(this.newImage, this.admin);
-    this.adminService.downloadProfilePic(this.admin).then((imgUrl: any) => {
-      this.admin.profilePicture = imgUrl;
-      this.adminService.setAdmin(this.admin).then(() => {
-        this.admin = JSON.parse(localStorage.getItem("currentUser") || "{}");
+  async editUserData() {
+    if (this.profilePicChanged) {
+      this.adminService.uploadProfilePic(this.newImage, this.admin);
+      await this.adminService.downloadProfilePic(this.admin).then(async (imgUrl: any) => {
+        this.admin.profilePicture = imgUrl;
       });
+    }
+
+    await this.adminService.setAdmin(this.admin).then(() => {
+      this.admin = JSON.parse(localStorage.getItem("currentUser") || "{}");
     });
+    
     this.returnToProfile();
     this.authService.displayMessage("Perfil Atualizado!", false);
     console.log(this.admin.profilePicture);

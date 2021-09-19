@@ -1,3 +1,4 @@
+import { LoadinfoService } from './../../../services/loadinfo.service';
 import { User } from './../../../models/user';
 import { Router } from '@angular/router';
 import { AuthService } from './../../../services/auth.service';
@@ -13,13 +14,17 @@ export class EditarPerfilComponent implements OnInit {
 	defaultImage: any = '../../../../assets/perfil-padrao.jpg';
 	newImage: any;
 
+	profilePicEdited: boolean;
+
 	CELULAR = '(00) 0 0000-0000'; //Mask para celular
 	TELEFONE = '(00) 0000-0000'; //Mask para telefone
 	phoneMask = this.TELEFONE;
 	phoneLength = '';
 	previousLength = 0;
 
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(private authService: AuthService, private router: Router, private loadinfoService: LoadinfoService) {
+		this.profilePicEdited = false;
+	}
 
 	onPhoneChanged() {
 		//Função que checa o tamanho do numero, se for maior que 10 é telefone, senão é celular
@@ -39,21 +44,23 @@ export class EditarPerfilComponent implements OnInit {
 	ngOnInit(): void {
 		this.authService.afAuth.onAuthStateChanged((user) => {
 			if (user) {
-				this.user = JSON.parse(
-					localStorage.getItem('currentUser') || '{}'
-				);
+				this.loadinfoService.loadInfoFromPageCache().then((userLoaded) => {
+					this.user = userLoaded;
+				})
 			} else this.router.navigate(['/login']);
 		});
 	}
 
-	editUserData() {
-		this.authService.uploadProfilePicture(this.user.uid, this.newImage);
-		this.authService
-			.downloadProfilePicture(this.user.uid)
-			.subscribe((imgUrl) => {
-				this.user.profilePicture = imgUrl;
-				this.authService.SetUserData(this.user);
-			});
+	async editUserData() {
+		if (this.profilePicEdited) {
+			this.authService.uploadProfilePicture(this.user.uid, this.newImage);
+			this.authService
+				.downloadProfilePicture(this.user.uid)
+				.subscribe(async (imgUrl: string) => {
+					this.user.profilePicture = imgUrl;
+				});
+		}
+		await this.authService.SetUserData(this.user);
 		this.router.navigate(['/verPerfil']);
 		this.authService.displayMessage('Perfil Atualizado!', false);
 	}
@@ -75,5 +82,6 @@ export class EditarPerfilComponent implements OnInit {
 				}
 			};
 		}
+		this.profilePicEdited = true;
 	}
 }

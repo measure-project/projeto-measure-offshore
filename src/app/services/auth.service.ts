@@ -31,7 +31,7 @@ export class AuthService {
 		public afs: AngularFirestore,
 		public afStorage: AngularFireStorage,
 		private snackBar: MatSnackBar
-	) {
+	) {		
 		this.afAuth.authState.subscribe((user: any) => {
 			if (user) {
 				this.userState = user;
@@ -94,6 +94,7 @@ export class AuthService {
 			);
 		const userLogadoCollection$: Observable<User[]> =
 			userLogadoCollection.valueChanges({ idField: 'uid' });
+
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
 			localStorage.setItem(
@@ -101,12 +102,14 @@ export class AuthService {
 				JSON.stringify(this.userLogado)
 			);
 		});
+		console.log(this.userLogado);
+		
 		return this.userLogado;
 	}
 
 	// função análoga para pegar dados do admin
 
-	getAdminData(email: string): void {
+	getAdminData(email: string) {
 		const adminLogadoCollection: AngularFirestoreCollection<Admin> =
 			this.afs.collection<Admin>('/admins', (ref: CollectionReference) =>
 				ref.where('email', '==', email)
@@ -122,6 +125,9 @@ export class AuthService {
 				JSON.stringify(this.adminLogado)
 			);
 		});
+
+		console.log(this.adminLogado);
+		return this.adminLogado;
 	}
 
 	// **tentativa de juntar ambas as funções em uma só** -> está dando alguns erros na variável refPessoaLogada
@@ -167,24 +173,24 @@ export class AuthService {
 	singIn(email: string, password: string): any {
 		// Chamando ambas para garantir
 		this.getUserData(email);
-		this.getAdminData(email);
+		if(!(!!this.userLogado))
+			this.getAdminData(email);
 
 		this.afAuth
 			.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-			.then(() => {
-				return this.afAuth
-					.signInWithEmailAndPassword(email, password)
-					.then((result: any) => {
-						this.ngZone.run(
-							() => {
-								// Tem que trocar para this.adminLogado para funcionar como admin
-								if (this.adminLogado)
-									this.router.navigate(['/verPerfilAdm']);
-								else this.router.navigate(['/verPerfil']);
-							},
-							() => this.SetUserData(result.user)
-						);
-					});
+			.then(async () => {
+				const result = await this.afAuth
+					.signInWithEmailAndPassword(email, password);
+				this.ngZone.run(
+					() => {
+						// Tem que trocar para this.adminLogado para funcionar como admin
+						if (this.adminLogado)
+							this.router.navigate(['/verPerfilAdm']);
+						else
+							this.router.navigate(['/verPerfil']);
+					},
+					() => this.SetUserData(result.user)
+				);
 			})
 			.catch((error: any) => {
 				this.displayMessage('Usuário ou senha incorretos', true);
