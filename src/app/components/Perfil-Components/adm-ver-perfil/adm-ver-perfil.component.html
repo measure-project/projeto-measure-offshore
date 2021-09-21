@@ -14,7 +14,7 @@
 		<mat-card-content class="profileCardContent">
 			<img
 				class="profilePicture"
-				src="{{ admin?.profilePicture }}"
+				src="{{ admin?.profilePicture || defaultImage }}"
 				alt="Foto de perfil"
 			/>
 			<h3>{{ admin?.name }}</h3>

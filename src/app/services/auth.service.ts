@@ -31,22 +31,7 @@ export class AuthService {
 		public afs: AngularFirestore,
 		public afStorage: AngularFireStorage,
 		private snackBar: MatSnackBar
-<<<<<<< HEAD
-	) {		
-		this.afAuth.authState.subscribe((user: any) => {
-			if (user) {
-				this.userState = user;
-				localStorage.setItem('user', JSON.stringify(this.userState));
-				JSON.parse(localStorage.getItem('user') || '{ }');
-			} else {
-				localStorage.setItem('user', '');
-				JSON.parse(localStorage.getItem('user') || '{ }');
-			}
-		});
-	}
-=======
 	) {}
->>>>>>> 65b3df4cac925b019cd58d5626de12d8a96aad06
 
 	// Para usar a função de displayMessage, passar true para o segundo argumento mostra fundo vermelho e false fundo verde.
 	displayMessage(msg: string, isError: boolean = false): void {
@@ -107,7 +92,7 @@ export class AuthService {
 			);
 		});
 		console.log(this.userLogado);
-		
+
 		return this.userLogado;
 	}
 
@@ -181,26 +166,10 @@ export class AuthService {
 	singIn(email: string, password: string): any {
 		// Chamando ambas para garantir
 		this.getUserData(email);
-		if(!(!!this.userLogado))
-			this.getAdminData(email);
+		if (!!!this.userLogado) this.getAdminData(email);
 
 		this.afAuth
 			.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-<<<<<<< HEAD
-			.then(async () => {
-				const result = await this.afAuth
-					.signInWithEmailAndPassword(email, password);
-				this.ngZone.run(
-					() => {
-						// Tem que trocar para this.adminLogado para funcionar como admin
-						if (this.adminLogado)
-							this.router.navigate(['/verPerfilAdm']);
-						else
-							this.router.navigate(['/verPerfil']);
-					},
-					() => this.SetUserData(result.user)
-				);
-=======
 			.then(() => {
 				return this.afAuth
 					.signInWithEmailAndPassword(email, password)
@@ -215,7 +184,6 @@ export class AuthService {
 								]);
 						});
 					});
->>>>>>> 65b3df4cac925b019cd58d5626de12d8a96aad06
 			})
 			.catch((error: any) => {
 				this.displayMessage('Usuário ou senha incorretos', true);

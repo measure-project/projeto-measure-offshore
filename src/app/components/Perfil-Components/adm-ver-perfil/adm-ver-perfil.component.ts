@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdmVerPerfilComponent implements OnInit {
 	admin!: Admin;
-	defaultImage = '../../../../assets/manutencao.jpg';
+	defaultImage = '../../../../assets/perfil-padrao.jpg';
 
 	constructor(private router: Router, private authService: AuthService) {}
 
