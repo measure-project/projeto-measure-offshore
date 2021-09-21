@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FuncionarioService } from './../../services/funcionario.service';
 import { Component, OnInit } from '@angular/core';
 import { Funcionario } from 'src/app/models/funcionario';
+import { Location } from '@angular/common';
 
 @Component({
 	selector: 'app-membros-atuais',
@@ -22,11 +23,12 @@ export class MembrosAtuaisComponent implements OnInit {
 		private router: Router,
 		private funcionarioService: FuncionarioService,
 		private adminService: AdminService,
-		private authService: AuthService
+		private authService: AuthService,
+		private location: Location
 	) {}
 
 	return() {
-		this.router.navigate(['/verPerfilAdm']);
+		this.location.back();
 	}
 
 	ngOnInit(): void {

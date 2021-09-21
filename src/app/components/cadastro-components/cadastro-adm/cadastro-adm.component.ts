@@ -1,7 +1,7 @@
+import { Location } from '@angular/common';
 import { AdminService } from './../../../services/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { Admin } from 'src/app/models/admin';
-import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-cadastro-adm',
@@ -14,7 +14,10 @@ export class CadastroAdmComponent implements OnInit {
 	confirmPassword: string;
 	profilePic: any;
 	phoneMask: string = '(00) 0 0000-0000';
-	constructor(private adminService: AdminService, private router: Router) {
+	constructor(
+		private adminService: AdminService,
+		private location: Location
+	) {
 		this.profilePic =
 			this.admin.profilePicture || '../../../../assets/perfil-padrao.jpg';
 		this.password = '';
@@ -56,7 +59,7 @@ export class CadastroAdmComponent implements OnInit {
 	}
 
 	returnToProfile(): void {
-		this.router.navigate(['/verPerfilAdm']);
+		this.location.back();
 	}
 
 	cadastrarAdmin(adminData: Admin, password: string) {
@@ -65,6 +68,5 @@ export class CadastroAdmComponent implements OnInit {
 		adminData.isAdmin = true;
 
 		this.adminService.signUpAdmin(adminData, password);
-		//this.router.navigate(['/verPerfilAdm']);
 	}
 }

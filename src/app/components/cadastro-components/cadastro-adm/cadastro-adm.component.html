@@ -86,7 +86,7 @@
 					/>
 					<mat-error>Insira um numero de telefone válido!</mat-error>
 				</mat-form-field>
-				
+
 				<!--CEP-->
 				<mat-form-field appearance="outline">
 					<mat-label>CEP</mat-label>
@@ -170,7 +170,6 @@
 						placeholder="Nome da rua"
 					/>
 				</mat-form-field>
-				
 
 				<div style="grid-column-start: 1; grid-column-end: 3">
 					<h2>Função</h2>
@@ -270,7 +269,11 @@
 					<mat-error>Confirme sua senha!</mat-error>
 				</mat-form-field>
 
-				<button mat-raised-button (click)="returnToProfile()">
+				<button
+					mat-raised-button
+					type="button"
+					(click)="returnToProfile()"
+				>
 					Voltar
 				</button>
 				<button
@@ -288,5 +291,4 @@
 			</form>
 		</mat-card-content>
 	</mat-card>
-
 </div>

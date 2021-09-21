@@ -10,7 +10,7 @@
 		<mat-card-content class="profileCardContent">
 			<img
 				class="profilePicture"
-				[src]="user.profilePicture || defaultImage"
+				src="{{ user?.profilePicture || defaultImage }}"
 				alt="Foto de perfil"
 			/>
 			<button mat-raised-button class="editPhoto">

@@ -22,7 +22,11 @@ export class EditarPerfilComponent implements OnInit {
 	phoneLength = '';
 	previousLength = 0;
 
-	constructor(private authService: AuthService, private router: Router, private loadinfoService: LoadinfoService) {
+	constructor(
+		private authService: AuthService,
+		private router: Router,
+		private loadinfoService: LoadinfoService
+	) {
 		this.profilePicEdited = false;
 	}
 
@@ -42,13 +46,7 @@ export class EditarPerfilComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.authService.afAuth.onAuthStateChanged((user) => {
-			if (user) {
-				this.loadinfoService.loadInfoFromPageCache().then((userLoaded) => {
-					this.user = userLoaded;
-				})
-			} else this.router.navigate(['/login']);
-		});
+		this.user = JSON.parse(localStorage.getItem('currentUser') || '{ }');
 	}
 
 	async editUserData() {
@@ -66,8 +64,7 @@ export class EditarPerfilComponent implements OnInit {
 	}
 
 	returnToProfile() {
-		this.user.profilePicture = '';
-		this.router.navigate(['/verPerfil']);
+		this.router.navigate([`/verPerfil/${this.user.uid}`]);
 	}
 
 	editPhoto(event: any) {

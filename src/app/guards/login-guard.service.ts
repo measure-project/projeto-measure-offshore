@@ -22,8 +22,9 @@ export class LoginGuardService implements CanActivate {
 			const user = JSON.parse(
 				localStorage.getItem('currentUser') || '{ }'
 			);
-			if (user.isAdmin) this.router.navigate(['/verPerfilAdm']);
-			else this.router.navigate(['/verPerfil']);
+			if (user.isAdmin)
+				this.router.navigate([`/verPerfilAdm/${user.uid}`]);
+			else this.router.navigate([`/verPerfil/${user.uid}`]);
 			return false;
 		}
 		return true;

@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/user';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +17,7 @@ export class TelaCadastroComponent implements OnInit {
 
 	password!: string;
 
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(private authService: AuthService, private location: Location) {}
 
 	ngOnInit(): void {}
 
@@ -50,10 +50,10 @@ export class TelaCadastroComponent implements OnInit {
 			);
 		}
 
-		this.router.navigate(['/login']);
+		this.returnToProfile();
 	}
 
-	cancel() {
-		this.router.navigate(['/verPerfilAdm']);
+	returnToProfile() {
+		this.location.back();
 	}
 }

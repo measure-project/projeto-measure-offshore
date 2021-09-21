@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { ServicosService } from './../../../services/servicos.service';
 import { Equipamento } from './../../../models/equipamento';
 import { FuncionarioService } from './../../../services/funcionario.service';
@@ -18,7 +19,8 @@ export class CadastroServicosComponent implements OnInit {
 		private router: Router,
 		private funcionarioService: FuncionarioService,
 		private servicoService: ServicosService,
-		public dialog: MatDialog
+		public dialog: MatDialog,
+		private location: Location
 	) {}
 
 	tipos!: Array<Servico>;
@@ -45,6 +47,8 @@ export class CadastroServicosComponent implements OnInit {
 		if (this.saveModel) {
 			this.servicoService.setService(servico);
 		}
+
+		this.location.back();
 	}
 
 	fillFormWithPreDefined(service: Servico) {
@@ -79,6 +83,6 @@ export class CadastroServicosComponent implements OnInit {
 	}
 
 	backToProfile() {
-		this.router.navigate(['/verPerfil']);
+		this.location.back();
 	}
 }

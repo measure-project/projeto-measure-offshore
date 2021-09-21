@@ -21,7 +21,7 @@ export class AdmVerPerfilComponent implements OnInit {
 	// Por alguma razão, essa função não funciona e retorna um erro de "não é possível ler name de undefined no console". Precisamos checar depois
 
 	toMembers() {
-		this.router.navigate(['/membros']);
+		this.router.navigate([`/verPerfilAdm/${this.admin.uid}/membros`]);
 	}
 
 	signOut() {

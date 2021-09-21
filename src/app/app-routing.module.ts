@@ -27,22 +27,22 @@ const routes: Routes = [
 		canActivate: [LoginGuardService],
 	},
 	{
-		path: 'cadastroCliente',
+		path: 'verPerfilAdm/:uid/cadastroCliente',
 		component: TelaCadastroComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},
 	{
-		path: 'cadastroFuncionario',
+		path: 'verPerfilAdm/:uid/cadastroFuncionario',
 		component: CadastroFuncionarioComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},
 	{
-		path: 'cadastroAdmin',
+		path: 'verPerfilAdm/:uid/cadastroAdmin',
 		component: CadastroAdmComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},
 	{
-		path: 'cadastroServico',
+		path: 'verPerfil/:uid/cadastroServico',
 		component: CadastroServicosComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},
@@ -56,22 +56,22 @@ const routes: Routes = [
 		canActivate: [RouteGuardService],
 	},
 	{
-		path: 'editarPerfil',
+		path: 'verPerfil/:uid/editarPerfil',
 		component: EditarPerfilComponent,
 		canActivate: [RouteGuardService],
 	},
 	{
-		path: 'verPerfilAdm',
+		path: 'verPerfilAdm/:uid',
 		component: AdmVerPerfilComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},
 	{
-		path: 'editarPerfilAdm',
+		path: 'verPerfilAdm/:uid/editarPerfil',
 		component: AdmEditarPerfilComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},
 	{
-		path: 'membros',
+		path: 'verPerfilAdm/:uid/membros',
 		component: MembrosAtuaisComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},

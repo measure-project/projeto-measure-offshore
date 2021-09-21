@@ -38,12 +38,13 @@
 							</mat-panel-title>
 						</mat-expansion-panel-header>
 
-						<div class="pre-defined-types">
-							<a
-								(click)="fillFormWithPreDefined(tipo)"
-								*ngFor="let tipo of tipos"
-								>{{ tipo.title }}</a
-							>
+						<div
+							*ngFor="let tipo of tipos"
+							class="pre-defined-types"
+						>
+							<a (click)="fillFormWithPreDefined(tipo)">{{
+								tipo.title
+							}}</a>
 						</div>
 					</mat-expansion-panel>
 
@@ -225,7 +226,13 @@
 				>
 
 				<div style="display: flex; justify-content: space-between">
-					<button type="button" (click)="backToProfile()" mat-raised-button>Voltar</button>
+					<button
+						type="button"
+						(click)="backToProfile()"
+						mat-raised-button
+					>
+						Voltar
+					</button>
 					<button type="submit" mat-raised-button>Salvar</button>
 				</div>
 			</form>

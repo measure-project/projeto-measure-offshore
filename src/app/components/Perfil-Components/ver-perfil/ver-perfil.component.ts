@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Admin } from 'src/app/models/admin';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './../../../models/user';
@@ -56,7 +57,8 @@ export class VerPerfilComponent implements OnInit {
 		private authService: AuthService,
 		private router: Router,
 		private currentRoute: ActivatedRoute,
-		private adminService: AdminService
+		private adminService: AdminService,
+		private location: Location
 	) {}
 
 	ngOnInit(): void {
@@ -78,13 +80,13 @@ export class VerPerfilComponent implements OnInit {
 		}
 	}
 
-
 	signOut() {
-		this.authService.SignOut();
+		if (this.admin) this.location.back();
+		else this.authService.SignOut();
 	}
 
 	toAdicionarServico() {
-		this.router.navigate(['/cadastroServico']);
+		this.router.navigate([`${this.location.path()}/cadastroServico`]);
 	}
 
 	filialDialog() {

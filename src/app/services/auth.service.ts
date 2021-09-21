@@ -91,7 +91,6 @@ export class AuthService {
 				JSON.stringify(this.userLogado)
 			);
 		});
-		console.log(this.userLogado);
 
 		return this.userLogado;
 	}
@@ -117,7 +116,6 @@ export class AuthService {
 			}
 		});
 
-		console.log(this.adminLogado);
 		return this.adminLogado;
 	}
 
@@ -166,7 +164,7 @@ export class AuthService {
 	singIn(email: string, password: string): any {
 		// Chamando ambas para garantir
 		this.getUserData(email);
-		if (!!!this.userLogado) this.getAdminData(email);
+		this.getAdminData(email);
 
 		this.afAuth
 			.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -177,7 +175,9 @@ export class AuthService {
 						this.ngZone.run(() => {
 							// Tem que trocar para this.adminLogado para funcionar como admin
 							if (this.adminLogado)
-								this.router.navigate(['/verPerfilAdm']);
+								this.router.navigate([
+									`/verPerfilAdm/${this.adminLogado.uid}`,
+								]);
 							else
 								this.router.navigate([
 									`/verPerfil/${this.userLogado.uid}`,

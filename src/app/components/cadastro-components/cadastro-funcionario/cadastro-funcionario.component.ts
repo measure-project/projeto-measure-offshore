@@ -1,6 +1,6 @@
+import { Location } from '@angular/common';
 import { FuncionarioService } from './../../../services/funcionario.service';
 import { Funcionario } from './../../../models/funcionario';
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -16,7 +16,7 @@ export class CadastroFuncionarioComponent implements OnInit {
 
 	constructor(
 		private funcionarioService: FuncionarioService,
-		private router: Router
+		private location: Location
 	) {}
 
 	CELULAR = '(00) 0 0000-0000'; //Mask para celular
@@ -57,7 +57,7 @@ export class CadastroFuncionarioComponent implements OnInit {
 	}
 
 	returnToProfile() {
-		this.router.navigate(['/verPerfilAdm']);
+		this.location.back();
 	}
 
 	editPhoto(event: any) {
