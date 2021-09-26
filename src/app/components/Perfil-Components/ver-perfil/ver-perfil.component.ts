@@ -1,3 +1,4 @@
+import { Servico } from './../../../models/servico';
 import { Location } from '@angular/common';
 import { Admin } from 'src/app/models/admin';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,22 +16,7 @@ export class VerPerfilComponent implements OnInit {
 	defaultImage = '../../../../assets/perfil-padrao.jpg';
 	user!: User;
 	admin!: Admin;
-
-	// Array para teste
-	services: Array<any> = [
-		{
-			name: 'Jardinagem especializada',
-			description:
-				'Serviço contratado por 6 meses. O trabalho contará com 16 funcionarios especializados da Measure Company e terá serviço de consultoria 24 horas. Disponibilização de equipamentos',
-			date: '25/04/2020',
-		},
-		{
-			name: 'Pintura Residencial',
-			description:
-				'Serviço contratado por 6 meses. O trabalho contará com 16 funcionarios especializados da Measure Company e terá serviço de consultoria 24 horas. Disponibilização de equipamentos',
-			date: '15/04/2020',
-		},
-	];
+	services!: Array<Servico>;
 
 	filiais: Array<any> = [
 		{

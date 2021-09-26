@@ -233,7 +233,13 @@
 					>
 						Voltar
 					</button>
-					<button type="submit" mat-raised-button>Salvar</button>
+					<button
+						type="submit"
+						[disabled]="!serviceData.valid"
+						mat-raised-button
+					>
+						Salvar
+					</button>
 				</div>
 			</form>
 		</mat-card-content>

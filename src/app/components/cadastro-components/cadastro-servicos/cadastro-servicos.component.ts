@@ -1,8 +1,11 @@
+import { AuthService } from './../../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { AdminService } from './../../../services/admin.service';
+import { User } from './../../../models/user';
 import { Location } from '@angular/common';
 import { ServicosService } from './../../../services/servicos.service';
 import { Equipamento } from './../../../models/equipamento';
 import { FuncionarioService } from './../../../services/funcionario.service';
-import { Router } from '@angular/router';
 import { Servico } from './../../../models/servico';
 import { Component, OnInit } from '@angular/core';
 import { Funcionario } from 'src/app/models/funcionario';
@@ -16,9 +19,11 @@ import { CriarEquipamentoComponent } from './criar-equipamento/criar-equipamento
 })
 export class CadastroServicosComponent implements OnInit {
 	constructor(
-		private router: Router,
 		private funcionarioService: FuncionarioService,
 		private servicoService: ServicosService,
+		private adminService: AdminService,
+		private authService: AuthService,
+		private currentRoute: ActivatedRoute,
 		public dialog: MatDialog,
 		private location: Location
 	) {}
@@ -33,20 +38,34 @@ export class CadastroServicosComponent implements OnInit {
 	funcionarioSelected: Array<Funcionario> = [];
 	equipamentoSelected: Array<Equipamento> = [];
 	preDefinedType!: Servico;
+	user!: User;
 
 	ngOnInit(): void {
 		this.funcionarios = this.funcionarioService.getAllFuncionarios();
 		this.equipamentos = this.servicoService.getAllEquipments();
 		this.tipos = this.servicoService.getAllServices();
+		this.adminService
+			.consultClient(this.currentRoute.snapshot.paramMap.get('uid') || '')
+			.then((users) => {
+				users.forEach((user: any) => {
+					this.user = user.data();
+				});
+			});
 	}
 
 	cadastrarServico(servico: Servico) {
 		servico.funcionarios = this.funcionarioSelected;
 		servico.equipamentos = this.equipamentoSelected;
 
+		this.user.services?.push(servico);
+
 		if (this.saveModel) {
+			console.log('ENTROU');
 			this.servicoService.setService(servico);
 		}
+
+		console.log(this.user);
+		this.authService.SetUserData(this.user);
 
 		this.location.back();
 	}

@@ -59,10 +59,10 @@
 			</button>
 		</div>
 
-		<mat-card class="servicosLista" *ngFor="let service of services">
+		<mat-card class="servicosLista" *ngFor="let service of user.services">
 			<mat-card-title>
-				<h1>{{ service.name }}</h1>
-				<p>{{ service.date }}</p>
+				<h1>{{ service.title }}</h1>
+				<p>{{ service.uid }}</p>
 			</mat-card-title>
 
 			<mat-card-content>

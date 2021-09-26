@@ -11,7 +11,7 @@ import { Admin } from 'src/app/models/admin';
 	styleUrls: ['./adm-editar-perfil.component.scss'],
 })
 export class AdmEditarPerfilComponent implements OnInit {
-	admin: Admin = {} as Admin;
+	admin!: Admin;
 
 	profilePicChanged: boolean;
 
