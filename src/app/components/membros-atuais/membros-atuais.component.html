@@ -36,7 +36,7 @@
 								<p>{{ cliente.adress }}</p>
 							</div>
 							<button
-								(click)="verMembro(cliente)"
+								(click)="verCliente(cliente)"
 								mat-raised-button
 							>
 								Ver
@@ -69,7 +69,12 @@
 								</p>
 								<p>{{ funcionario.adress }}</p>
 							</div>
-							<button mat-raised-button>Ver</button>
+							<button
+								mat-raised-button
+								(click)="verFuncionario(funcionario)"
+							>
+								Ver
+							</button>
 						</mat-card>
 					</div>
 				</mat-tab>
@@ -98,7 +103,9 @@
 								</p>
 								<p>{{ admin.adress }}</p>
 							</div>
-							<button mat-raised-button>Ver</button>
+							<button mat-raised-button (click)="verAdmin(admin)">
+								Ver
+							</button>
 						</mat-card>
 					</div>
 				</mat-tab>

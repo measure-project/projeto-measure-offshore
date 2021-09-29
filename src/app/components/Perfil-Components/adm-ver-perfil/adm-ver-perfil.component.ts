@@ -1,5 +1,7 @@
+import { Location } from '@angular/common';
+import { AdminService } from 'src/app/services/admin.service';
 import { Admin } from './../../../models/admin';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,21 +12,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdmVerPerfilComponent implements OnInit {
 	admin!: Admin;
+	readOnly: Boolean = false;
 	defaultImage = '../../../../assets/perfil-padrao.jpg';
 
-	constructor(private router: Router, private authService: AuthService) {}
+	constructor(
+		private router: Router,
+		private authService: AuthService,
+		private currentRoute: ActivatedRoute,
+		private adminService: AdminService,
+		private location: Location
+	) {}
 
 	ngOnInit(): void {
+		const id = this.currentRoute.snapshot.paramMap.get('uid');
 		this.admin = JSON.parse(localStorage.getItem('currentUser') || '{ }');
-	}
 
-	// Por alguma razão, essa função não funciona e retorna um erro de "não é possível ler name de undefined no console". Precisamos checar depois
+		console.log(id);
+		console.log(this.admin.uid);
+
+		if (this.admin.uid !== id) {
+			this.readOnly = true;
+
+			this.adminService.getAdmin(id ?? '').then((admins) => {
+				admins.forEach((admin: any) => {
+					this.admin = admin.data();
+				});
+			});
+		}
+	}
 
 	toMembers() {
 		this.router.navigate([`/verPerfilAdm/${this.admin.uid}/membros`]);
 	}
 
 	signOut() {
-		this.authService.SignOut();
+		if (!this.readOnly) this.authService.SignOut();
+
+		this.location.back();
 	}
 }

@@ -37,7 +37,13 @@ export class MembrosAtuaisComponent implements OnInit {
 		this.admins = this.adminService.getAllAdmin();
 	}
 
-	verMembro(membro: User) {
-		this.router.navigate([`/verPerfil`, membro.uid]);
+	verCliente(cliente: User) {
+		this.router.navigate([`/verPerfil`, cliente.uid]);
+	}
+
+	verFuncionario(funcionario: Funcionario) {}
+
+	verAdmin(admin: Admin) {
+		this.router.navigate(['/verPerfilAdm', admin.uid]);
 	}
 }

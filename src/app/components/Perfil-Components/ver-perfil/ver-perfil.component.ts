@@ -56,7 +56,7 @@ export class VerPerfilComponent implements OnInit {
 			);
 			this.adminService
 				.consultClient(
-					this.currentRoute.snapshot.paramMap.get('uid') || ''
+					this.currentRoute.snapshot.paramMap.get('uid') ?? ''
 				)
 				.then((users) => {
 					users.forEach((user: any) => {
@@ -75,7 +75,5 @@ export class VerPerfilComponent implements OnInit {
 		this.router.navigate([`${this.location.path()}/cadastroServico`]);
 	}
 
-	filialDialog() {
-		// Mat dialog para as filiais
-	}
+	filialDialog() {}
 }

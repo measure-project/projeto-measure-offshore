@@ -54,6 +54,12 @@ export class AdminService {
 		});
 	}
 
+	async getAdmin(uid: string) {
+		const docRef = this.afs.collection('admins').ref;
+
+		return await docRef.where('uid', '==', uid).get();
+	}
+
 	getAllAdmin() {
 		const ref = this.afs.collection('admins');
 		let adminList = Array<Admin>();

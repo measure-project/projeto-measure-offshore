@@ -7,7 +7,11 @@
 	<mat-card class="profileCard mat-elevation-z4">
 		<mat-card-title>
 			<h1>Admnistrador</h1>
-			<a [routerLink]="['./editarPerfil']" class="editProfile">
+			<a
+				*ngIf="!readOnly"
+				[routerLink]="['./editarPerfil']"
+				class="editProfile"
+			>
 				<span class="material-icons">border_color</span><br />Editar
 			</a>
 		</mat-card-title>
@@ -43,7 +47,12 @@
 
 			<button mat-raised-button>Incertezas</button>
 			<button mat-raised-button>Planilhas</button>
-			<button mat-raised-button (click)="signOut()">Sair</button>
+			<button *ngIf="readOnly" mat-raised-button (click)="signOut()">
+				Voltar
+			</button>
+			<button *ngIf="!readOnly" mat-raised-button (click)="signOut()">
+				Sair
+			</button>
 		</mat-card-actions>
 	</mat-card>
 </div>
