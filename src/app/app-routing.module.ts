@@ -1,3 +1,4 @@
+import { VerServicoComponent } from './components/ver-servico/ver-servico.component';
 import { RoleGuardService } from './guards/role-guard.service';
 import { LoginGuardService } from './guards/login-guard.service';
 import { RouteGuardService } from './guards/route-guard.service';
@@ -53,6 +54,11 @@ const routes: Routes = [
 	{
 		path: 'verPerfil/:uid',
 		component: VerPerfilComponent,
+		canActivate: [RouteGuardService],
+	},
+	{
+		path: 'verPerfil/:uid/servico/:sid',
+		component: VerServicoComponent,
 		canActivate: [RouteGuardService],
 	},
 	{

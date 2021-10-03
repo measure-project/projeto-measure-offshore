@@ -70,7 +70,10 @@ export class AuthService {
 
 			services: user.services ?? [],
 		};
-		localStorage.setItem('currentUser', JSON.stringify(userState));
+
+		if (!this.adminLogado)
+			localStorage.setItem('currentUser', JSON.stringify(userState));
+
 		return userRef.set(userState, {
 			merge: true,
 		});
@@ -118,28 +121,6 @@ export class AuthService {
 
 		return this.adminLogado;
 	}
-
-	// **tentativa de juntar ambas as funções em uma só** -> está dando alguns erros na variável refPessoaLogada
-
-	// getData(email: string): User | Admin {
-	// 	let refPessoaLogada: AngularFirestoreCollection<User[] | Admin[]> =
-	// 		this.afs.collection('/users', (ref: CollectionReference) =>
-	// 			ref.where('email', '==', email)
-	// 		);
-
-	// 	if (!refPessoaLogada)
-	// 		refPessoaLogada = this.afs.collection(
-	// 			'/admins',
-	// 			(ref: CollectionReference) => ref.where('email', '==', email)
-	// 		);
-
-	// 	const refPessoaLogada$: Observable<User[] | Admin[]> =
-	// 		refPessoaLogada.valueChanges({ idField: 'uid' });
-
-	// 	refPessoaLogada$.subscribe((pessoaLogada) => {});
-
-	// 	return this.adminLogado || this.userLogado;
-	// }
 
 	getAllUsers() {
 		const ref = this.afs.collection('users');

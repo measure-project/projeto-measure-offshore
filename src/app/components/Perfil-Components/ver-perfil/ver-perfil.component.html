@@ -59,15 +59,28 @@
 			</button>
 		</div>
 
-		<mat-card class="servicosLista" *ngFor="let service of user.services">
-			<mat-card-title>
-				<h1>{{ service.title }}</h1>
-				<p>{{ service.uid }}</p>
-			</mat-card-title>
+		<div *ngIf="user.services">
+			<a
+				[routerLink]="['/verPerfil', user.uid, 'servico', service.uid]"
+				*ngFor="let service of user.services"
+				><mat-card class="servicosLista">
+					<mat-card-title>
+						<h1>{{ service.title }}</h1>
+						<p>{{ service.uid }}</p>
+					</mat-card-title>
 
-			<mat-card-content>
-				<p>{{ service.description }}</p>
-			</mat-card-content>
-		</mat-card>
+					<mat-card-content>
+						<p>{{ service.description }}</p>
+					</mat-card-content>
+				</mat-card>
+			</a>
+		</div>
+		<div *ngIf="!user.services">
+			<mat-card class="servicosLista">
+				<mat-card-title>
+					<h1>Ainda não há serviços cadastrados</h1>
+				</mat-card-title>
+			</mat-card>
+		</div>
 	</div>
 </div>

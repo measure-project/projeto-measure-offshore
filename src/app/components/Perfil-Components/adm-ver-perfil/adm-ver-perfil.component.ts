@@ -27,9 +27,6 @@ export class AdmVerPerfilComponent implements OnInit {
 		const id = this.currentRoute.snapshot.paramMap.get('uid');
 		this.admin = JSON.parse(localStorage.getItem('currentUser') || '{ }');
 
-		console.log(id);
-		console.log(this.admin.uid);
-
 		if (this.admin.uid !== id) {
 			this.readOnly = true;
 
