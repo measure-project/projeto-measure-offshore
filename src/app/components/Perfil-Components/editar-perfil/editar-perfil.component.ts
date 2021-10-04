@@ -59,7 +59,7 @@ export class EditarPerfilComponent implements OnInit {
 				});
 		}
 		await this.authService.SetUserData(this.user);
-		this.router.navigate(['/verPerfil']);
+		this.router.navigate([`/verPerfil/${this.user.uid}`]);
 		this.authService.displayMessage('Perfil Atualizado!', false);
 	}
 

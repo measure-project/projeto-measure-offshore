@@ -76,7 +76,25 @@ export class CadastroServicosComponent implements OnInit {
 	}
 
 	addDocumentType(typeName: string) {
+		if(!typeName) {
+			this.authService.displayMessage("Nome de tipo não inserido!", true)
+			return
+		}
+
+		if(this.docTypes.includes(typeName)) { 
+			this.authService.displayMessage("Nome já existente!", true)
+			return
+		}
+			
 		this.docTypes.push(typeName);
+	}
+
+	changeFunction(docType: string, event: any) {
+		this.addDocuments(docType, event);
+	}
+
+	removeDocumentType(docType: string) {
+		this.docTypes.splice(this.docTypes.indexOf(docType), 1);
 	}
 
 	addDocuments(docType: string, event: any) {
