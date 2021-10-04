@@ -1,5 +1,5 @@
 import { AuthService } from './../../../services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from './../../../services/admin.service';
 import { User } from './../../../models/user';
 import { Location } from '@angular/common';
@@ -45,19 +45,33 @@ export class EditarServicoComponent implements OnInit {
 		this.funcionarios = this.funcionarioService.getAllFuncionarios();
 		this.equipamentos = this.servicoService.getAllEquipments();
 		this.tipos = this.servicoService.getAllServices();
-		this.adminService
+
+		this.loadUser().then(() => {
+			this.loadServico();
+		});
+	}
+
+	async loadUser() {
+		return await this.adminService
 			.consultClient(this.currentRoute.snapshot.paramMap.get('uid') || '')
 			.then((users) => {
 				users.forEach((user: any) => {
 					this.user = user.data();
 				});
-				this.uid = this.servico.uid;
 			});
 	}
 
-	editarServico(servico: Servico) {
-		servico.funcionarios = this.funcionarioSelected;
-		servico.equipamentos = this.equipamentoSelected;
+	async loadServico() {
+		await this.currentRoute.params.subscribe((params) => {
+			this.servico = this.user.services?.find(
+				(servico) => servico.uid == params['id']
+			);
+		});
+	}
+
+	async editarServico() {
+		this.servico.funcionarios = this.funcionarioSelected;
+		this.servico.equipamentos = this.equipamentoSelected;
 
 		const index = this.user.services?.findIndex((servico: Servico) => {
 			servico.uid === this.uid;
@@ -66,20 +80,15 @@ export class EditarServicoComponent implements OnInit {
 		this.user.services?.splice(index!, 1);
 		this.user.services?.push(this.servico);
 
-		if (this.saveModel) {
-			console.log('ENTROU');
-			this.servicoService.setService(servico);
-		}
+		if (this.saveModel) this.servicoService.setService(this.servico);
 
-		console.log(this.user);
-		this.authService.SetUserData(this.user);
+		await this.authService.SetUserData(this.user);
 
 		this.location.back();
 	}
 
 	fillFormWithPreDefined(service: Servico) {
 		this.preDefinedType = service;
-		console.log(this.preDefinedType.title);
 	}
 
 	addDocumentType(typeName: string) {

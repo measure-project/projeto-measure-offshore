@@ -122,6 +122,10 @@
 			margin-bottom: 2rem;
 			border-radius: 30px;
 
+			.editServicoIcon {
+				color: $colorSecondary;
+				text-decoration: none;
+			}
 			mat-card-title {
 				width: 95%;
 				display: flex;

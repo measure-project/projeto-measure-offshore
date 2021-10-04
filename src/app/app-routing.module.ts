@@ -83,7 +83,7 @@ const routes: Routes = [
 		canActivate: [RouteGuardService, RoleGuardService],
 	},
 	{
-		path: 'verPerfil/:uid/editarServico',
+		path: 'verPerfil/:uid/editarServico/:id',
 		component: EditarServicoComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},

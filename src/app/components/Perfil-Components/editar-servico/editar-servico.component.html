@@ -10,11 +10,7 @@
 		</mat-card-title>
 
 		<mat-card-content class="servicoCardContent">
-			<form
-				#serviceData="ngForm"
-				(ngSubmit)="editarServico(serviceData.value)"
-				class="edit-form"
-			>
+			<form (ngSubmit)="editarServico()" class="edit-form">
 				<h2>Título/Tipo do serviço</h2>
 				<div class="serviceInfo">
 					<mat-form-field appearance="outline">
@@ -24,7 +20,7 @@
 							matInput
 							type="text"
 							name="title"
-							ngModel
+							[(ngModel)]="servico.title"
 							required
 							placeholder="Ex: Jardinagem Especializada"
 						/>
@@ -48,10 +44,9 @@
 						<mat-label> Descrição </mat-label>
 						<textarea
 							matInput
-							ngModel
 							name="description"
 							id="description"
-							ngModel
+							[(ngModel)]="servico.description"
 							required
 							cols="30"
 							rows="10"
@@ -201,7 +196,7 @@
 					</button>
 					<button
 						type="submit"
-						[disabled]="!serviceData.valid"
+						[disabled]="!this.servico"
 						mat-raised-button
 					>
 						Salvar

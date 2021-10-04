@@ -51,13 +51,9 @@ export class VerPerfilComponent implements OnInit {
 		this.user = JSON.parse(localStorage.getItem('currentUser') || '{ }');
 
 		if (this.user.isAdmin) {
-			this.admin = JSON.parse(
-				localStorage.getItem('currentUser') || '{ }'
-			);
+			this.admin = JSON.parse(localStorage.getItem('currentUser') || '{ }');
 			this.adminService
-				.consultClient(
-					this.currentRoute.snapshot.paramMap.get('uid') ?? ''
-				)
+				.consultClient(this.currentRoute.snapshot.paramMap.get('uid') ?? '')
 				.then((users) => {
 					users.forEach((user: any) => {
 						this.user = user.data();
