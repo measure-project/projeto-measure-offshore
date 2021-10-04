@@ -1,3 +1,5 @@
+import { EditarServicoComponent } from './components/Perfil-Components/editar-servico/editar-servico.component';
+import { VerServicoComponent } from './components/Perfil-Components/ver-servico/ver-servico.component';
 import { RoleGuardService } from './guards/role-guard.service';
 import { LoginGuardService } from './guards/login-guard.service';
 import { RouteGuardService } from './guards/route-guard.service';
@@ -73,6 +75,16 @@ const routes: Routes = [
 	{
 		path: 'verPerfilAdm/:uid/membros',
 		component: MembrosAtuaisComponent,
+		canActivate: [RouteGuardService, RoleGuardService],
+	},
+	{
+		path: 'verPerfil/:uid/verServico',
+		component: VerServicoComponent,
+		canActivate: [RouteGuardService, RoleGuardService],
+	},
+	{
+		path: 'verPerfil/:uid/editarServico',
+		component: EditarServicoComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},
 ];
