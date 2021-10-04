@@ -52,20 +52,35 @@
 		</div>
 
 		<mat-card class="servicosLista" *ngFor="let service of user.services">
-			<mat-card-title>
-				<h1>{{ service.title }}</h1>
-				<a
-					*ngIf="admin"
-					[routerLink]="['./editarServico', service.uid]"
-					class="editServicoIcon"
-				>
-					<span class="material-icons">border_color</span><br />
-				</a>
-			</mat-card-title>
+			<div *ngIf="user.services">
+				<mat-card-title>
+					<h1>
+						<a
+							[routerLink]="['/verPerfil', user.uid, 'servico', service.uid]"
+							class="routerLink"
+							>{{ service.title }}</a
+						>
+					</h1>
+					<a
+						*ngIf="admin"
+						[routerLink]="['./editarServico', service.uid]"
+						class="routerLink"
+					>
+						<span class="material-icons">border_color</span><br />
+					</a>
+				</mat-card-title>
 
-			<mat-card-content>
-				<p>{{ service.description }}</p>
-			</mat-card-content>
+				<mat-card-content>
+					<p>{{ service.description }}</p>
+				</mat-card-content>
+			</div>
 		</mat-card>
+		<div *ngIf="!user.services">
+			<mat-card class="servicosLista">
+				<mat-card-title>
+					<h1>Ainda não há serviços cadastrados</h1>
+				</mat-card-title>
+			</mat-card>
+		</div>
 	</div>
 </div>

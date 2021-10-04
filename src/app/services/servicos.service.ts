@@ -27,6 +27,7 @@ export class ServicosService {
 		const serviceState: Servico = {
 			title: service.title,
 			description: service.description,
+			// documentos: service.documentos,
 			equipamentos: service.equipamentos,
 			funcionarios: service.funcionarios,
 			uid: id,
@@ -80,6 +81,24 @@ export class ServicosService {
 		return serviceList;
 	}
 
-	uploadFiles() {}
-	downloadFiles() {}
+	async getServiceFromClient(uid: string) {
+		const ref = this.afs.collection('users').ref;
+
+		return await ref.where('uid', '==', uid).get();
+	}
+
+	uploadFiles(files: Array<any>, id: string) {
+		files.forEach((file) => {
+			this.afStorage
+				.ref(`servicos/${id}/documents/${file[0]}/${file[1]}`)
+				.put(file[2])
+				.then(() => {
+					console.log('Documentos Upados!');
+				})
+				.catch((err) => {
+					console.log(`Houve um erro: ${err}`);
+				});
+		});
+	}
+	downloadFiles(id: string) {}
 }

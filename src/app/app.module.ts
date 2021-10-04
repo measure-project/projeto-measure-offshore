@@ -46,7 +46,7 @@ import { MembrosAtuaisComponent } from './components/membros-atuais/membros-atua
 import { FilterPipe } from './components/membros-atuais/filter.pipe';
 import { CadastroServicosComponent } from './components/cadastro-components/cadastro-servicos/cadastro-servicos.component';
 import { CriarEquipamentoComponent } from './components/cadastro-components/cadastro-servicos/criar-equipamento/criar-equipamento.component';
-import { VerServicoComponent } from './components/Perfil-Components/ver-servico/ver-servico.component';
+import { VerServicoComponent } from './components/ver-servico/ver-servico.component';
 import { EditarServicoComponent } from './components/Perfil-Components/editar-servico/editar-servico.component';
 
 @NgModule({

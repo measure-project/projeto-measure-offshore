@@ -66,6 +66,8 @@ export class EditarServicoComponent implements OnInit {
 			this.servico = this.user.services?.find(
 				(servico) => servico.uid == params['id']
 			);
+			this.funcionarioSelected = this.servico.funcionarios;
+			this.equipamentoSelected = this.servico.equipamentos;
 		});
 	}
 
@@ -137,5 +139,14 @@ export class EditarServicoComponent implements OnInit {
 
 	backToProfile() {
 		this.location.back();
+	}
+
+	confereForm(): boolean {
+		return (
+			!!this.servico.title &&
+			!!this.servico.description &&
+			!!this.servico.funcionarios &&
+			!!this.servico.equipamentos
+		);
 	}
 }

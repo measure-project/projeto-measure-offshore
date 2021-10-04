@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { Funcionario } from 'src/app/models/funcionario';
 import { MatDialog } from '@angular/material/dialog';
 import { CriarEquipamentoComponent } from './criar-equipamento/criar-equipamento.component';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
 	selector: 'app-cadastro-servicos',
@@ -54,20 +55,22 @@ export class CadastroServicosComponent implements OnInit {
 	}
 
 	cadastrarServico(servico: Servico) {
+		// servico.documentos = this.documentList;
 		servico.funcionarios = this.funcionarioSelected;
 		servico.equipamentos = this.equipamentoSelected;
 
+		servico.uid = uuidv4();
+
 		this.user.services?.push(servico);
+		this.servicoService.uploadFiles(this.documentList, servico.uid);
 
 		if (this.saveModel) {
-			console.log('ENTROU');
 			this.servicoService.setService(servico);
 		}
 
-		console.log(this.user);
 		this.authService.SetUserData(this.user);
 
-		this.location.back();
+		this.backToProfile();
 	}
 
 	fillFormWithPreDefined(service: Servico) {
@@ -100,7 +103,11 @@ export class CadastroServicosComponent implements OnInit {
 	addDocuments(docType: string, event: any) {
 		if (event.target.files) {
 			for (let i = 0; i < event.target.files.length; i++) {
-				this.documentList.push([docType, event.target.files[i].name]);
+				this.documentList.push([
+					docType,
+					event.target.files[i].name,
+					event.target.files[i],
+				]);
 			}
 		}
 	}
