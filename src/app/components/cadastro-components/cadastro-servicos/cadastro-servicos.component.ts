@@ -35,7 +35,7 @@ export class CadastroServicosComponent implements OnInit {
 	equipamentos!: Array<Equipamento>;
 	servico!: Servico;
 	docTypes: Array<string> = [];
-	documentList: Array<Array<any>> = [[]];
+	documentList: Array<any> = [];
 	funcionarioSelected: Array<Funcionario> = [];
 	equipamentoSelected: Array<Equipamento> = [];
 	preDefinedType!: Servico;
@@ -62,6 +62,9 @@ export class CadastroServicosComponent implements OnInit {
 		servico.uid = uuidv4();
 
 		this.user.services?.push(servico);
+		this.documentList.forEach((file) => {
+			this.servico.documentos.push(file.name);
+		})
 		this.servicoService.uploadFiles(this.documentList, servico.uid);
 
 		if (this.saveModel) {
@@ -85,11 +88,11 @@ export class CadastroServicosComponent implements OnInit {
 	addDocuments(docType: string, event: any) {
 		if (event.target.files) {
 			for (let i = 0; i < event.target.files.length; i++) {
-				this.documentList.push([
-					docType,
-					event.target.files[i].name,
-					event.target.files[i],
-				]);
+				this.documentList.push({
+					type: docType,
+					name: event.target.files[i].name,
+					file: event.target.files[i],
+				});
 			}
 		}
 	}
