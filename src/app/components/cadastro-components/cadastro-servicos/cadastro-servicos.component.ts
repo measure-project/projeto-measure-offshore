@@ -63,7 +63,10 @@ export class CadastroServicosComponent implements OnInit {
 
 		this.user.services?.push(servico);
 		this.documentList.forEach((file) => {
-			this.servico.documentos.push(file.type + '/' + file.name);
+			this.servico.documentos.push({
+				name: file.name,
+				type: file.type,
+			});
 		});
 		this.servicoService.uploadFiles(this.documentList, servico.uid);
 
