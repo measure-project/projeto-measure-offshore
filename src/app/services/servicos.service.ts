@@ -27,10 +27,10 @@ export class ServicosService {
 		const serviceState: Servico = {
 			title: service.title,
 			description: service.description,
-			documentos: service.documentos,
 			equipamentos: service.equipamentos,
 			funcionarios: service.funcionarios,
 			uid: id,
+			documentos: service.documentos.slice(),
 		};
 
 		return docRef.set(serviceState, {
