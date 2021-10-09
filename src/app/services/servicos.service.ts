@@ -27,7 +27,7 @@ export class ServicosService {
 		const serviceState: Servico = {
 			title: service.title,
 			description: service.description,
-			// documentos: service.documentos,
+			documentos: service.documentos,
 			equipamentos: service.equipamentos,
 			funcionarios: service.funcionarios,
 			uid: id,
@@ -90,8 +90,8 @@ export class ServicosService {
 	uploadFiles(files: Array<any>, id: string) {
 		files.forEach((file) => {
 			this.afStorage
-				.ref(`servicos/${id}/documents/${file[0]}/${file[1]}`)
-				.put(file[2])
+				.ref(`servicos/${id}/documents/${file.categoria}/${file.nome}`)
+				.put(file.documento)
 				.then(() => {
 					console.log('Documentos Upados!');
 				})
@@ -100,5 +100,7 @@ export class ServicosService {
 				});
 		});
 	}
-	downloadFiles(id: string) {}
+	downloadFiles(id: string, paths: Array<any>) {
+		console.log(paths);
+	}
 }

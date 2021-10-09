@@ -1,6 +1,5 @@
 import { Servico } from './../../models/servico';
 import { ServicosService } from './../../services/servicos.service';
-import { AdminService } from './../../services/admin.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -29,11 +28,13 @@ export class VerServicoComponent implements OnInit {
 				users.forEach((user: any) => {
 					user.data().services.forEach((service: any) => {
 						if (service.uid == sid) this.service = service;
+						this.servicoService.downloadFiles(
+							sid,
+							service.documentos
+						);
 					});
 				});
 			});
-
-			this.servicoService.downloadFiles(sid);
 		}
 	}
 }

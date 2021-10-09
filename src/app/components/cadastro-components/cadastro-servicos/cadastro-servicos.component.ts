@@ -29,15 +29,20 @@ export class CadastroServicosComponent implements OnInit {
 		private location: Location
 	) {}
 
+	servico: Servico = {
+		uid: '',
+		title: '',
+		description: '',
+		documentos: [],
+		funcionarios: [],
+		equipamentos: [],
+	};
+
 	tipos!: Array<Servico>;
 	saveModel: boolean = false;
 	funcionarios!: Array<Funcionario>;
 	equipamentos!: Array<Equipamento>;
-	servico!: Servico;
 	docTypes: Array<string> = [];
-	documentList: Array<Array<any>> = [[]];
-	funcionarioSelected: Array<Funcionario> = [];
-	equipamentoSelected: Array<Equipamento> = [];
 	preDefinedType!: Servico;
 	user!: User;
 
@@ -55,19 +60,24 @@ export class CadastroServicosComponent implements OnInit {
 	}
 
 	cadastrarServico(servico: Servico) {
-		// servico.documentos = this.documentList;
-		servico.funcionarios = this.funcionarioSelected;
-		servico.equipamentos = this.equipamentoSelected;
+		servico.documentos = this.servico.documentos;
+		servico.funcionarios = this.servico.funcionarios;
+		servico.equipamentos = this.servico.equipamentos;
 
 		servico.uid = uuidv4();
 
-		this.user.services?.push(servico);
-		this.servicoService.uploadFiles(this.documentList, servico.uid);
+		this.servicoService.uploadFiles(servico.documentos, servico.uid);
 
 		if (this.saveModel) {
 			this.servicoService.setService(servico);
 		}
 
+		// Foi o jeito que eu encontrei de tirar as files do array
+		servico.documentos.map((doc) => {
+			delete doc.documento;
+		});
+
+		this.user.services?.push(servico);
 		this.authService.SetUserData(this.user);
 
 		this.backToProfile();
@@ -79,17 +89,19 @@ export class CadastroServicosComponent implements OnInit {
 	}
 
 	addDocumentType(typeName: string) {
-		if(!typeName) {
-			this.authService.displayMessage("Nome de tipo não inserido!", true)
-			return
+		if (!typeName) {
+			this.authService.displayMessage('Nome de tipo não inserido!', true);
+			return;
 		}
 
-		if(this.docTypes.includes(typeName)) { 
-			this.authService.displayMessage("Nome já existente!", true)
-			return
+		if (this.docTypes.includes(typeName)) {
+			this.authService.displayMessage('Nome já existente!', true);
+			return;
 		}
-			
+
 		this.docTypes.push(typeName);
+
+		(<HTMLInputElement>document.getElementById('typeName')).value = '';
 	}
 
 	changeFunction(docType: string, event: any) {
@@ -103,21 +115,21 @@ export class CadastroServicosComponent implements OnInit {
 	addDocuments(docType: string, event: any) {
 		if (event.target.files) {
 			for (let i = 0; i < event.target.files.length; i++) {
-				this.documentList.push([
-					docType,
-					event.target.files[i].name,
-					event.target.files[i],
-				]);
+				this.servico.documentos.push({
+					categoria: docType,
+					nome: event.target.files[i].name,
+					documento: event.target.files[i],
+				});
 			}
 		}
 	}
 
 	addFuncionario(funcionario: Funcionario) {
-		this.funcionarioSelected.push(funcionario);
+		this.servico.funcionarios.push(funcionario);
 	}
 
 	addEquipamento(equipamento: Equipamento) {
-		this.equipamentoSelected.push(equipamento);
+		this.servico.equipamentos.push(equipamento);
 	}
 
 	openDialog() {

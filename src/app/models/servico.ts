@@ -5,7 +5,7 @@ export interface Servico {
 	uid: string;
 	title: string;
 	description: string;
-	// documentos: Array<Array<any>>;
+	documentos: Array<any>;
 	funcionarios: Array<Funcionario>;
 	equipamentos: Array<Equipamento>;
 }
