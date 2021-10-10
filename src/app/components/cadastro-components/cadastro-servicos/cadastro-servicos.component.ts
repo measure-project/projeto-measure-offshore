@@ -59,8 +59,13 @@ export class CadastroServicosComponent implements OnInit {
 			});
 	}
 
-	cadastrarServico(servico: Servico) {
-		servico.documentos = this.servico.documentos;
+	async cadastrarServico(servico: Servico) {
+		servico.documentos = this.servico.documentos.map((document) => {
+			return {
+				categoria: document.categoria,
+				nome: document.nome,
+			};
+		});
 		servico.funcionarios = this.servico.funcionarios;
 		servico.equipamentos = this.servico.equipamentos;
 
@@ -73,26 +78,21 @@ export class CadastroServicosComponent implements OnInit {
 				type: file.type,
 			});
 		});
+
 		this.servicoService.uploadFiles(this.servico.documentos, servico.uid);
 
 		if (this.saveModel) {
 			this.servicoService.setService(servico);
 		}
 
-		// Foi o jeito que eu encontrei de tirar as files do array
-		servico.documentos.map((doc) => {
-			delete doc.documento;
-		});
-
 		this.user.services?.push(servico);
-		this.authService.SetUserData(this.user);
+		await this.authService.SetUserData(this.user);
 
 		this.backToProfile();
 	}
 
 	fillFormWithPreDefined(service: Servico) {
 		this.preDefinedType = service;
-		console.log(this.preDefinedType.title);
 	}
 
 	addDocumentType(typeName: string) {

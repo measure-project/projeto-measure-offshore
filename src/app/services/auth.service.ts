@@ -47,6 +47,9 @@ export class AuthService {
 		const userRef: AngularFirestoreDocument<any> = this.afs.doc(
 			`users/${user.uid}`
 		);
+
+		console.log('Passei no service 1');
+
 		const userState: any = {
 			uid: user.uid,
 
@@ -71,12 +74,18 @@ export class AuthService {
 			services: user.services ?? [],
 		};
 
+		console.log('Passei no service 2');
+
 		if (!this.adminLogado)
 			localStorage.setItem('currentUser', JSON.stringify(userState));
 
-		return userRef.set(userState, {
+		console.log('Passei no service 3');
+
+		userRef.set(userState, {
 			merge: true,
 		});
+
+		console.log('Passe aqui 4');
 	}
 
 	getUserData(email: string): User {
@@ -89,10 +98,7 @@ export class AuthService {
 
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
-			localStorage.setItem(
-				'currentUser',
-				JSON.stringify(this.userLogado)
-			);
+			localStorage.setItem('currentUser', JSON.stringify(this.userLogado));
 		});
 
 		return this.userLogado;
@@ -112,10 +118,7 @@ export class AuthService {
 		adminLogadoCollection$.subscribe((admin) => {
 			this.adminLogado = admin[0];
 			if (this.adminLogado) {
-				localStorage.setItem(
-					'currentUser',
-					JSON.stringify(this.adminLogado)
-				);
+				localStorage.setItem('currentUser', JSON.stringify(this.adminLogado));
 			}
 		});
 
@@ -156,13 +159,8 @@ export class AuthService {
 						this.ngZone.run(() => {
 							// Tem que trocar para this.adminLogado para funcionar como admin
 							if (this.adminLogado)
-								this.router.navigate([
-									`/verPerfilAdm/${this.adminLogado.uid}`,
-								]);
-							else
-								this.router.navigate([
-									`/verPerfil/${this.userLogado.uid}`,
-								]);
+								this.router.navigate([`/verPerfilAdm/${this.adminLogado.uid}`]);
+							else this.router.navigate([`/verPerfil/${this.userLogado.uid}`]);
 						});
 					});
 			})

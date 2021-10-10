@@ -26,7 +26,9 @@
 		</mat-card-content>
 
 		<mat-card-actions>
-			<button mat-raised-button (click)="signOut()">Sair</button>
+			<button mat-raised-button (click)="signOut()">
+				{{ admin ? 'Voltar' : 'Sair' }}
+			</button>
 		</mat-card-actions>
 	</mat-card>
 
@@ -52,7 +54,7 @@
 		</div>
 
 		<mat-card class="servicosLista" *ngFor="let service of user.services">
-			<div *ngIf="user.services">
+			<div *ngIf="hasServices">
 				<mat-card-title>
 					<h1>
 						<a

@@ -17,6 +17,7 @@ export class VerPerfilComponent implements OnInit {
 	user!: User;
 	admin!: Admin;
 	services!: Array<Servico>;
+	hasServices: boolean = false;
 
 	filiais: Array<any> = [
 		{
@@ -47,19 +48,22 @@ export class VerPerfilComponent implements OnInit {
 		private location: Location
 	) {}
 
-	ngOnInit(): void {
+	async ngOnInit() {
 		this.user = JSON.parse(localStorage.getItem('currentUser') || '{ }');
 
 		if (this.user.isAdmin) {
 			this.admin = JSON.parse(localStorage.getItem('currentUser') || '{ }');
-			this.adminService
+			await this.adminService
 				.consultClient(this.currentRoute.snapshot.paramMap.get('uid') ?? '')
 				.then((users) => {
 					users.forEach((user: any) => {
 						this.user = user.data();
+						console.log(this.user);
 					});
 				});
 		}
+
+		this.hasServices = this.user.services!?.length > 0 || false;
 	}
 
 	signOut() {
