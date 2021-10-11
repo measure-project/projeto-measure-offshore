@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerServicoComponent implements OnInit {
 	service!: Servico;
+	downloadUrl!: Array<string>;
 
 	constructor(
 		private servicoService: ServicosService,
@@ -36,5 +37,9 @@ export class VerServicoComponent implements OnInit {
 				});
 			});
 		}
+	}
+
+	backToProfile() {
+		this.location.back();
 	}
 }

@@ -14,6 +14,21 @@
 			<hr style="width: 100%" />
 			<h2>Documentos</h2>
 
+			<div class="documentList">
+				<div
+					class="documentTypes"
+					*ngFor="let doc of service.documentos"
+				>
+					<p>{{ doc.categoria }}</p>
+					<a
+						target="_blank"
+						download="{{ doc.categoria }}"
+						id="{{ doc.categoria }}"
+						>{{ doc.nome }}</a
+					>
+				</div>
+			</div>
+
 			<hr style="width: 100%" />
 			<h2>Funcionarios</h2>
 
@@ -30,5 +45,9 @@
 
 			<h3>Donwload das informações do serviço</h3>
 		</mat-card-content>
+
+		<div>
+			<button mat-raised-button (click)="backToProfile()">Voltar</button>
+		</div>
 	</mat-card>
 </div>
