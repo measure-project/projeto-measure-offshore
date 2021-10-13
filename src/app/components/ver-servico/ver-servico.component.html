@@ -11,37 +11,55 @@
 		</mat-card-title>
 
 		<mat-card-content class="servicoCardContent">
+			<!------------------DOCUMENTOS----------------->
+
 			<hr style="width: 100%" />
 			<h2>Documentos</h2>
 
 			<div class="documentList">
-				<div
-					class="documentTypes"
-					*ngFor="let doc of service.documentos"
-				>
-					<p>{{ doc.categoria }}</p>
-					<a
-						target="_blank"
-						download="{{ doc.categoria }}"
-						id="{{ doc.categoria }}"
-						>{{ doc.nome }}</a
-					>
+				<div class="documentTypes" *ngFor="let categoria of docTypes">
+					<p>{{ categoria }}</p>
+					<div *ngFor="let doc of service.documentos">
+						<a
+							target="_blank"
+							download="{{ doc.nome }}"
+							id="{{ doc.nome }}"
+							*ngIf="doc.categoria == categoria"
+							>{{ doc.nome }}</a
+						>
+					</div>
 				</div>
 			</div>
 
 			<hr style="width: 100%" />
+
+			<!--------------------FUNCIONARIOS----------------->
+
 			<h2>Funcionarios</h2>
 
-			<div *ngFor="let funcionario of service.funcionarios">
-				<p>{{ funcionario.name }}</p>
+			<div class="funcionario-equipamento-list">
+				<div
+					class="list-item"
+					*ngFor="let funcionario of service.funcionarios"
+				>
+					<p>{{ funcionario.name }}</p>
+				</div>
 			</div>
+			<!------------------EQUIPAMENTOS------------------->
 
 			<hr style="width: 100%" />
 			<h2>Equipamentos</h2>
 
-			<div *ngFor="let equipamento of service.equipamentos">
-				<p>{{ equipamento.name }}</p>
+			<div class="funcionario-equipamento-list">
+				<div
+					class="list-item"
+					*ngFor="let equipamento of service.equipamentos"
+				>
+					<h3>{{ equipamento.name }}</h3>
+				</div>
 			</div>
+
+			<!------------DOWNLOAD DAS INFORMAÇÕES-------------->
 
 			<h3>Donwload das informações do serviço</h3>
 		</mat-card-content>

@@ -63,10 +63,26 @@
 			row-gap: 1rem;
 			column-gap: 0.5rem;
 		}
+
 		.documentTypes {
 			background-color: $colorPrimary;
 			border-radius: 5px;
 			color: white;
+		}
+
+		.funcionario-equipamento-list {
+			display: grid;
+			grid-template-columns: 33% 33% 33%;
+			column-gap: 1rem;
+			row-gap: 1rem;
+		}
+
+		.list-item {
+			width: min-content;
+			color: white;
+			padding: 10px;
+			background-color: $colorPrimary;
+			border-radius: 5px;
 		}
 	}
 }

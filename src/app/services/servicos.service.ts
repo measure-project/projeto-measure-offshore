@@ -116,10 +116,10 @@ export class ServicosService {
 					// xhr.open('GET', url);
 					// xhr.send();
 
-					var a = document.querySelectorAll(`#${path.categoria}`);
-					a.forEach((doc) => {
-						doc.setAttribute('href', url);
-					});
+					console.log(path.nome);
+					var a = document.getElementById(`${path.nome}`); // Não funciona qnd tem documento de nome repetido
+					console.log(a);
+					a?.setAttribute('href', url);
 				});
 		});
 	}

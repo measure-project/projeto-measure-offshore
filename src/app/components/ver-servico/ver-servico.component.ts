@@ -11,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerServicoComponent implements OnInit {
 	service!: Servico;
+	docTypes: Array<any> = [];
+	doclist: Array<any> = [];
 	downloadUrl!: Array<string>;
 
 	constructor(
@@ -28,11 +30,19 @@ export class VerServicoComponent implements OnInit {
 			this.servicoService.getServiceFromClient(uid).then((users) => {
 				users.forEach((user: any) => {
 					user.data().services.forEach((service: any) => {
-						if (service.uid == sid) this.service = service;
-						this.servicoService.downloadFiles(
-							sid,
-							service.documentos
-						);
+						if (service.uid == sid) {
+							this.service = service;
+							this.service.documentos.forEach((doc) => {
+								this.doclist.push(doc.categoria);
+							});
+
+							this.docTypes = [...new Set(this.doclist)];
+
+							this.servicoService.downloadFiles(
+								sid,
+								service.documentos
+							);
+						}
 					});
 				});
 			});
