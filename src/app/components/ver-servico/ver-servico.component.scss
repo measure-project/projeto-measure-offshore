@@ -48,26 +48,33 @@
 
 		mat-card-title {
 			text-align: center;
+			width: 80%;
 			margin-bottom: 2rem;
 		}
 
 		mat-card-content {
 			display: flex;
+			width: 80%;
 			flex-direction: column;
 			align-items: center;
 		}
 
 		.documentList {
-			display: grid;
-			grid-template-columns: 33% 33% 33%;
-			row-gap: 1rem;
-			column-gap: 0.5rem;
+			width: 100%;
 		}
 
-		.documentTypes {
+		mat-expansion-panel {
+			margin: 0.5rem 0 0.5rem 0;
 			background-color: $colorPrimary;
-			border-radius: 5px;
-			color: white;
+
+			h3 {
+				color: white;
+			}
+
+			a {
+				text-decoration: none;
+				color: white;
+			}
 		}
 
 		.funcionario-equipamento-list {
@@ -78,7 +85,7 @@
 		}
 
 		.list-item {
-			width: min-content;
+			width: max-content;
 			color: white;
 			padding: 10px;
 			background-color: $colorPrimary;

@@ -1,3 +1,4 @@
+import { FuncionarioService } from './../../services/funcionario.service';
 import { Servico } from './../../models/servico';
 import { ServicosService } from './../../services/servicos.service';
 import { Location } from '@angular/common';
@@ -13,10 +14,14 @@ export class VerServicoComponent implements OnInit {
 	service!: Servico;
 	docTypes: Array<any> = [];
 	doclist: Array<any> = [];
-	downloadUrl!: Array<string>;
+
+	//Variáveis pro expansion panel
+	panelOpenState: boolean = false;
+	step: number = 0;
 
 	constructor(
 		private servicoService: ServicosService,
+		private funcionarioService: FuncionarioService,
 		private currentRoute: ActivatedRoute,
 		private location: Location
 	) {}
@@ -42,6 +47,10 @@ export class VerServicoComponent implements OnInit {
 								sid,
 								service.documentos
 							);
+
+							// this.service.funcionarios.forEach((funcionario) => {
+							// 		Baixar arquivos do funcionario aqui
+							// });
 						}
 					});
 				});
@@ -51,5 +60,10 @@ export class VerServicoComponent implements OnInit {
 
 	backToProfile() {
 		this.location.back();
+	}
+
+	// Setando qual expansion panel abrir
+	setStep(n: number) {
+		this.step = n;
 	}
 }

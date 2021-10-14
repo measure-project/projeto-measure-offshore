@@ -116,7 +116,6 @@ export class ServicosService {
 					// xhr.open('GET', url);
 					// xhr.send();
 
-					console.log(path.nome);
 					var a = document.getElementById(`${path.nome}`); // Não funciona qnd tem documento de nome repetido
 					console.log(a);
 					a?.setAttribute('href', url);

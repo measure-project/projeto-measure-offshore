@@ -86,13 +86,13 @@ export class FuncionarioService {
 		});
 	}
 
-	downloadFiles(email: string) {
+	downloadFiles(email: string, path: string) {
 		return [
 			this.afStorage
 				.ref(`funcionarios/${email}/profile.jpg`)
 				.getDownloadURL(),
 			this.afStorage
-				.ref(`funcionarios/${email}/document.pdf`)
+				.ref(`funcionarios/${email}/documents/`)
 				.getDownloadURL(),
 		];
 	}

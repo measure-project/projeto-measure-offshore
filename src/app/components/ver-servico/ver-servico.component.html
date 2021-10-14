@@ -7,7 +7,7 @@
 	<mat-card class="servicoCard" *ngIf="service">
 		<mat-card-title>
 			<h1>{{ service.title }}</h1>
-			<h2>{{ service.description }}</h2>
+			<h3 style="text-align: justify">{{ service.description }}</h3>
 		</mat-card-title>
 
 		<mat-card-content class="servicoCardContent">
@@ -17,18 +17,36 @@
 			<h2>Documentos</h2>
 
 			<div class="documentList">
-				<div class="documentTypes" *ngFor="let categoria of docTypes">
-					<p>{{ categoria }}</p>
-					<div *ngFor="let doc of service.documentos">
-						<a
-							target="_blank"
-							download="{{ doc.nome }}"
-							id="{{ doc.nome }}"
-							*ngIf="doc.categoria == categoria"
-							>{{ doc.nome }}</a
-						>
-					</div>
-				</div>
+				<mat-accordion
+					class="documentTypes"
+					*ngFor="let docType of docTypes; let i = index"
+				>
+					<mat-expansion-panel
+						[expanded]="step === i"
+						(opened)="setStep(i)"
+					>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								<h3>{{ docType }}</h3>
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<div *ngFor="let doc of service.documentos">
+							<a
+								*ngIf="doc.categoria == docType"
+								target="_blank"
+								id="{{ doc.nome }}"
+								><h4>
+									{{ doc.nome }}
+									<span class="material-icons"
+										>file_download</span
+									>
+								</h4>
+								<hr
+							/></a>
+						</div>
+					</mat-expansion-panel>
+				</mat-accordion>
 			</div>
 
 			<hr style="width: 100%" />
@@ -42,7 +60,8 @@
 					class="list-item"
 					*ngFor="let funcionario of service.funcionarios"
 				>
-					<p>{{ funcionario.name }}</p>
+					<h3 style="margin: 0">{{ funcionario.name }}</h3>
+					<h4 style="margin: 0">{{ funcionario.sector }}</h4>
 				</div>
 			</div>
 			<!------------------EQUIPAMENTOS------------------->
