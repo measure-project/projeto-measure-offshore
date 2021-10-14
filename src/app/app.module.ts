@@ -10,21 +10,37 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TelaLoginComponent } from './components/tela-login/tela-login.component';
-import { TelaCadastroComponent } from './components/tela-cadastro/tela-cadastro.component';
+import { TelaLoginComponent } from './components/Login-Components/tela-login/tela-login.component';
+import { TelaCadastroComponent } from './components/Login-Components/tela-cadastro/tela-cadastro.component';
+import { TelaRecuperarSenhaComponent } from './components/Login-Components/tela-recuperar-senha/tela-recuperar-senha.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-import { TelaRecuperarSenhaComponent } from './components/tela-recuperar-senha/tela-recuperar-senha.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+
+import { HomePageComponent } from './components/home-components/home-page/home-page.component';
+import { TelaVideoComponent } from './components/home-components/tela-video/tela-video.component';
+import { PrestacaoServicosComponent } from './components/home-components/prestacao-servicos/prestacao-servicos.component';
+import { TelaBottomComponent } from './components/home-components/tela-bottom/tela-bottom.component';
 
 @NgModule({
-	declarations: [AppComponent, TelaLoginComponent, TelaCadastroComponent, TelaRecuperarSenhaComponent],
+	declarations: [
+		AppComponent,
+		TelaLoginComponent,
+		TelaCadastroComponent,
+		TelaRecuperarSenhaComponent,
+		HomePageComponent,
+		PrestacaoServicosComponent,
+		TelaVideoComponent,
+		TelaBottomComponent,
+	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
@@ -39,6 +55,8 @@ import { TelaRecuperarSenhaComponent } from './components/tela-recuperar-senha/t
 		ShowHidePasswordModule,
 		MatInputModule,
 		MatSnackBarModule,
+		MatToolbarModule,
+		IvyCarouselModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

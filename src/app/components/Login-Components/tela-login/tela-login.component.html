@@ -1,0 +1,81 @@
+
+<div class="engloba-mat-card">
+	<mat-card class="mat-elevation-z4">
+		<mat-card-title
+			><img
+				src="../../../assets/measure-logo.png"
+				alt="Logo da Measure offshore"
+		/></mat-card-title>
+		<form class="login-form" (ngSubmit)="logar()">
+			<mat-form-field appearance="outline">
+				<mat-label>E-mail</mat-label>
+
+				<input
+					matInput
+					ngModel
+					name="e-mail"
+					[(ngModel)]="username"
+					placeholder="usuario@email.com"
+					type="text"
+					required
+				/>
+				<mat-error>Insira o e-mail!</mat-error>
+			</mat-form-field>
+			<mat-form-field appearance="outline">
+				<mat-label>Senha</mat-label>
+				<input
+					matInput
+					type="password"
+					name="senha"
+					id="userPassword"
+					[(ngModel)]="password"
+					placeholder="**************"
+					showHideInput
+					required
+				/>
+				<i
+					matSuffix
+					class="material-icons"
+					style="cursor: pointer"
+					showHideTrigger="userPassword"
+					[showHideStatus]="{
+						materialIcon: true,
+						id: 'userPassword'
+					}"
+				></i>
+				<mat-error>Insira a senha!</mat-error>
+			</mat-form-field>
+		</form>
+
+		<p class="forgot-password">
+			<a (click)="forgotPassword()">Esqueci minha senha</a>
+		</p>
+		<button
+			class="login-button colorWhite"
+			mat-raised-button
+			(click)="logar()"
+		>
+			Login
+		</button>
+
+		<p class="ou-txt">ou</p>
+		<button class="google-button" mat-raised-button (click)="logarGoogle()">
+			<i matPrefix
+				><img src="assets/Google-logo.svg" id="google-logo"
+			/></i>
+			Entrar com o Google
+		</button>
+
+		<p style="margin-top: 10px">
+			----------------------------- / / -----------------------------
+		</p>
+
+		<button
+			class="create-account-button colorWhite"
+			mat-raised-button
+			(click)="navigateToCreateNewAccount()"
+		>
+			Criar Conta
+		</button>
+	</mat-card>
+</div>

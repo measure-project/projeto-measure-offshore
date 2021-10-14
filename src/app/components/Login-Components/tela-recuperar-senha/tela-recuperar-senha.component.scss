@@ -1,0 +1,61 @@
+@import '../../../../variables.scss';
+
+.matCardContainer {
+	min-height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgb(230, 230, 230);
+}
+
+.matCard {
+	width: 30rem;
+
+	display: flex;
+	flex-direction: column;
+
+	.cardTitle {
+		text-align: center;
+
+		h1 {
+			font-size: 3rem;
+		}
+
+		h3 {
+			font-size: 1rem;
+		}
+	}
+
+	.pwRecoverForm {
+		display: flex;
+		flex-direction: column;
+
+		.formButtons {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 1rem;
+		}
+	}
+
+	button {
+		margin-top: 1rem;
+		width: 10rem;
+		background-color: $colorPrimary;
+	}
+}
+
+@media (max-width: 600px) {
+	.matCard {
+		width: 80%;
+
+		.cardTitle {
+			h1 {
+				font-size: 2rem;
+			}
+		}
+	}
+
+	mat-form-field {
+		width: 100% !important;
+	}
+}

@@ -25,6 +25,7 @@
     "@fortawesome/angular-fontawesome": "^0.9.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "angular-responsive-carousel": "^2.1.1",
     "firebase": "^8.6.5",
     "ngx-mask": "^12.0.0",
     "ngx-show-hide-password": "^2.3.0",

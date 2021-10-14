@@ -1,0 +1,45 @@
+<div class="matCardContainer">
+	<mat-card class="matCard">
+		<mat-card-title class="cardTitle">
+			<h1>Recuperar senha</h1>
+			<h3>
+				Insira seu e-mail cadastrado e lhe enviaremos um e-mail para
+				trocar sua senha.
+			</h3>
+		</mat-card-title>
+
+		<form
+			#email="ngForm"
+			(ngSubmit)="recuperarSenha(email.value.email)"
+			class="pwRecoverForm"
+		>
+			<mat-form-field appearance="outline">
+				<mat-label>Digite seu e-mail</mat-label>
+				<input
+					matInput
+					type="text"
+					name="email"
+					ngModel
+					placeholder="usuario@email.com"
+					required
+					email
+				/>
+				<mat-error>Digite um e-mail válido!</mat-error>
+			</mat-form-field>
+
+			<div class="formButtons">
+				<button mat-raised-button (click)="cancel()" class="colorWhite">
+					Cancelar
+				</button>
+
+				<button
+					mat-raised-button
+					[disabled]="!email.valid"
+					class="colorWhite"
+				>
+					Enviar
+				</button>
+			</div>
+		</form>
+	</mat-card>
+</div>

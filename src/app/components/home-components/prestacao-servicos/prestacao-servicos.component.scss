@@ -1,0 +1,108 @@
+@import '../../../../variables.scss';
+$tamanho: 400px;
+.page-content {
+	margin-left: 7rem;
+	margin-bottom: 2rem;
+	margin-top: 2rem;
+	display: flex;
+
+	justify-content: space-between;
+
+	h2 {
+		line-height: 2rem;
+		font-size: 2rem;
+		font-weight: 400;
+	}
+
+	h3 {
+		font-weight: 500;
+	}
+
+	.palavra-servicos {
+		color: $colorPrimary;
+		margin-left: 3rem;
+	}
+
+	.orcamento-button {
+		background-color: $colorPrimary;
+		border-radius: 50px;
+		text-align: center;
+	}
+
+	.consulte-equipe {
+		background-size: contain;
+		width: (1279px / 853px) * $tamanho - 100px;
+		height: (853px / 1279px) * $tamanho;
+		border-radius: 30px;
+		margin-right: 7rem;
+		.black-box {
+			width: inherit;
+			height: inherit;
+			border-radius: inherit;
+			background-color: rgb(12, 11, 11);
+			opacity: 0.7;
+		}
+
+		.consulta-text {
+			color: white;
+			height: inherit;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+
+	.presta-servicos {
+		justify-content: right;
+	}
+}
+
+.cardContainer {
+	margin-top: 10rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.fraseCard {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background-color: $colorPrimary;
+		width: 30rem;
+		height: 20rem;
+		border-radius: 50px;
+		box-shadow: 0px 10px 10px white;
+		text-align: center;
+
+		img {
+			width: 3rem;
+		}
+	}
+
+	.iconsCard {
+		z-index: -1;
+		margin-top: -2rem;
+		background-color: $colorPrimary;
+		width: 80rem;
+		height: 20rem;
+		border-radius: 50px;
+
+		.icons {
+			color: white;
+			display: flex;
+			height: inherit;
+			align-items: center;
+			justify-content: space-evenly;
+			text-align: center;
+
+			h3 {
+				font-size: 1.5rem;
+			}
+
+			img {
+				width: 8rem;
+			}
+		}
+	}
+}
