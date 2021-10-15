@@ -7,7 +7,9 @@
 	<mat-card class="servicoCard" *ngIf="service">
 		<mat-card-title>
 			<h1>{{ service.title }}</h1>
-			<h3 style="text-align: justify">{{ service.description }}</h3>
+			<h3 style="text-align: justify; overflow-wrap: break-word">
+				{{ service.description }}
+			</h3>
 		</mat-card-title>
 
 		<mat-card-content class="servicoCardContent">
@@ -58,10 +60,42 @@
 			<div class="funcionario-equipamento-list">
 				<div
 					class="list-item"
-					*ngFor="let funcionario of service.funcionarios"
+					*ngFor="
+						let funcionario of service.funcionarios;
+						let i = index
+					"
 				>
-					<h3 style="margin: 0">{{ funcionario.name }}</h3>
-					<h4 style="margin: 0">{{ funcionario.sector }}</h4>
+					<div style="display: flex">
+						<img
+							id="profilePic-{{ i }}"
+							alt="Imagem de perfil do funcionario"
+							width="50px"
+							height="50px"
+							class="funcionario-profile-pic"
+						/>
+						<div>
+							<h3 style="margin: 0">{{ funcionario.name }}</h3>
+							<h4 style="margin: 0">{{ funcionario.sector }}</h4>
+						</div>
+					</div>
+
+					<mat-expansion-panel style="background-color: white">
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								<p>Documentos</p>
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<a
+							*ngFor="let doc of funcionario.documents"
+							id="{{ doc }}"
+							target="_blank"
+							download
+						>
+							{{ doc }}
+							<hr />
+						</a>
+					</mat-expansion-panel>
 				</div>
 			</div>
 			<!------------------EQUIPAMENTOS------------------->

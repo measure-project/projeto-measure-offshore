@@ -117,7 +117,7 @@ export class ServicosService {
 					// xhr.send();
 
 					var a = document.getElementById(`${path.nome}`); // Não funciona qnd tem documento de nome repetido
-					console.log(a);
+
 					a?.setAttribute('href', url);
 				});
 		});

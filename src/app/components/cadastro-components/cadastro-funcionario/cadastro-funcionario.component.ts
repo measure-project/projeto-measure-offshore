@@ -51,7 +51,11 @@ export class CadastroFuncionarioComponent implements OnInit {
 		);
 
 		funcionario.profilePicture = 'placeholder'; //Por enquanto deixar assim
-		funcionario.documents = this.funcionario.documents;
+		funcionario.documents = [];
+		this.funcionario.documents.forEach((doc) => {
+			funcionario.documents.push(doc.nome);
+		});
+
 		this.funcionarioService.setFuncionario(funcionario);
 		this.returnToProfile();
 	}
@@ -79,7 +83,10 @@ export class CadastroFuncionarioComponent implements OnInit {
 
 		if (event.target.files && event.target.files[0]) {
 			for (let i = 0; i < event.target.files.length; i++) {
-				this.funcionario.documents.push(event.target.files[i].name);
+				this.funcionario.documents.push({
+					nome: event.target.files[i].name,
+					arquivo: event.target.files[i],
+				});
 			}
 		}
 	}

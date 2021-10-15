@@ -48,9 +48,15 @@ export class VerServicoComponent implements OnInit {
 								service.documentos
 							);
 
-							// this.service.funcionarios.forEach((funcionario) => {
-							// 		Baixar arquivos do funcionario aqui
-							// });
+							let funcionarioIndex = 0;
+							this.service.funcionarios.forEach((funcionario) => {
+								this.funcionarioService.downloadFiles(
+									funcionario.email,
+									funcionario.documents,
+									funcionarioIndex
+								);
+								funcionarioIndex++;
+							});
 						}
 					});
 				});

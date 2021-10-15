@@ -11,5 +11,5 @@ export interface Funcionario {
 	sector: string;
 	func: string;
 	email: string;
-	documents: Array<File>;
+	documents: Array<any>;
 }
