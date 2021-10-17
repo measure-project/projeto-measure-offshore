@@ -59,7 +59,7 @@
 
 			<div class="funcionario-equipamento-list">
 				<div
-					class="list-item"
+					class="list-funcionario"
 					*ngFor="
 						let funcionario of service.funcionarios;
 						let i = index
@@ -105,16 +105,26 @@
 
 			<div class="funcionario-equipamento-list">
 				<div
-					class="list-item"
+					class="list-equipamento"
 					*ngFor="let equipamento of service.equipamentos"
 				>
 					<h3>{{ equipamento.name }}</h3>
+					<h4>Código: {{ equipamento.code }}</h4>
+					<h4>Marca: {{ equipamento.brand }}</h4>
 				</div>
 			</div>
 
 			<!------------DOWNLOAD DAS INFORMAÇÕES-------------->
 
-			<h3>Donwload das informações do serviço</h3>
+			<h3 style="margin-top: 1rem">
+				<span
+					><img
+						src="../../../assets/sheet.png"
+						width="25px"
+					/>Download das</span
+				>
+				informações do serviço
+			</h3>
 		</mat-card-content>
 
 		<div>

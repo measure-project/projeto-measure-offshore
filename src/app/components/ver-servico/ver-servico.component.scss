@@ -85,11 +85,18 @@
 			border-radius: 50%;
 		}
 
-		.list-item {
-			width: min-content;
+		.list-funcionario {
 			color: white;
-			padding: 10px;
 			background-color: $colorPrimary;
+			padding: 10px;
+			border-radius: 5px;
+		}
+
+		.list-equipamento {
+			height: min-content;
+			color: white;
+			background-color: $colorPrimary;
+			padding: 10px;
 			border-radius: 5px;
 		}
 	}
