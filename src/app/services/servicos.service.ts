@@ -100,7 +100,7 @@ export class ServicosService {
 				});
 		});
 	}
-	downloadFiles(id: string, paths: Array<any>) {
-		console.log(paths);
+	downloadFiles(ServiocoId: string, files: Array<any> = []) {
+		console.log('teste');
 	}
 }
