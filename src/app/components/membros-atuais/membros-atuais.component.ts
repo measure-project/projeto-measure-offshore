@@ -41,7 +41,12 @@ export class MembrosAtuaisComponent implements OnInit {
 		this.router.navigate([`/verPerfil`, cliente.uid]);
 	}
 
-	verFuncionario(funcionario: Funcionario) {}
+	verFuncionario(funcionario: Funcionario) {
+		this.router.navigate([
+			`/${this.location.path()}/funcionarios/`,
+			funcionario.uid,
+		]);
+	}
 
 	verAdmin(admin: Admin) {
 		this.router.navigate(['/verPerfilAdm', admin.uid]);

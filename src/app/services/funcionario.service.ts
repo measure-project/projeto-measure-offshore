@@ -60,7 +60,11 @@ export class FuncionarioService {
 		return funcionarioList;
 	}
 
-	getFuncionarioById() {}
+	async getFuncionarioById(fid: string) {
+		const docRef = this.afs.collection('funcionarios').ref;
+
+		return await docRef.where('uid', '==', fid).get();
+	}
 
 	uploadFiles(profilePic: File, documents: Array<any>, email: string) {
 		this.afStorage
@@ -91,14 +95,6 @@ export class FuncionarioService {
 		docName: Array<any>,
 		funcionarioIndex: number
 	) {
-		// return [
-		// 	this.afStorage
-		// 		.ref(`funcionarios/${email}/profile.jpg`)
-		// 		.getDownloadURL(),
-		// 	this.afStorage
-		// 		.ref(`funcionarios/${email}/documents/${docName}`)
-		// 		.getDownloadURL(),
-		// ];
 		this.afStorage
 			.ref(`funcionarios/${email}/profileImage/profile.jpg`)
 			.getDownloadURL()
