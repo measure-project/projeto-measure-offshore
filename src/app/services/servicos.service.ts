@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Servico } from './../models/servico';
 import { Equipamento } from './../models/equipamento';
 import { Injectable } from '@angular/core';
@@ -101,6 +102,24 @@ export class ServicosService {
 		});
 	}
 	downloadFiles(id: string, paths: Array<any>) {
-		console.log(paths);
+		paths.forEach((path) => {
+			this.afStorage
+				.ref(`servicos/${id}/documents/${path.categoria}/${path.nome}`)
+				.getDownloadURL()
+				.subscribe((url) => {
+					// Não consegui dessa forma por erro de cors, da pra arrumar mas é um trampinho
+					// var xhr = new XMLHttpRequest();
+					// xhr.responseType = 'blob';
+					// xhr.onload = (event) => {
+					// 	var blob = xhr.response;
+					// };
+					// xhr.open('GET', url);
+					// xhr.send();
+
+					var a = document.getElementById(`${path.nome}`); // Não funciona qnd tem documento de nome repetido
+
+					a?.setAttribute('href', url);
+				});
+		});
 	}
 }

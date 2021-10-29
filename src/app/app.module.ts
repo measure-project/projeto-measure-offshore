@@ -48,6 +48,7 @@ import { CadastroServicosComponent } from './components/cadastro-components/cada
 import { CriarEquipamentoComponent } from './components/cadastro-components/cadastro-servicos/criar-equipamento/criar-equipamento.component';
 import { VerServicoComponent } from './components/ver-servico/ver-servico.component';
 import { EditarServicoComponent } from './components/Perfil-Components/editar-servico/editar-servico.component';
+import { FuncionarioVerPerfilComponent } from './components/Perfil-Components/funcionario-ver-perfil/funcionario-ver-perfil.component';
 
 @NgModule({
 	declarations: [
@@ -71,6 +72,7 @@ import { EditarServicoComponent } from './components/Perfil-Components/editar-se
 		CriarEquipamentoComponent,
 		VerServicoComponent,
 		EditarServicoComponent,
+  FuncionarioVerPerfilComponent,
 	],
 	imports: [
 		BrowserModule,
