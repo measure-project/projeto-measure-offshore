@@ -26,7 +26,15 @@ export class EditarServicoComponent implements OnInit {
 		private currentRoute: ActivatedRoute,
 		public dialog: MatDialog,
 		private location: Location
-	) {}
+	) {
+		this.funcionarios = this.funcionarioService.getAllFuncionarios();
+		this.equipamentos = this.servicoService.getAllEquipments();
+		this.tipos = this.servicoService.getAllServices();
+
+		this.loadUser().then(() => {
+			this.loadServico();
+		});
+	}
 
 	tipos!: Array<Servico>;
 	uid: string | undefined;
@@ -42,13 +50,7 @@ export class EditarServicoComponent implements OnInit {
 	user!: User;
 
 	ngOnInit(): void {
-		this.funcionarios = this.funcionarioService.getAllFuncionarios();
-		this.equipamentos = this.servicoService.getAllEquipments();
-		this.tipos = this.servicoService.getAllServices();
-
-		this.loadUser().then(() => {
-			this.loadServico();
-		});
+		
 	}
 
 	async loadUser() {
@@ -68,6 +70,7 @@ export class EditarServicoComponent implements OnInit {
 			);
 			this.funcionarioSelected = this.servico.funcionarios;
 			this.equipamentoSelected = this.servico.equipamentos;
+			this.docTypes = this.servico.documentos.map((doc: any) => doc.categoria)
 		});
 	}
 
@@ -79,14 +82,19 @@ export class EditarServicoComponent implements OnInit {
 			servico.uid === this.uid;
 		});
 
+		
+		if (this.saveModel) this.servicoService.editService(this.servico);
+		
 		this.user.services?.splice(index!, 1);
 		this.user.services?.push(this.servico);
-
-		if (this.saveModel) this.servicoService.setService(this.servico);
-
+		console.log("passou");
+		
 		await this.authService.SetUserData(this.user);
 
-		this.location.back();
+		console.log("passou");
+		
+
+		this.backToProfile();
 	}
 
 	fillFormWithPreDefined(service: Servico) {
@@ -118,7 +126,11 @@ export class EditarServicoComponent implements OnInit {
 	addDocuments(docType: string, event: any) {
 		if (event.target.files) {
 			for (let i = 0; i < event.target.files.length; i++) {
-				this.documentList.push([docType, event.target.files[i].name]);
+				this.servico.documentos.push({
+					categoria: docType,
+					nome: event.target.files[i].name,
+					documento: event.target.files[i],
+				});
 			}
 		}
 	}
