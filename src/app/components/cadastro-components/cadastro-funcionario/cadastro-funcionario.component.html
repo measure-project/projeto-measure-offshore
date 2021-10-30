@@ -55,6 +55,7 @@
 						required
 						placeholder="01/01/2021"
 						mask="00/00/0000"
+						[dropSpecialCharacters]="false"
 					/>
 					<mat-error>Insira sua data de nascimento!</mat-error>
 				</mat-form-field>
@@ -83,6 +84,7 @@
 						required
 						placeholder="(99) 9999-9999"
 						mask="{{ phoneMask }}"
+						[dropSpecialCharacters]="false"
 						(ngModelChange)="phoneLength = $event; onPhoneChanged()"
 					/>
 					<mat-error>Insira um numero de telefone válido!</mat-error>

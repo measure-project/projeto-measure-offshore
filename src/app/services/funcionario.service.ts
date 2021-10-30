@@ -103,6 +103,8 @@ export class FuncionarioService {
 					`profilePic-${funcionarioIndex}`
 				);
 
+				if (url) console.log('HOLY SHIT');
+
 				img?.setAttribute('src', url);
 			});
 
