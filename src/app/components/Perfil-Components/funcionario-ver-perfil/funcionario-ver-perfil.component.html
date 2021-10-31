@@ -1,0 +1,54 @@
+<div class="content" *ngIf="funcionario">
+	<mat-toolbar class="toolBar">
+		<img src="../../../../assets/measure-logo.png" />
+		<span class="material-icons profileIcon">account_circle</span>
+	</mat-toolbar>
+
+	<mat-card class="profileCard mat-elevation-z4">
+		<mat-card-title>
+			<h1>Funcionário</h1>
+
+			<a [routerLink]="['./funcionarioEditarPerfil']" class="editProfile">
+				<span class="material-icons">border_color</span><br />Editar
+			</a>
+		</mat-card-title>
+		<mat-card-content class="profileCardContent">
+			<img
+				class="profilePicture"
+				id="profilePic-0"
+				alt="Imagem de perfil"
+			/>
+
+			<h2>{{ funcionario.name }}</h2>
+
+			<h3>Informações pessoais</h3>
+
+			<div class="funcionario-info">
+				<h4>{{ funcionario.phone }}</h4>
+				<h4>{{ funcionario.adress }}</h4>
+				<h4>{{ funcionario.birthday }}</h4>
+				<h4>{{ funcionario.district }}</h4>
+			</div>
+
+			<h3>Função</h3>
+			<h4>{{ funcionario.func }}</h4>
+
+			<h3>Documentos</h3>
+			<div>
+				<a
+					*ngFor="let doc of funcionario.documents"
+					id="{{ doc }}"
+					target="_blank"
+					download
+				>
+					{{ doc }}
+					<hr />
+				</a>
+			</div>
+		</mat-card-content>
+
+		<mat-card-actions>
+			<button (click)="back()" mat-raised-button>Voltar</button>
+		</mat-card-actions>
+	</mat-card>
+</div>

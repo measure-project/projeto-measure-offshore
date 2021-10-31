@@ -2,8 +2,9 @@
 
 .toolBar {
 	width: 100%;
-	margin-bottom: 4rem;
+	margin-bottom: 2rem;
 	background-color: $colorPrimary;
+	justify-content: center;
 	position: relative;
 
 	img {
@@ -70,37 +71,18 @@
 				color: gray;
 				font-size: 1.5rem;
 			}
+
+			.funcionario-info {
+				display: grid;
+				grid-template-columns: 50% 50%;
+				width: 100%;
+			}
 		}
 
 		mat-card-actions {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-
 			button {
 				color: $colorSecondary;
 				background-color: $colorPrimary;
-				margin-bottom: 1rem;
-				width: 10rem;
-			}
-
-			.cadastroPanel {
-				margin-bottom: 1rem;
-				background-color: $colorPrimary;
-				width: 10rem;
-				min-height: 2.5rem;
-
-				.panelContent {
-					text-align: center;
-
-					a {
-						display: block;
-						color: $colorSecondary;
-					}
-					a:hover {
-						cursor: pointer;
-					}
-				}
 			}
 		}
 	}

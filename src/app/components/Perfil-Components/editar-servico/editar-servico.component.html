@@ -104,10 +104,10 @@
 
 						<ng-container
 							class="documentList"
-							*ngFor="let document of documentList"
+							*ngFor="let document of servico.documentos"
 						>
-							<p *ngIf="docType == document[0]">
-								{{ document[1] }}
+							<p *ngIf="docType == document.categoria">
+								{{ document.nome }}
 							</p>
 						</ng-container>
 					</div>

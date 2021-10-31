@@ -1,3 +1,4 @@
+import { FuncionarioVerPerfilComponent } from './components/Perfil-Components/funcionario-ver-perfil/funcionario-ver-perfil.component';
 import { VerServicoComponent } from './components/ver-servico/ver-servico.component';
 import { RoleGuardService } from './guards/role-guard.service';
 import { LoginGuardService } from './guards/login-guard.service';
@@ -80,6 +81,11 @@ const routes: Routes = [
 	{
 		path: 'verPerfilAdm/:uid/membros',
 		component: MembrosAtuaisComponent,
+		canActivate: [RouteGuardService, RoleGuardService],
+	},
+	{
+		path: 'verPerfilAdm/:uid/membros/funcionarios/:fid',
+		component: FuncionarioVerPerfilComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},
 	{

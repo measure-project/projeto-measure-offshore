@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Servico } from './../models/servico';
 import { Equipamento } from './../models/equipamento';
 import { Injectable } from '@angular/core';
@@ -36,6 +37,23 @@ export class ServicosService {
 		return docRef.set(serviceState, {
 			merge: true,
 		});
+	}
+
+	editService(service: Servico) {
+		const docRef: AngularFirestoreDocument<DocumentData> = this.afs
+			.collection(`servicos/${service.uid}`)
+			.doc();
+
+		const serviceState: Servico = {
+			title: service.title,
+			description: service.description,
+			equipamentos: service.equipamentos,
+			funcionarios: service.funcionarios,
+			uid: service.uid,
+			documentos: service.documentos.slice(),
+		};
+
+		return docRef.update(serviceState);
 	}
 
 	setEquipment(equipment: Equipamento) {
@@ -100,7 +118,27 @@ export class ServicosService {
 				});
 		});
 	}
-	downloadFiles(ServiocoId: string, files: Array<any> = []) {
-		console.log('teste');
+	downloadFiles(id: string, paths: Array<any>) {
+		paths.forEach((path) => {
+			this.afStorage
+				.ref(`servicos/${id}/documents/${path.categoria}/${path.nome}`)
+				.getDownloadURL()
+				.subscribe((url) => {
+					// Não consegui dessa forma por erro de cors, da pra arrumar mas é um trampinho
+					// var xhr = new XMLHttpRequest();
+					// xhr.responseType = 'blob';
+					// xhr.onload = (event) => {
+					// 	var blob = xhr.response;
+					// };
+					// xhr.open('GET', url);
+					// xhr.send();
+
+					var a = document.getElementById(`${path.nome}`); // Não funciona qnd tem documento de nome repetido
+
+					a?.setAttribute('href', url);
+				});
+		});
 	}
+
+	deleteFile(path: string) {}
 }

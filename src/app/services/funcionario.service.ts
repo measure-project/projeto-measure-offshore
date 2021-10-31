@@ -60,9 +60,13 @@ export class FuncionarioService {
 		return funcionarioList;
 	}
 
-	getFuncionarioById() {}
+	async getFuncionarioById(fid: string) {
+		const docRef = this.afs.collection('funcionarios').ref;
 
-	uploadFiles(profilePic: File, documents: Array<File>, email: string) {
+		return await docRef.where('uid', '==', fid).get();
+	}
+
+	uploadFiles(profilePic: File, documents: Array<any>, email: string) {
 		this.afStorage
 			.ref(`funcionarios/${email}/profileImage/profile.jpg`)
 			.put(profilePic)
@@ -75,8 +79,8 @@ export class FuncionarioService {
 
 		documents.forEach((file) => {
 			this.afStorage
-				.ref(`funcionarios/${email}/documents/${file.name}`)
-				.put(file)
+				.ref(`funcionarios/${email}/documents/${file.nome}`)
+				.put(file.arquivo)
 				.then(() => {
 					console.log('Documentos upados!');
 				})
@@ -86,14 +90,31 @@ export class FuncionarioService {
 		});
 	}
 
-	downloadFiles(email: string) {
-		return [
+	downloadFiles(
+		email: string,
+		docName: Array<any>,
+		funcionarioIndex: number
+	) {
+		this.afStorage
+			.ref(`funcionarios/${email}/profileImage/profile.jpg`)
+			.getDownloadURL()
+			.subscribe((url) => {
+				const img = document.getElementById(
+					`profilePic-${funcionarioIndex}`
+				);
+
+				img?.setAttribute('src', url);
+			});
+
+		docName.forEach((doc) => {
 			this.afStorage
-				.ref(`funcionarios/${email}/profile.jpg`)
-				.getDownloadURL(),
-			this.afStorage
-				.ref(`funcionarios/${email}/document.pdf`)
-				.getDownloadURL(),
-		];
+				.ref(`funcionarios/${email}/documents/${doc}`)
+				.getDownloadURL()
+				.subscribe((url) => {
+					const a = document.getElementById(`${doc}`);
+
+					a?.setAttribute('href', url);
+				});
+		});
 	}
 }

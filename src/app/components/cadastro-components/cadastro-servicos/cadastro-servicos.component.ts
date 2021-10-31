@@ -71,7 +71,6 @@ export class CadastroServicosComponent implements OnInit {
 
 		servico.uid = uuidv4();
 
-		this.user.services?.push(servico);
 		this.servico.documentos.forEach((file) => {
 			this.servico.documentos.push({
 				name: file.name,
