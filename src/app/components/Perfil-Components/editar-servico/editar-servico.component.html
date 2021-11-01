@@ -191,13 +191,19 @@
 				<label for="preDefine">Definir como modelo pré-estabelecido</label>
 
 				<div style="display: flex; justify-content: space-between">
-					<button type="button" (click)="backToProfile()" mat-raised-button>
+					<button
+						type="button"
+						class="action-btn"
+						(click)="backToProfile()"
+						mat-raised-button
+					>
 						Voltar
 					</button>
 					<button
 						type="submit"
 						[disabled]="!confereForm()"
 						mat-raised-button
+						class="action-btn"
 					>
 						Salvar
 					</button>

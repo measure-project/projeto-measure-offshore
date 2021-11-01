@@ -11,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 import { Funcionario } from 'src/app/models/funcionario';
 import { MatDialog } from '@angular/material/dialog';
 import { CriarEquipamentoComponent } from 'src/app/components/cadastro-components/cadastro-servicos/criar-equipamento/criar-equipamento.component';
-
 @Component({
 	selector: 'app-editar-servico',
 	templateUrl: './editar-servico.component.html',
@@ -27,13 +26,7 @@ export class EditarServicoComponent implements OnInit {
 		public dialog: MatDialog,
 		private location: Location
 	) {
-		this.funcionarios = this.funcionarioService.getAllFuncionarios();
-		this.equipamentos = this.servicoService.getAllEquipments();
-		this.tipos = this.servicoService.getAllServices();
-
-		this.loadUser().then(() => {
-			this.loadServico();
-		});
+		this.servico = {} as Servico;
 	}
 
 	tipos!: Array<Servico>;
@@ -41,16 +34,21 @@ export class EditarServicoComponent implements OnInit {
 	saveModel: boolean = false;
 	funcionarios!: Array<Funcionario>;
 	equipamentos!: Array<Equipamento>;
-	servico!: Servico;
+	documentosAnteriores!: Array<any>;
+	servico: Servico;
 	docTypes: Array<string> = [];
-	documentList: Array<Array<any>> = [[]];
 	funcionarioSelected: Array<Funcionario> = [];
 	equipamentoSelected: Array<Equipamento> = [];
 	preDefinedType!: Servico;
 	user!: User;
 
-	ngOnInit(): void {
-		
+	async ngOnInit(): Promise<void> {
+		await this.loadUser();
+		await this.loadServico();
+		this.funcionarios = this.funcionarioService.getAllFuncionarios();
+		this.equipamentos = this.servicoService.getAllEquipments();
+		this.tipos = this.servicoService.getAllServices();
+		this.documentosAnteriores = this.servico.documentos.slice();
 	}
 
 	async loadUser() {
@@ -70,31 +68,55 @@ export class EditarServicoComponent implements OnInit {
 			);
 			this.funcionarioSelected = this.servico.funcionarios;
 			this.equipamentoSelected = this.servico.equipamentos;
-			this.docTypes = this.servico.documentos.map((doc: any) => doc.categoria)
+			this.docTypes = this.servico.documentos.map((doc: any) => doc.categoria);
+			this.docTypes = [...new Set(this.docTypes)];
 		});
 	}
 
 	async editarServico() {
+		console.log(this.servico.documentos);
+
+		const uploadedFiles: any[] = [
+			...this.servico.documentos.filter(
+				(document: any) =>
+					!this.documentosAnteriores.find((doc: any) => {
+						return doc.nome == document.nome;
+					})
+			),
+		];
+
+		const userSavedDocuments = this.servico.documentos.map((document: any) => {
+			return {
+				categoria: document.categoria,
+				nome: document.nome,
+			};
+		});
+
 		this.servico.funcionarios = this.funcionarioSelected;
 		this.servico.equipamentos = this.equipamentoSelected;
 
-		const index = this.user.services?.findIndex((servico: Servico) => {
-			servico.uid === this.uid;
-		});
+		try {
+			this.servicoService.uploadFiles(uploadedFiles, this.servico.uid);
 
-		
-		if (this.saveModel) this.servicoService.editService(this.servico);
-		
-		this.user.services?.splice(index!, 1);
-		this.user.services?.push(this.servico);
-		console.log("passou");
-		
-		await this.authService.SetUserData(this.user);
+			this.servico.documentos = userSavedDocuments;
+			console.log(this.servico.documentos);
 
-		console.log("passou");
-		
+			if (this.saveModel) this.servicoService.editService(this.servico);
 
-		this.backToProfile();
+			const index =
+				this.user.services?.findIndex((servico: Servico) => {
+					servico.uid === this.uid;
+				}) || 0;
+
+			if (this.user.services) this.user.services[index] = this.servico;
+
+			await this.authService.SetUserData(this.user);
+
+			this.backToProfile();
+		} catch (error: any) {
+			this.authService.displayMessage(String(error), true);
+			console.log(error);
+		}
 	}
 
 	fillFormWithPreDefined(service: Servico) {

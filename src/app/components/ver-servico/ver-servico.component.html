@@ -23,10 +23,7 @@
 					class="documentTypes"
 					*ngFor="let docType of docTypes; let i = index"
 				>
-					<mat-expansion-panel
-						[expanded]="step === i"
-						(opened)="setStep(i)"
-					>
+					<mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)">
 						<mat-expansion-panel-header>
 							<mat-panel-title>
 								<h3>{{ docType }}</h3>
@@ -40,9 +37,7 @@
 								id="{{ doc.nome }}"
 								><h4>
 									{{ doc.nome }}
-									<span class="material-icons"
-										>file_download</span
-									>
+									<span class="material-icons">file_download</span>
 								</h4>
 								<hr
 							/></a>
@@ -60,10 +55,7 @@
 			<div class="funcionario-equipamento-list">
 				<div
 					class="list-funcionario"
-					*ngFor="
-						let funcionario of service.funcionarios;
-						let i = index
-					"
+					*ngFor="let funcionario of service.funcionarios; let i = index"
 				>
 					<div style="display: flex">
 						<img
@@ -118,17 +110,17 @@
 
 			<h3 style="margin-top: 1rem">
 				<span
-					><img
-						src="../../../assets/sheet.png"
-						width="25px"
-					/>Download das</span
+					><img src="../../../assets/sheet.png" width="25px" />Download
+					das</span
 				>
 				informações do serviço
 			</h3>
 		</mat-card-content>
 
 		<div>
-			<button mat-raised-button (click)="backToProfile()">Voltar</button>
+			<button mat-raised-button class="action-btn" (click)="backToProfile()">
+				Voltar
+			</button>
 		</div>
 	</mat-card>
 </div>
