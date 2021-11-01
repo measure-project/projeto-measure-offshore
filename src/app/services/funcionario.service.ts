@@ -35,7 +35,6 @@ export class FuncionarioService {
 			birthday: funcionario.birthday,
 			district: funcionario.district,
 			complement: funcionario.complement,
-			profilePicture: funcionario.profilePicture,
 			sector: funcionario.sector,
 			func: funcionario.func,
 			email: funcionario.email,
@@ -67,15 +66,16 @@ export class FuncionarioService {
 	}
 
 	uploadFiles(profilePic: File, documents: Array<any>, email: string) {
-		this.afStorage
-			.ref(`funcionarios/${email}/profileImage/profile.jpg`)
-			.put(profilePic)
-			.then(() => {
-				console.log('Imagem upada!');
-			})
-			.catch((err) => {
-				console.log(`Houve um erro: ${err}`);
-			});
+		if (profilePic)
+			this.afStorage
+				.ref(`funcionarios/${email}/profileImage/profile.jpg`)
+				.put(profilePic)
+				.then(() => {
+					console.log('Imagem upada!');
+				})
+				.catch((err) => {
+					console.log(`Houve um erro: ${err}`);
+				});
 
 		documents.forEach((file) => {
 			this.afStorage

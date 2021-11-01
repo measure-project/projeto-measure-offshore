@@ -10,7 +10,8 @@
 		<mat-card-content class="profileCardContent">
 			<img
 				class="profilePicture"
-				[src]="funcionario.profilePicture || defaultImage"
+				[src]="profilePicture"
+				(error)="onErrorImg($event)"
 				alt="Foto de perfil"
 			/>
 			<button mat-raised-button class="editPhoto">
@@ -210,7 +211,11 @@
 					</mat-radio-group>
 				</div>
 
-				<button mat-raised-button (click)="returnToProfile()">
+				<button
+					mat-raised-button
+					type="button"
+					(click)="returnToProfile()"
+				>
 					Voltar
 				</button>
 				<button type="submit" mat-raised-button>Cadastrar</button>

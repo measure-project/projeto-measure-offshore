@@ -13,6 +13,7 @@ export class FuncionarioEditarPerfilComponent implements OnInit {
 	funcionario = {} as Funcionario;
 	defaultImage: any = '../../../../assets/perfil-padrao.jpg';
 	newImage: any;
+	profilePicture: any;
 
 	constructor(
 		private funcionarioService: FuncionarioService,
@@ -65,10 +66,13 @@ export class FuncionarioEditarPerfilComponent implements OnInit {
 			funcionario.email
 		);
 
-		funcionario.profilePicture = 'placeholder'; //Por enquanto deixar assim
+		funcionario.uid = this.funcionario.uid;
+
 		funcionario.documents = [];
 		this.funcionario.documents.forEach((doc) => {
-			funcionario.documents.push(doc);
+			// GAMBIARRA
+			if (doc.nome) funcionario.documents.push(doc.nome);
+			else funcionario.documents.push(doc);
 		});
 
 		console.log(funcionario);
@@ -89,7 +93,7 @@ export class FuncionarioEditarPerfilComponent implements OnInit {
 
 			fileReader.onload = (e) => {
 				if (e) {
-					this.funcionario.profilePicture = e.target?.result;
+					this.profilePicture = e.target?.result;
 				}
 			};
 		}
@@ -105,6 +109,12 @@ export class FuncionarioEditarPerfilComponent implements OnInit {
 					arquivo: event.target.files[i],
 				});
 			}
+		}
+	}
+
+	onErrorImg(e: any) {
+		if (e.target) {
+			e.target.src = '../../../../assets/perfil-padrao.jpg';
 		}
 	}
 }
