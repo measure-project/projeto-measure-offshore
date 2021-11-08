@@ -130,6 +130,18 @@
 				color: $colorSecondary;
 				text-decoration: none;
 			}
+
+			.actionButtons {
+				display: flex;
+				margin-top: 10px;
+
+				.delete-btn {
+					color: $colorDelete;
+					padding-left: 10px;
+					cursor: pointer;
+					text-decoration: none;
+				}
+			}
 			mat-card-title {
 				width: 95%;
 				display: flex;

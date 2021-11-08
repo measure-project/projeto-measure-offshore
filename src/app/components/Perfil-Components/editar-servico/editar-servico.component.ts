@@ -175,6 +175,10 @@ export class EditarServicoComponent implements OnInit {
 		this.location.back();
 	}
 
+	deleteService() {
+		
+	}
+
 	confereForm(): boolean {
 		return (
 			!!this.servico.title &&

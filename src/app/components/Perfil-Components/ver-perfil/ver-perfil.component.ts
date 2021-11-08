@@ -1,3 +1,4 @@
+import { ServicosService } from './../../../services/servicos.service';
 import { Servico } from './../../../models/servico';
 import { Location } from '@angular/common';
 import { Admin } from 'src/app/models/admin';
@@ -45,7 +46,8 @@ export class VerPerfilComponent implements OnInit {
 		private router: Router,
 		private currentRoute: ActivatedRoute,
 		private adminService: AdminService,
-		private location: Location
+		private location: Location,
+		private servicoService: ServicosService
 	) {}
 
 	async ngOnInit() {
@@ -55,7 +57,7 @@ export class VerPerfilComponent implements OnInit {
 			this.admin = JSON.parse(localStorage.getItem('currentUser') || '{ }');
 			await this.adminService
 				.consultClient(this.currentRoute.snapshot.paramMap.get('uid') ?? '')
-				.then((users) => {
+				.then(users => {
 					users.forEach((user: any) => {
 						this.user = user.data();
 						console.log(this.user);
@@ -69,6 +71,16 @@ export class VerPerfilComponent implements OnInit {
 	signOut() {
 		if (this.admin) this.location.back();
 		else this.authService.SignOut();
+	}
+
+	async deleteService(id: string) {
+		console.log('Excluindo ' + id);
+		this.servicoService.deleteService(id).then(() => {
+			this.user.services = this.user.services?.filter(
+				service => service.uid !== id
+			);
+			this.authService.SetUserData(this.user);
+		});
 	}
 
 	toAdicionarServico() {
