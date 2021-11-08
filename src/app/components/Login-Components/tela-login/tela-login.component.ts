@@ -26,12 +26,11 @@ export class TelaLoginComponent implements OnInit {
 		this.authService.GoogleAuth();
 	}
 
-	navigateToCreateNewAccount(): void {
-		this.router.navigate(['/signup']);
-		console.log(this.username, this.password);
-	}
-
 	forgotPassword() {
 		this.router.navigate(['/passwordRecovery']);
+	}
+
+	returnToHome() {
+		this.router.navigate(['/']);
 	}
 }

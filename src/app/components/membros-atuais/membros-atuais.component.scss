@@ -1,0 +1,78 @@
+@import '../../../variables.scss';
+
+.toolBar {
+	background-color: $colorPrimary;
+	justify-content: center;
+	margin-bottom: 4.3rem;
+
+	img {
+		width: 8rem;
+	}
+
+	.profileIcon {
+		color: white;
+		position: absolute;
+		right: 2rem;
+	}
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: $colorSecondary;
+
+	.membersCard {
+		width: 50rem;
+		height: 35rem;
+		margin-bottom: 2rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-style: solid;
+		border-radius: 50px;
+		overflow-y: hidden;
+
+		h1 {
+			color: $colorPrimary;
+			margin-top: 1rem;
+			font-size: 3rem;
+			text-shadow: 1px 1px 2px black;
+		}
+
+		mat-tab-group {
+			height: 27rem;
+		}
+
+		.tabContent {
+			display: flex;
+			flex-direction: column;
+
+			mat-form-field {
+				margin-top: 1rem;
+				align-self: center;
+				height: 3rem;
+				width: 70%;
+			}
+
+			.info {
+				p {
+					margin: 0;
+				}
+			}
+		}
+
+		mat-card-content {
+			width: 80%;
+		}
+
+		.funcionarioList {
+			display: flex;
+			justify-content: space-between;
+			margin: 1rem;
+			color: white;
+			background-color: $colorPrimary;
+		}
+	}
+}

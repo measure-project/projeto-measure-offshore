@@ -1,0 +1,255 @@
+<div class="content">
+	<mat-toolbar class="toolBar">
+		<img src="../../../../assets/measure-logo.png" />
+		<span class="material-icons profileIcon">account_circle</span>
+	</mat-toolbar>
+
+	<mat-card class="servicoCard">
+		<mat-card-title style="margin-bottom: 2rem">
+			<h1>CADASTRO DE SERVIÇOS</h1>
+		</mat-card-title>
+
+		<mat-card-content class="servicoCardContent">
+			<form
+				#serviceData="ngForm"
+				(ngSubmit)="cadastrarServico(serviceData.value)"
+				class="edit-form"
+			>
+				<h2>Título/Tipo do serviço</h2>
+				<div class="serviceInfo">
+					<mat-form-field appearance="outline">
+						<mat-label> Nome do serviço </mat-label>
+
+						<input
+							matInput
+							type="text"
+							name="title"
+							ngModel
+							required
+							placeholder="Ex: Jardinagem Especializada"
+						/>
+						<mat-error>Insira um título válido</mat-error>
+					</mat-form-field>
+
+					<mat-expansion-panel style="height: min-content">
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								Selecionar pré-definido
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<div
+							*ngFor="let tipo of tipos"
+							class="pre-defined-types"
+						>
+							<a (click)="fillFormWithPreDefined(tipo)">{{
+								tipo.title
+							}}</a>
+						</div>
+					</mat-expansion-panel>
+
+					<mat-form-field
+						style="grid-column: 1 / 3; margin-top: 1rem"
+						appearance="outline"
+					>
+						<mat-label> Descrição </mat-label>
+						<textarea
+							matInput
+							ngModel
+							name="description"
+							id="description"
+							ngModel
+							required
+							cols="30"
+							rows="10"
+						></textarea>
+					</mat-form-field>
+				</div>
+
+				<!------------------------------------------------------>
+
+				<h2>Documentos</h2>
+				<div class="documents">
+					<div style="grid-column: 1 / 4">
+						<mat-form-field
+							style="margin-right: 1rem"
+							appearance="outline"
+						>
+							<mat-label>Adicionar Tipo</mat-label>
+							<input
+								#typeName
+								id="typeName"
+								matInput
+								type="text"
+								placeholder="Nome"
+								(keyup.enter)="addDocumentType(typeName.value)"
+							/>
+						</mat-form-field>
+						<button
+							mat-raised-button
+							type="button"
+							(click)="addDocumentType(typeName.value)"
+						>
+							Adicionar Tipo
+						</button>
+					</div>
+					<div class="documentList" *ngFor="let docType of docTypes">
+						<div
+							style="
+								display: flex;
+								justify-content: space-between;
+							"
+						>
+							<h4>
+								{{ docType }}
+							</h4>
+
+							<i class="material-icons"
+								><label for="{{ docType }}">upload</label></i
+							>
+
+							<input
+								style="display: none"
+								type="file"
+								name="serviceDocuments"
+								multiple
+								required
+								id="{{ docType }}"
+								(change)="addDocuments(docType, $event)"
+							/>
+
+							<i class="material-icons"
+								><a (click)="removeDocumentType(docType)"
+									>cancel</a
+								></i
+							>
+						</div>
+
+						<ng-container
+							class="documentList"
+							*ngFor="let document of servico.documentos"
+						>
+							<p *ngIf="docType == document.categoria">
+								{{ document.nome }}
+							</p>
+						</ng-container>
+					</div>
+				</div>
+
+				<!------------------------------------------------------>
+
+				<h2>Funcionarios</h2>
+
+				<div class="itemsSelected">
+					<ng-container
+						*ngFor="let funcionario of servico.funcionarios"
+					>
+						<p>{{ funcionario.name }}</p>
+					</ng-container>
+				</div>
+
+				<div class="bdList">
+					<mat-form-field
+						style="grid-column: 1 / 3; width: 20rem"
+						appearance="outline"
+					>
+						<mat-label>Pesquisar</mat-label>
+						<input matInput type="text" #filterText />
+						<i matSuffix class="material-icons">search</i>
+					</mat-form-field>
+					<mat-card
+						style="
+							width: 10rem;
+							display: flex;
+							justify-content: space-between;
+						"
+						*ngFor="
+							let funcionario of funcionarios
+								| searchFilter: filterText.value
+						"
+					>
+						{{ funcionario.name }}
+						<a (click)="addFuncionario(funcionario)"
+							><i class="material-icons">add</i></a
+						>
+					</mat-card>
+				</div>
+
+				<!------------------------------------------------------>
+
+				<h2>Equipamento</h2>
+
+				<div class="itemsSelected">
+					<ng-container
+						*ngFor="let equipamento of servico.equipamentos"
+					>
+						<p>{{ equipamento.name }}</p>
+					</ng-container>
+				</div>
+
+				<div class="bdList">
+					<mat-form-field
+						style="grid-column: 1 / 3; width: 20rem"
+						appearance="outline"
+					>
+						<mat-label>Pesquisar</mat-label>
+						<input matInput type="text" #filterText />
+						<i matSuffix class="material-icons">search</i>
+					</mat-form-field>
+					<mat-card
+						style="
+							width: 10rem;
+							display: flex;
+							justify-content: space-between;
+						"
+						*ngFor="
+							let equipamento of equipamentos
+								| searchFilter: filterText.value
+						"
+					>
+						{{ equipamento.name }}
+						<a (click)="addEquipamento(equipamento)"
+							><i class="material-icons">add</i></a
+						>
+					</mat-card>
+					<button
+						mat-raised-button
+						type="button"
+						(click)="openDialog()"
+					>
+						Criar equipamento
+					</button>
+				</div>
+
+				<!------------------------------------------------------>
+				<input
+					id="preDefine"
+					[(ngModel)]="saveModel"
+					name="preDefine"
+					[ngModelOptions]="{ standalone: true }"
+					type="checkbox"
+				/>
+				<label for="preDefine"
+					>Definir como modelo pré-estabelecido</label
+				>
+
+				<div style="display: flex; justify-content: space-between">
+					<button
+						type="button"
+						(click)="backToProfile()"
+						mat-raised-button
+					>
+						Voltar
+					</button>
+					<button
+						type="submit"
+						[disabled]="!serviceData.valid"
+						mat-raised-button
+					>
+						Salvar
+					</button>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>

@@ -31,7 +31,6 @@ mat-card {
 .login-form {
 	display: flex;
 	flex-direction: column;
-
 	width: 20rem;
 }
 
@@ -44,8 +43,13 @@ mat-card {
 	text-align: center;
 }
 
+.login-button {
+	align-self: center;
+}
+
 .login-button,
-.create-account-button {
+.create-account-button,
+.return-button {
 	width: 10rem;
 	background-color: #4abdb7;
 }

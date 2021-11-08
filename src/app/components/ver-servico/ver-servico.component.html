@@ -1,0 +1,126 @@
+<div class="content">
+	<mat-toolbar class="toolBar">
+		<img src="../../../../assets/measure-logo.png" />
+		<span class="material-icons profileIcon">account_circle</span>
+	</mat-toolbar>
+
+	<mat-card class="servicoCard" *ngIf="service">
+		<mat-card-title>
+			<h1>{{ service.title }}</h1>
+			<h3 style="text-align: justify; overflow-wrap: break-word">
+				{{ service.description }}
+			</h3>
+		</mat-card-title>
+
+		<mat-card-content class="servicoCardContent">
+			<!------------------DOCUMENTOS----------------->
+
+			<hr style="width: 100%" />
+			<h2>Documentos</h2>
+
+			<div class="documentList">
+				<mat-accordion
+					class="documentTypes"
+					*ngFor="let docType of docTypes; let i = index"
+				>
+					<mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)">
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								<h3>{{ docType }}</h3>
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<div *ngFor="let doc of service.documentos">
+							<a
+								*ngIf="doc.categoria == docType"
+								target="_blank"
+								id="{{ doc.nome }}"
+								><h4>
+									{{ doc.nome }}
+									<span class="material-icons">file_download</span>
+								</h4>
+								<hr
+							/></a>
+						</div>
+					</mat-expansion-panel>
+				</mat-accordion>
+			</div>
+
+			<hr style="width: 100%" />
+
+			<!--------------------FUNCIONARIOS----------------->
+
+			<h2>Funcionarios</h2>
+
+			<div class="funcionario-equipamento-list">
+				<div
+					class="list-funcionario"
+					*ngFor="let funcionario of service.funcionarios; let i = index"
+				>
+					<div style="display: flex">
+						<img
+							id="profilePic-{{ i }}"
+							alt="Imagem de perfil do funcionario"
+							width="50px"
+							height="50px"
+							class="funcionario-profile-pic"
+						/>
+						<div>
+							<h3 style="margin: 0">{{ funcionario.name }}</h3>
+							<h4 style="margin: 0">{{ funcionario.sector }}</h4>
+						</div>
+					</div>
+
+					<mat-expansion-panel style="background-color: white">
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								<p>Documentos</p>
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<a
+							*ngFor="let doc of funcionario.documents"
+							id="{{ doc }}"
+							target="_blank"
+							download
+						>
+							{{ doc }}
+							<hr />
+						</a>
+					</mat-expansion-panel>
+				</div>
+			</div>
+			<!------------------EQUIPAMENTOS------------------->
+
+			<hr style="width: 100%" />
+			<h2>Equipamentos</h2>
+
+			<div class="funcionario-equipamento-list">
+				<div
+					class="list-equipamento"
+					*ngFor="let equipamento of service.equipamentos"
+				>
+					<h3>{{ equipamento.name }}</h3>
+					<h4>Código: {{ equipamento.code }}</h4>
+					<h4>Marca: {{ equipamento.brand }}</h4>
+				</div>
+			</div>
+
+			<!------------DOWNLOAD DAS INFORMAÇÕES-------------->
+
+			<h3 style="margin-top: 1rem">
+				<span
+					><img src="../../../assets/sheet.png" width="25px" />Download
+					das</span
+				>
+				informações do serviço
+			</h3>
+		</mat-card-content>
+
+		<div>
+			<button mat-raised-button class="action-btn" (click)="backToProfile()">
+				Voltar
+			</button>
+		</div>
+	</mat-card>
+</div>

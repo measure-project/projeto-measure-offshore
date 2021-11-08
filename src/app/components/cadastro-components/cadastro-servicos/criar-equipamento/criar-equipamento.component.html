@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Criar Equipamento</h1>
+<div mat-dialog-content>
+	<form
+		#data="ngForm"
+		(ngSubmit)="createEquipment(data.value)"
+		style="display: flex; flex-direction: column"
+	>
+		<mat-form-field appearance="outline">
+			<mat-label>Nome do equipamento</mat-label>
+			<input matInput type="text" name="name" ngModel />
+		</mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>Código do equipamento</mat-label>
+			<input matInput type="text" name="code" ngModel />
+		</mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>Marca do equipamento</mat-label>
+			<input matInput type="text" name="brand" ngModel />
+		</mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>Descrição do equipamento</mat-label>
+			<textarea
+				matInput
+				type="text"
+				name="description"
+				ngModel
+				rows="5"
+			></textarea>
+		</mat-form-field>
+		<div mat-dialog-actions>
+			<button mat-raised-button mat-dialog-close>Cancelar</button>
+			<button mat-raised-button mat-dialog-close type="submit">
+				Salvar
+			</button>
+		</div>
+	</form>
+</div>
