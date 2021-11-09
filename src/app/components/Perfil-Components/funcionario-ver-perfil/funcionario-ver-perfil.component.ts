@@ -27,7 +27,6 @@ export class FuncionarioVerPerfilComponent implements OnInit {
 				.then((funcionarios) => {
 					funcionarios.forEach((funcionario: any) => {
 						this.funcionario = funcionario.data();
-						console.log(this.funcionario.documents);
 
 						this.funcionarioService.downloadFiles(
 							this.funcionario.email,

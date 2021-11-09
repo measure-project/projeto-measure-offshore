@@ -51,4 +51,17 @@ export class MembrosAtuaisComponent implements OnInit {
 	verAdmin(admin: Admin) {
 		this.router.navigate(['/verPerfilAdm', admin.uid]);
 	}
+
+	deletarFuncionario(funcionario: Funcionario) {
+		this.funcionarioService.deleteFuncionarioById(funcionario.uid);
+		window.location.reload();
+	}
+
+	deletarCliente(cliente: User) {
+		this.authService.deleteUserById(cliente.uid);
+	}
+
+	deletarAdmin(admin: Admin) {
+		this.adminService.deleteAdminById(admin.uid);
+	}
 }

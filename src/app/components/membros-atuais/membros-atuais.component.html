@@ -35,12 +35,22 @@
 								</p>
 								<p>{{ cliente.adress }}</p>
 							</div>
-							<button
-								(click)="verCliente(cliente)"
-								mat-raised-button
-							>
-								Ver
-							</button>
+							<div>
+								<button
+									(click)="verCliente(cliente)"
+									mat-raised-button
+								>
+									Ver
+								</button>
+								<button
+									mat-raised-button
+									color="warn"
+									style="margin-left: 0.25rem"
+									(click)="deletarCliente(cliente)"
+								>
+									Deletar
+								</button>
+							</div>
 						</mat-card>
 					</div>
 				</mat-tab>
@@ -69,12 +79,22 @@
 								</p>
 								<p>{{ funcionario.adress }}</p>
 							</div>
-							<button
-								mat-raised-button
-								(click)="verFuncionario(funcionario)"
-							>
-								Ver
-							</button>
+							<div>
+								<button
+									mat-raised-button
+									(click)="verFuncionario(funcionario)"
+								>
+									Ver
+								</button>
+								<button
+									mat-raised-button
+									color="warn"
+									style="margin-left: 0.25rem"
+									(click)="deletarFuncionario(funcionario)"
+								>
+									Deletar
+								</button>
+							</div>
 						</mat-card>
 					</div>
 				</mat-tab>
@@ -103,9 +123,22 @@
 								</p>
 								<p>{{ admin.adress }}</p>
 							</div>
-							<button mat-raised-button (click)="verAdmin(admin)">
-								Ver
-							</button>
+							<div>
+								<button
+									mat-raised-button
+									(click)="verAdmin(admin)"
+								>
+									Ver
+								</button>
+								<button
+									mat-raised-button
+									color="warn"
+									style="margin-left: 0.25rem"
+									(click)="deletarAdmin(admin)"
+								>
+									Deletar
+								</button>
+							</div>
 						</mat-card>
 					</div>
 				</mat-tab>

@@ -65,6 +65,19 @@ export class FuncionarioService {
 		return await docRef.where('uid', '==', fid).get();
 	}
 
+	async deleteFuncionarioById(fid: string) {
+		return await this.afs
+			.collection('funcionarios')
+			.doc(fid)
+			.delete()
+			.then(() => {
+				console.log('Documento deletado!');
+			})
+			.catch((err) => {
+				console.log(`Houve um erro: ${err}`);
+			});
+	}
+
 	uploadFiles(profilePic: File, documents: Array<any>, email: string) {
 		if (profilePic)
 			this.afStorage
