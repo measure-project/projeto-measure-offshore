@@ -77,7 +77,7 @@ export class FuncionarioEditarPerfilComponent implements OnInit {
 
 		console.log(funcionario);
 
-		this.funcionarioService.setFuncionario(funcionario);
+		this.funcionarioService.editFuncionario(funcionario);
 		this.returnToProfile();
 	}
 
@@ -114,7 +114,7 @@ export class FuncionarioEditarPerfilComponent implements OnInit {
 
 	onErrorImg(e: any) {
 		if (e.target) {
-			e.target.src = '../../../../assets/perfil-padrao.jpg';
+			e.target.src = this.defaultImage;
 		}
 	}
 }

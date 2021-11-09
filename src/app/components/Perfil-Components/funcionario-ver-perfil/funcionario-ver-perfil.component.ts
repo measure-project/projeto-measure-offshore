@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FuncionarioVerPerfilComponent implements OnInit {
 	funcionario!: Funcionario;
+	defaultImage = '../../../../assets/perfil-padrao.jpg';
 
 	constructor(
 		private location: Location,
@@ -42,6 +43,6 @@ export class FuncionarioVerPerfilComponent implements OnInit {
 	}
 
 	onErrorImg(e: any) {
-		if (e) e.target.src = '../../../../assets/perfil-padrao.jpg';
+		if (e) e.target.src = this.defaultImage;
 	}
 }

@@ -46,6 +46,29 @@ export class FuncionarioService {
 		});
 	}
 
+	editFuncionario(funcionario: Funcionario) {
+		const docRef: AngularFirestoreDocument<DocumentData> = this.afs
+			.collection(`funcionarios`)
+			.doc();
+
+		const funcionarioState: Funcionario = {
+			uid: funcionario.uid,
+			name: funcionario.name,
+			phone: funcionario.phone,
+			adress: funcionario.adress,
+			houseNumber: funcionario.houseNumber,
+			birthday: funcionario.birthday,
+			district: funcionario.district,
+			complement: funcionario.complement,
+			sector: funcionario.sector,
+			func: funcionario.func,
+			email: funcionario.email,
+			documents: funcionario.documents,
+		};
+
+		return docRef.update(funcionarioState);
+	}
+
 	getAllFuncionarios() {
 		const ref = this.afs.collection('funcionarios');
 		let funcionarioList = Array<Funcionario>();
