@@ -4,6 +4,7 @@ import { Equipamento } from './../models/equipamento';
 import { Injectable } from '@angular/core';
 import {
 	AngularFirestore,
+	AngularFirestoreCollection,
 	AngularFirestoreDocument,
 	DocumentData,
 } from '@angular/fire/firestore';
@@ -39,6 +40,23 @@ export class ServicosService {
 		});
 	}
 
+	editService(service: Servico) {
+		const docRef: AngularFirestoreDocument<DocumentData> = this.afs
+			.collection(`servicos/${service.uid}`)
+			.doc();
+
+		const serviceState: Servico = {
+			title: service.title,
+			description: service.description,
+			equipamentos: service.equipamentos,
+			funcionarios: service.funcionarios,
+			uid: service.uid,
+			documentos: service.documentos.slice(),
+		};
+
+		return docRef.update(serviceState);
+	}
+
 	setEquipment(equipment: Equipamento) {
 		const docRef: AngularFirestoreDocument<DocumentData> = this.afs
 			.collection(`equipamentos`)
@@ -60,7 +78,7 @@ export class ServicosService {
 		const ref = this.afs.collection('equipamentos');
 		let equipamentList = Array<Equipamento>();
 
-		ref.get().subscribe((snapShot) => {
+		ref.get().subscribe(snapShot => {
 			snapShot.forEach((doc: any) => {
 				equipamentList.push(doc.data());
 			});
@@ -73,7 +91,7 @@ export class ServicosService {
 		const ref = this.afs.collection('servicos');
 		let serviceList = Array<Servico>();
 
-		ref.get().subscribe((snapShot) => {
+		ref.get().subscribe(snapShot => {
 			snapShot.forEach((doc: any) => {
 				serviceList.push(doc.data());
 			});
@@ -89,24 +107,24 @@ export class ServicosService {
 	}
 
 	uploadFiles(files: Array<any>, id: string) {
-		files.forEach((file) => {
+		files.forEach(file => {
 			this.afStorage
 				.ref(`servicos/${id}/documents/${file.categoria}/${file.nome}`)
 				.put(file.documento)
 				.then(() => {
 					console.log('Documentos Upados!');
 				})
-				.catch((err) => {
+				.catch(err => {
 					console.log(`Houve um erro: ${err}`);
 				});
 		});
 	}
 	downloadFiles(id: string, paths: Array<any>) {
-		paths.forEach((path) => {
+		paths.forEach(path => {
 			this.afStorage
 				.ref(`servicos/${id}/documents/${path.categoria}/${path.nome}`)
 				.getDownloadURL()
-				.subscribe((url) => {
+				.subscribe(url => {
 					// Não consegui dessa forma por erro de cors, da pra arrumar mas é um trampinho
 					// var xhr = new XMLHttpRequest();
 					// xhr.responseType = 'blob';
@@ -122,4 +140,13 @@ export class ServicosService {
 				});
 		});
 	}
+
+	async deleteService(id: string) {
+		console.log('Chamou no service ' + id);
+		const docRef: AngularFirestoreDocument<any> = this.afs.collection(`servicos`).doc(id);
+
+		return await docRef.delete();
+	}
+
+	deleteFile(path: string) {}
 }

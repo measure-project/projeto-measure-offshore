@@ -11,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 import { Funcionario } from 'src/app/models/funcionario';
 import { MatDialog } from '@angular/material/dialog';
 import { CriarEquipamentoComponent } from 'src/app/components/cadastro-components/cadastro-servicos/criar-equipamento/criar-equipamento.component';
-
 @Component({
 	selector: 'app-editar-servico',
 	templateUrl: './editar-servico.component.html',
@@ -26,29 +25,30 @@ export class EditarServicoComponent implements OnInit {
 		private currentRoute: ActivatedRoute,
 		public dialog: MatDialog,
 		private location: Location
-	) {}
+	) {
+		this.servico = {} as Servico;
+	}
 
 	tipos!: Array<Servico>;
 	uid: string | undefined;
 	saveModel: boolean = false;
 	funcionarios!: Array<Funcionario>;
 	equipamentos!: Array<Equipamento>;
-	servico!: Servico;
+	documentosAnteriores!: Array<any>;
+	servico: Servico;
 	docTypes: Array<string> = [];
-	documentList: Array<Array<any>> = [[]];
 	funcionarioSelected: Array<Funcionario> = [];
 	equipamentoSelected: Array<Equipamento> = [];
 	preDefinedType!: Servico;
 	user!: User;
 
-	ngOnInit(): void {
+	async ngOnInit(): Promise<void> {
+		await this.loadUser();
+		await this.loadServico();
 		this.funcionarios = this.funcionarioService.getAllFuncionarios();
 		this.equipamentos = this.servicoService.getAllEquipments();
 		this.tipos = this.servicoService.getAllServices();
-
-		this.loadUser().then(() => {
-			this.loadServico();
-		});
+		this.documentosAnteriores = this.servico.documentos.slice();
 	}
 
 	async loadUser() {
@@ -68,25 +68,59 @@ export class EditarServicoComponent implements OnInit {
 			);
 			this.funcionarioSelected = this.servico.funcionarios;
 			this.equipamentoSelected = this.servico.equipamentos;
+			this.docTypes = this.servico.documentos.map(
+				(doc: any) => doc.categoria
+			);
+			this.docTypes = [...new Set(this.docTypes)];
 		});
 	}
 
 	async editarServico() {
+		console.log(this.servico.documentos);
+
+		const uploadedFiles: any[] = [
+			...this.servico.documentos.filter(
+				(document: any) =>
+					!this.documentosAnteriores.find((doc: any) => {
+						return doc.nome == document.nome;
+					})
+			),
+		];
+
+		const userSavedDocuments = this.servico.documentos.map(
+			(document: any) => {
+				return {
+					categoria: document.categoria,
+					nome: document.nome,
+				};
+			}
+		);
+
 		this.servico.funcionarios = this.funcionarioSelected;
 		this.servico.equipamentos = this.equipamentoSelected;
 
-		const index = this.user.services?.findIndex((servico: Servico) => {
-			servico.uid === this.uid;
-		});
+		try {
+			this.servicoService.uploadFiles(uploadedFiles, this.servico.uid);
 
-		this.user.services?.splice(index!, 1);
-		this.user.services?.push(this.servico);
+			this.servico.documentos = userSavedDocuments;
+			console.log(this.servico.documentos);
 
-		if (this.saveModel) this.servicoService.setService(this.servico);
+			if (this.saveModel) this.servicoService.editService(this.servico);
 
-		await this.authService.SetUserData(this.user);
+			const index =
+				this.user.services?.findIndex((servico: Servico) => {
+					servico.uid === this.uid;
+				}) || 0;
 
-		this.location.back();
+			if (this.user.services) this.user.services[index] = this.servico;
+
+			await this.authService.SetUserData(this.user);
+
+			this.backToProfile();
+		} catch (error: any) {
+			this.authService.displayMessage(String(error), true);
+			console.log(error);
+		}
 	}
 
 	fillFormWithPreDefined(service: Servico) {
@@ -118,7 +152,11 @@ export class EditarServicoComponent implements OnInit {
 	addDocuments(docType: string, event: any) {
 		if (event.target.files) {
 			for (let i = 0; i < event.target.files.length; i++) {
-				this.documentList.push([docType, event.target.files[i].name]);
+				this.servico.documentos.push({
+					categoria: docType,
+					nome: event.target.files[i].name,
+					documento: event.target.files[i],
+				});
 			}
 		}
 	}
@@ -140,6 +178,8 @@ export class EditarServicoComponent implements OnInit {
 	backToProfile() {
 		this.location.back();
 	}
+
+	deleteService() {}
 
 	confereForm(): boolean {
 		return (

@@ -104,10 +104,10 @@
 
 						<ng-container
 							class="documentList"
-							*ngFor="let document of documentList"
+							*ngFor="let document of servico.documentos"
 						>
-							<p *ngIf="docType == document[0]">
-								{{ document[1] }}
+							<p *ngIf="docType == document.categoria">
+								{{ document.nome }}
 							</p>
 						</ng-container>
 					</div>
@@ -190,14 +190,20 @@
 				/>
 				<label for="preDefine">Definir como modelo pré-estabelecido</label>
 
-				<div style="display: flex; justify-content: space-between">
-					<button type="button" (click)="backToProfile()" mat-raised-button>
+				<div style="display: flex; justify-content: space-between; margin-top: 5px;">
+					<button
+						type="button"
+						class="action-btn"
+						(click)="backToProfile()"
+						mat-raised-button
+					>
 						Voltar
 					</button>
 					<button
 						type="submit"
 						[disabled]="!confereForm()"
 						mat-raised-button
+						class="action-btn"
 					>
 						Salvar
 					</button>

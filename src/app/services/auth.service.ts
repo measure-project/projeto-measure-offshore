@@ -80,6 +80,8 @@ export class AuthService {
 			localStorage.setItem('currentUser', JSON.stringify(userState));
 
 		console.log('Passei no service 3');
+		console.log(userState);
+		
 
 		userRef.set(userState, {
 			merge: true,
