@@ -71,7 +71,11 @@
 						>
 							<span class="material-icons">border_color</span><br />
 						</a>
-						<a *ngIf="admin" class="delete-btn" (click)="deleteService(service.uid)">
+						<a
+							*ngIf="admin"
+							class="delete-btn"
+							(click)="deleteService(service)"
+						>
 							<span class="material-icons"> highlight_off </span>
 						</a>
 					</div>
