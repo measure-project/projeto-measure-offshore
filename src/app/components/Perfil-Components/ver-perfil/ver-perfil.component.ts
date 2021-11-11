@@ -76,7 +76,7 @@ export class VerPerfilComponent implements OnInit {
 		else this.authService.SignOut();
 	}
 
-	async deleteService(service: Servico) {
+	deleteService(service: Servico) {
 		console.log('Excluindo ' + service.uid);
 		const config: MatDialogConfig<any> = {
 			data: {

@@ -35,10 +35,11 @@ export class ExcluirModalComponent implements OnInit {
 				);
 				this.authService.SetUserData(this.user);
 
-				this.authService.displayMessage('Serviço excluído com sucesso!', false);
 				this.dialogRef.close();
+				this.authService.displayMessage('Serviço excluído com sucesso!', false);
 			})
 			.catch((error) => {
+				this.dialogRef.close();
 				this.authService.displayMessage(error.message, true);
 			});
 	}
