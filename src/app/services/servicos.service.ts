@@ -4,6 +4,7 @@ import { Equipamento } from './../models/equipamento';
 import { Injectable } from '@angular/core';
 import {
 	AngularFirestore,
+	AngularFirestoreCollection,
 	AngularFirestoreDocument,
 	DocumentData,
 } from '@angular/fire/firestore';
@@ -140,5 +141,16 @@ export class ServicosService {
 		});
 	}
 
-	deleteFile(path: string) {}
+	async deleteService(service: Servico) {
+		console.log('Chamou no service ' + service.uid);
+
+		const typesArray: any[] = [];
+
+		return await service.documentos.forEach((doc) => {
+			this.afStorage
+				.ref(`servicos/${service.uid}/documents`)
+				.child(`${doc.categoria}/${doc.nome}`)
+				.delete();
+		});
+	}
 }
