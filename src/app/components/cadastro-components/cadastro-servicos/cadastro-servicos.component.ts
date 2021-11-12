@@ -66,6 +66,7 @@ export class CadastroServicosComponent implements OnInit {
 				nome: document.nome,
 			};
 		});
+
 		servico.funcionarios = this.servico.funcionarios;
 		servico.equipamentos = this.servico.equipamentos;
 

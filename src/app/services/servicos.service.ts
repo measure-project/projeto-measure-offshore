@@ -78,7 +78,7 @@ export class ServicosService {
 		const ref = this.afs.collection('equipamentos');
 		let equipamentList = Array<Equipamento>();
 
-		ref.get().subscribe(snapShot => {
+		ref.get().subscribe((snapShot) => {
 			snapShot.forEach((doc: any) => {
 				equipamentList.push(doc.data());
 			});
@@ -91,7 +91,7 @@ export class ServicosService {
 		const ref = this.afs.collection('servicos');
 		let serviceList = Array<Servico>();
 
-		ref.get().subscribe(snapShot => {
+		ref.get().subscribe((snapShot) => {
 			snapShot.forEach((doc: any) => {
 				serviceList.push(doc.data());
 			});
@@ -107,24 +107,24 @@ export class ServicosService {
 	}
 
 	uploadFiles(files: Array<any>, id: string) {
-		files.forEach(file => {
+		files.forEach((file) => {
 			this.afStorage
 				.ref(`servicos/${id}/documents/${file.categoria}/${file.nome}`)
 				.put(file.documento)
 				.then(() => {
 					console.log('Documentos Upados!');
 				})
-				.catch(err => {
+				.catch((err) => {
 					console.log(`Houve um erro: ${err}`);
 				});
 		});
 	}
 	downloadFiles(id: string, paths: Array<any>) {
-		paths.forEach(path => {
+		paths.forEach((path) => {
 			this.afStorage
 				.ref(`servicos/${id}/documents/${path.categoria}/${path.nome}`)
 				.getDownloadURL()
-				.subscribe(url => {
+				.subscribe((url) => {
 					// Não consegui dessa forma por erro de cors, da pra arrumar mas é um trampinho
 					// var xhr = new XMLHttpRequest();
 					// xhr.responseType = 'blob';
@@ -141,12 +141,16 @@ export class ServicosService {
 		});
 	}
 
-	async deleteService(id: string) {
-		console.log('Chamou no service ' + id);
-		const docRef: AngularFirestoreDocument<any> = this.afs.collection(`servicos`).doc(id);
+	async deleteService(service: Servico) {
+		console.log('Chamou no service ' + service.uid);
 
-		return await docRef.delete();
+		const typesArray: any[] = [];
+
+		return await service.documentos.forEach((doc) => {
+			this.afStorage
+				.ref(`servicos/${service.uid}/documents`)
+				.child(`${doc.categoria}/${doc.nome}`)
+				.delete();
+		});
 	}
-
-	deleteFile(path: string) {}
 }

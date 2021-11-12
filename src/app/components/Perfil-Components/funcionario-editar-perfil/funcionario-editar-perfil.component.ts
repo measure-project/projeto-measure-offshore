@@ -14,6 +14,7 @@ export class FuncionarioEditarPerfilComponent implements OnInit {
 	defaultImage: any = '../../../../assets/perfil-padrao.jpg';
 	newImage: any;
 	profilePicture: any;
+	documentosAnteriores: any;
 
 	constructor(
 		private funcionarioService: FuncionarioService,
@@ -49,6 +50,7 @@ export class FuncionarioEditarPerfilComponent implements OnInit {
 				.then((funcionarios) => {
 					funcionarios.forEach((funcionario: any) => {
 						this.funcionario = funcionario.data();
+						this.documentosAnteriores = this.funcionario.documents;
 
 						this.funcionarioService.downloadFiles(
 							this.funcionario.email,
@@ -69,15 +71,15 @@ export class FuncionarioEditarPerfilComponent implements OnInit {
 		funcionario.uid = this.funcionario.uid;
 
 		funcionario.documents = [];
-		this.funcionario.documents.forEach((doc) => {
-			// GAMBIARRA
-			if (doc.nome) funcionario.documents.push(doc.nome);
-			else funcionario.documents.push(doc);
+
+		const savedDocuments = this.funcionario.documents.map((doc) => {
+			if (doc.nome) return doc.nome;
+			else return doc;
 		});
 
-		console.log(funcionario);
+		funcionario.documents = savedDocuments;
 
-		this.funcionarioService.editFuncionario(funcionario);
+		this.funcionarioService.setFuncionario(funcionario);
 		this.returnToProfile();
 	}
 

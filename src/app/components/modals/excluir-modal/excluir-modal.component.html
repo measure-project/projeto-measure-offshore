@@ -1,0 +1,13 @@
+<mat-dialog-content>
+	<h2>Tem certeza que deseja excluir o serviço</h2>
+	<h2>
+		<b>{{ this.service.title }}?</b>
+	</h2>
+</mat-dialog-content>
+
+<mat-dialog-content class="btn-group">
+	<button mat-button mat-dialog-close class="action-btn">Cancelar</button>
+	<button mat-button type="button" (click)="deleteServico()" class="danger-btn">
+		Excluir
+	</button>
+</mat-dialog-content>

@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { FuncionarioService } from './../../../services/funcionario.service';
 import { Funcionario } from './../../../models/funcionario';
 import { Component, OnInit } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
 	selector: 'app-cadastro-funcionario',
@@ -50,6 +51,8 @@ export class CadastroFuncionarioComponent implements OnInit {
 			this.funcionario.documents,
 			funcionario.email
 		);
+
+		funcionario.uid = uuidv4();
 
 		funcionario.documents = [];
 		this.funcionario.documents.forEach((doc) => {

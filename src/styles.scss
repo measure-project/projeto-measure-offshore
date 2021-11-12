@@ -15,7 +15,7 @@ body {
 }
 
 .msg-error {
-	background-color: red;
+	background-color: $colorDelete;
 	color: #ebebeb;
 }
 
@@ -26,5 +26,10 @@ body {
 
 .action-btn {
 	background-color: $colorPrimary;
+	color: $colorSecondary;
+}
+
+.danger-btn {
+	background-color: $colorDelete;
 	color: $colorSecondary;
 }

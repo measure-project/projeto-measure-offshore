@@ -21,35 +21,7 @@ export class FuncionarioService {
 	setFuncionario(funcionario: Funcionario) {
 		const docRef: AngularFirestoreDocument<DocumentData> = this.afs
 			.collection(`funcionarios`)
-			.doc();
-		let id: string;
-		funcionario.uid != undefined
-			? (id = funcionario.uid)
-			: (id = docRef.ref.id);
-		const funcionarioState: Funcionario = {
-			uid: id,
-			name: funcionario.name,
-			phone: funcionario.phone,
-			adress: funcionario.adress,
-			houseNumber: funcionario.houseNumber,
-			birthday: funcionario.birthday,
-			district: funcionario.district,
-			complement: funcionario.complement,
-			sector: funcionario.sector,
-			func: funcionario.func,
-			email: funcionario.email,
-			documents: funcionario.documents,
-		};
-
-		return docRef.set(funcionarioState, {
-			merge: true,
-		});
-	}
-
-	editFuncionario(funcionario: Funcionario) {
-		const docRef: AngularFirestoreDocument<DocumentData> = this.afs
-			.collection(`funcionarios`)
-			.doc();
+			.doc(funcionario.uid);
 
 		const funcionarioState: Funcionario = {
 			uid: funcionario.uid,
@@ -66,7 +38,9 @@ export class FuncionarioService {
 			documents: funcionario.documents,
 		};
 
-		return docRef.update(funcionarioState);
+		return docRef.set(funcionarioState, {
+			merge: true,
+		});
 	}
 
 	getAllFuncionarios() {

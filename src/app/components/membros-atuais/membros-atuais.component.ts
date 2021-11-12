@@ -63,5 +63,9 @@ export class MembrosAtuaisComponent implements OnInit {
 
 	deletarAdmin(admin: Admin) {
 		this.adminService.deleteAdminById(admin.uid);
+
+		this.admins = this.admins.filter((deletadoAdm) => {
+			return admin.uid !== deletadoAdm.uid;
+		});
 	}
 }
