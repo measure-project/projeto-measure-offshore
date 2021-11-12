@@ -17,6 +17,4 @@ export interface Admin {
 	isAdmin: boolean;
 
 	funcao: string;
-
-	documents: Array<File>;
 }

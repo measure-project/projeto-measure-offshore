@@ -43,8 +43,6 @@ export class AdminService {
 			emailVerified: admin.emailVerified,
 
 			funcao: admin.funcao,
-
-			documents: admin.documents,
 		};
 
 		localStorage.setItem('currentUser', JSON.stringify(adminState));
@@ -81,14 +79,6 @@ export class AdminService {
 				console.log('Deu certo');
 			})
 			.catch((error: any) => console.log(`Erro: ${error}`));
-	}
-
-	uploadFile(file: File, admin: Admin): void {
-		this.afStorage
-			.ref(`admins/${admin.uid}/documents.pdf`)
-			.put(admin.documents)
-			.then(() => console.log(`Arquivo ${file.name} upado`))
-			.catch(() => console.log(`Falha ao upar ${file.name}`));
 	}
 
 	signUpAdmin(admin: Admin, password: string): any {

@@ -14,10 +14,7 @@ export class CadastroAdmComponent implements OnInit {
 	confirmPassword: string;
 	profilePic: any;
 	phoneMask: string = '(00) 0 0000-0000';
-	constructor(
-		private adminService: AdminService,
-		private location: Location
-	) {
+	constructor(private adminService: AdminService, private location: Location) {
 		this.profilePic =
 			this.admin.profilePicture || '../../../../assets/perfil-padrao.jpg';
 		this.password = '';
@@ -48,23 +45,12 @@ export class CadastroAdmComponent implements OnInit {
 		}
 	}
 
-	addDocument(event: any) {
-		if (!this.admin.documents) this.admin.documents = [];
-
-		if (event.target.files && event.target.files[0]) {
-			for (let i = 0; i < event.target.files.length; i++) {
-				this.admin.documents.push(event.target.files[i]);
-			}
-		}
-	}
-
 	returnToProfile(): void {
 		this.location.back();
 	}
 
 	cadastrarAdmin(adminData: Admin, password: string) {
 		adminData.profilePicture = '';
-		adminData.documents = [];
 		adminData.isAdmin = true;
 
 		this.adminService.signUpAdmin(adminData, password);
