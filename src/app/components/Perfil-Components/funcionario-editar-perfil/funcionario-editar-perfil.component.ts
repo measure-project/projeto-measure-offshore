@@ -1,24 +1,25 @@
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FuncionarioService } from './../../../services/funcionario.service';
 import { Funcionario } from './../../../models/funcionario';
 import { Component, OnInit } from '@angular/core';
-import { v4 as uuidv4 } from 'uuid';
 
 @Component({
-	selector: 'app-cadastro-funcionario',
-	templateUrl: './cadastro-funcionario.component.html',
-	styleUrls: ['./cadastro-funcionario.component.scss'],
+	selector: 'app-funcionario-editar-perfil',
+	templateUrl: './funcionario-editar-perfil.component.html',
+	styleUrls: ['./funcionario-editar-perfil.component.scss'],
 })
-export class CadastroFuncionarioComponent implements OnInit {
+export class FuncionarioEditarPerfilComponent implements OnInit {
 	funcionario = {} as Funcionario;
 	defaultImage: any = '../../../../assets/perfil-padrao.jpg';
 	newImage: any;
-	documentSelected: any;
 	profilePicture: any;
+	documentosAnteriores: any;
 
 	constructor(
 		private funcionarioService: FuncionarioService,
-		private location: Location
+		private location: Location,
+		private currentRoute: ActivatedRoute
 	) {}
 
 	CELULAR = '(00) 0 0000-0000'; //Mask para celular
@@ -42,7 +43,22 @@ export class CadastroFuncionarioComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.documentSelected = document.querySelector('#documentList');
+		const fid = this.currentRoute.snapshot.paramMap.get('fid');
+		if (fid)
+			this.funcionarioService
+				.getFuncionarioById(fid)
+				.then((funcionarios) => {
+					funcionarios.forEach((funcionario: any) => {
+						this.funcionario = funcionario.data();
+						this.documentosAnteriores = this.funcionario.documents;
+
+						this.funcionarioService.downloadFiles(
+							this.funcionario.email,
+							this.funcionario.documents,
+							0
+						);
+					});
+				});
 	}
 
 	setFuncionarioData(funcionario: Funcionario) {
@@ -52,12 +68,16 @@ export class CadastroFuncionarioComponent implements OnInit {
 			funcionario.email
 		);
 
-		funcionario.uid = uuidv4();
+		funcionario.uid = this.funcionario.uid;
 
 		funcionario.documents = [];
-		this.funcionario.documents.forEach((doc) => {
-			funcionario.documents.push(doc.nome);
+
+		const savedDocuments = this.funcionario.documents.map((doc) => {
+			if (doc.nome) return doc.nome;
+			else return doc;
 		});
+
+		funcionario.documents = savedDocuments;
 
 		this.funcionarioService.setFuncionario(funcionario);
 		this.returnToProfile();
@@ -95,8 +115,8 @@ export class CadastroFuncionarioComponent implements OnInit {
 	}
 
 	onErrorImg(e: any) {
-		if (e) {
-			e.target.src = '../../../../assets/perfil-padrao.jpg';
+		if (e.target) {
+			e.target.src = this.defaultImage;
 		}
 	}
 }

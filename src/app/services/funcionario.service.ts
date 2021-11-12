@@ -21,13 +21,10 @@ export class FuncionarioService {
 	setFuncionario(funcionario: Funcionario) {
 		const docRef: AngularFirestoreDocument<DocumentData> = this.afs
 			.collection(`funcionarios`)
-			.doc();
-		let id: string;
-		funcionario.uid != undefined
-			? (id = funcionario.uid)
-			: (id = docRef.ref.id);
+			.doc(funcionario.uid);
+
 		const funcionarioState: Funcionario = {
-			uid: id,
+			uid: funcionario.uid,
 			name: funcionario.name,
 			phone: funcionario.phone,
 			adress: funcionario.adress,
@@ -35,7 +32,6 @@ export class FuncionarioService {
 			birthday: funcionario.birthday,
 			district: funcionario.district,
 			complement: funcionario.complement,
-			profilePicture: funcionario.profilePicture,
 			sector: funcionario.sector,
 			func: funcionario.func,
 			email: funcionario.email,
@@ -66,16 +62,30 @@ export class FuncionarioService {
 		return await docRef.where('uid', '==', fid).get();
 	}
 
-	uploadFiles(profilePic: File, documents: Array<any>, email: string) {
-		this.afStorage
-			.ref(`funcionarios/${email}/profileImage/profile.jpg`)
-			.put(profilePic)
+	async deleteFuncionarioById(fid: string) {
+		return await this.afs
+			.collection('funcionarios')
+			.doc(fid)
+			.delete()
 			.then(() => {
-				console.log('Imagem upada!');
+				console.log('Documento deletado!');
 			})
 			.catch((err) => {
 				console.log(`Houve um erro: ${err}`);
 			});
+	}
+
+	uploadFiles(profilePic: File, documents: Array<any>, email: string) {
+		if (profilePic)
+			this.afStorage
+				.ref(`funcionarios/${email}/profileImage/profile.jpg`)
+				.put(profilePic)
+				.then(() => {
+					console.log('Imagem upada!');
+				})
+				.catch((err) => {
+					console.log(`Houve um erro: ${err}`);
+				});
 
 		documents.forEach((file) => {
 			this.afStorage

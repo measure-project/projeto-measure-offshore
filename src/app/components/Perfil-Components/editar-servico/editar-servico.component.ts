@@ -68,7 +68,9 @@ export class EditarServicoComponent implements OnInit {
 			);
 			this.funcionarioSelected = this.servico.funcionarios;
 			this.equipamentoSelected = this.servico.equipamentos;
-			this.docTypes = this.servico.documentos.map((doc: any) => doc.categoria);
+			this.docTypes = this.servico.documentos.map(
+				(doc: any) => doc.categoria
+			);
 			this.docTypes = [...new Set(this.docTypes)];
 		});
 	}
@@ -85,12 +87,14 @@ export class EditarServicoComponent implements OnInit {
 			),
 		];
 
-		const userSavedDocuments = this.servico.documentos.map((document: any) => {
-			return {
-				categoria: document.categoria,
-				nome: document.nome,
-			};
-		});
+		const userSavedDocuments = this.servico.documentos.map(
+			(document: any) => {
+				return {
+					categoria: document.categoria,
+					nome: document.nome,
+				};
+			}
+		);
 
 		this.servico.funcionarios = this.funcionarioSelected;
 		this.servico.equipamentos = this.equipamentoSelected;
@@ -175,9 +179,7 @@ export class EditarServicoComponent implements OnInit {
 		this.location.back();
 	}
 
-	deleteService() {
-		
-	}
+	deleteService() {}
 
 	confereForm(): boolean {
 		return (

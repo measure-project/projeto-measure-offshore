@@ -5,11 +5,12 @@
 	</mat-toolbar>
 	<mat-card class="profileCard mat-elevation-z4">
 		<mat-card-title>
-			<h1>Cadastro de Funcionários</h1>
+			<h1>Editar funcionário</h1>
 		</mat-card-title>
 		<mat-card-content class="profileCardContent">
 			<img
 				class="profilePicture"
+				id="profilePic-0"
 				[src]="profilePicture"
 				(error)="onErrorImg($event)"
 				alt="Foto de perfil"
@@ -39,7 +40,7 @@
 						matInput
 						type="text"
 						name="name"
-						ngModel
+						[ngModel]="funcionario.name"
 						required
 						placeholder="Nome"
 					/>
@@ -52,7 +53,7 @@
 						matInput
 						type="text"
 						name="birthday"
-						ngModel
+						[ngModel]="funcionario.birthday"
 						required
 						placeholder="01/01/2021"
 						mask="00/00/0000"
@@ -67,7 +68,7 @@
 						matInput
 						type="text"
 						name="email"
-						ngModel
+						[ngModel]="funcionario.email"
 						required
 						email
 						placeholder="usuario@email.com"
@@ -81,7 +82,7 @@
 						matInput
 						type="text"
 						name="phone"
-						ngModel
+						[ngModel]="funcionario.phone"
 						required
 						placeholder="(99) 9999-9999"
 						mask="{{ phoneMask }}"
@@ -97,7 +98,7 @@
 						matInput
 						type="text"
 						name="adress"
-						ngModel
+						[ngModel]="funcionario.adress"
 						required
 						placeholder="Nome da rua"
 					/>
@@ -110,7 +111,7 @@
 						matInput
 						type="text"
 						name="district"
-						ngModel
+						[ngModel]="funcionario.district"
 						required
 						placeholder="Nome do bairro"
 					/>
@@ -123,7 +124,7 @@
 						matInput
 						type="text"
 						name="complement"
-						ngModel
+						[ngModel]="funcionario.complement"
 						placeholder="Nome da rua"
 					/>
 				</mat-form-field>
@@ -136,7 +137,7 @@
 						matInput
 						type="text"
 						name="houseNumber"
-						ngModel
+						[ngModel]="funcionario.houseNumber"
 						required
 						placeholder="00"
 						mask="0*"
@@ -152,7 +153,7 @@
 							matInput
 							type="text"
 							name="func"
-							ngModel
+							[ngModel]="funcionario.func"
 							required
 							placeholder="analista"
 						/>
@@ -180,9 +181,15 @@
 					<div id="documentList">
 						<a
 							class="selectedDocuments mat-elevation-z4"
-							*ngFor="let document of funcionario.documents"
+							*ngFor="let doc of funcionario.documents"
+							[id]="doc"
 						>
-							{{ document.nome }}
+							<span *ngIf="doc.nome">
+								{{ doc.nome }}
+							</span>
+							<span *ngIf="!doc.nome">
+								{{ doc }}
+							</span>
 						</a>
 					</div>
 				</div>
@@ -195,7 +202,10 @@
 					"
 				>
 					<h2>Setor</h2>
-					<mat-radio-group name="sector" ngModel>
+					<mat-radio-group
+						name="sector"
+						[ngModel]="funcionario.sector"
+					>
 						<mat-radio-button
 							style="margin-right: 1rem"
 							*ngFor="
