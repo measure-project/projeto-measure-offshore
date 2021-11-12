@@ -100,7 +100,10 @@ export class AuthService {
 
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
-			localStorage.setItem('currentUser', JSON.stringify(this.userLogado));
+			localStorage.setItem(
+				'currentUser',
+				JSON.stringify(this.userLogado)
+			);
 		});
 
 		return this.userLogado;
@@ -120,7 +123,10 @@ export class AuthService {
 		adminLogadoCollection$.subscribe((admin) => {
 			this.adminLogado = admin[0];
 			if (this.adminLogado) {
-				localStorage.setItem('currentUser', JSON.stringify(this.adminLogado));
+				localStorage.setItem(
+					'currentUser',
+					JSON.stringify(this.adminLogado)
+				);
 			}
 		});
 
@@ -138,6 +144,19 @@ export class AuthService {
 		});
 
 		return clienteList;
+	}
+
+	async deleteUserById(uid: string) {
+		return await this.afs
+			.collection('users')
+			.doc(uid)
+			.delete()
+			.then(() => {
+				console.log('Documento deletado!');
+			})
+			.catch((err) => {
+				console.log(`Houve um erro: ${err}`);
+			});
 	}
 
 	loggedIn(): boolean {
@@ -161,8 +180,13 @@ export class AuthService {
 						this.ngZone.run(() => {
 							// Tem que trocar para this.adminLogado para funcionar como admin
 							if (this.adminLogado)
-								this.router.navigate([`/verPerfilAdm/${this.adminLogado.uid}`]);
-							else this.router.navigate([`/verPerfil/${this.userLogado.uid}`]);
+								this.router.navigate([
+									`/verPerfilAdm/${this.adminLogado.uid}`,
+								]);
+							else
+								this.router.navigate([
+									`/verPerfil/${this.userLogado.uid}`,
+								]);
 						});
 					});
 			})

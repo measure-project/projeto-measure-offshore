@@ -18,6 +18,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MembrosAtuaisComponent } from './components/membros-atuais/membros-atuais.component';
 import { EditarServicoComponent } from './components/Perfil-Components/editar-servico/editar-servico.component';
+import { FuncionarioEditarPerfilComponent } from './components/Perfil-Components/funcionario-editar-perfil/funcionario-editar-perfil.component';
 
 const routes: Routes = [
 	{
@@ -86,6 +87,11 @@ const routes: Routes = [
 	{
 		path: 'verPerfilAdm/:uid/membros/funcionarios/:fid',
 		component: FuncionarioVerPerfilComponent,
+		canActivate: [RouteGuardService, RoleGuardService],
+	},
+	{
+		path: 'verPerfilAdm/:uid/membros/funcionarios/:fid/editar',
+		component: FuncionarioEditarPerfilComponent,
 		canActivate: [RouteGuardService, RoleGuardService],
 	},
 	{

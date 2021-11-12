@@ -54,5 +54,6 @@ export class CadastroAdmComponent implements OnInit {
 		adminData.isAdmin = true;
 
 		this.adminService.signUpAdmin(adminData, password);
+		this.returnToProfile();
 	}
 }

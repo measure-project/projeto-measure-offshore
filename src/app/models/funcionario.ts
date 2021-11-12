@@ -7,7 +7,6 @@ export interface Funcionario {
 	birthday: string;
 	district: string;
 	complement?: string;
-	profilePicture?: any;
 	sector: string;
 	func: string;
 	email: string;

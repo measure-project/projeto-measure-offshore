@@ -14,6 +14,7 @@ export class VerServicoComponent implements OnInit {
 	service!: Servico;
 	docTypes: Array<any> = [];
 	doclist: Array<any> = [];
+	defaultImage = '../../../../assets/perfil-padrao.jpg';
 
 	//Variáveis pro expansion panel
 	panelOpenState: boolean = false;
@@ -71,5 +72,10 @@ export class VerServicoComponent implements OnInit {
 	// Setando qual expansion panel abrir
 	setStep(n: number) {
 		this.step = n;
+	}
+
+	onErrorImg(e: any) {
+		console.log(e.target);
+		if (e) e.target.src = this.defaultImage;
 	}
 }

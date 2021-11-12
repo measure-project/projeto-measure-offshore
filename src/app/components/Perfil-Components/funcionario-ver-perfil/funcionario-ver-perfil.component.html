@@ -8,7 +8,7 @@
 		<mat-card-title>
 			<h1>Funcionário</h1>
 
-			<a [routerLink]="['./funcionarioEditarPerfil']" class="editProfile">
+			<a [routerLink]="['./editar']" class="editProfile">
 				<span class="material-icons">border_color</span><br />Editar
 			</a>
 		</mat-card-title>
@@ -16,6 +16,8 @@
 			<img
 				class="profilePicture"
 				id="profilePic-0"
+				src=""
+				(error)="onErrorImg($event)"
 				alt="Imagem de perfil"
 			/>
 
@@ -24,14 +26,35 @@
 			<h3>Informações pessoais</h3>
 
 			<div class="funcionario-info">
-				<h4>{{ funcionario.phone }}</h4>
-				<h4>{{ funcionario.adress }}</h4>
-				<h4>{{ funcionario.birthday }}</h4>
-				<h4>{{ funcionario.district }}</h4>
+				<mat-card class="funcionario-info-data mat-elevation-z4">
+					<mat-card-title>
+						<h4>Telefone:</h4>
+					</mat-card-title>
+					<h4>{{ funcionario.phone }}</h4>
+				</mat-card>
+				<mat-card class="funcionario-info-data mat-elevation-z4">
+					<h4>Endereço:</h4>
+					<h4>{{ funcionario.adress }}</h4>
+				</mat-card>
+				<mat-card class="funcionario-info-data mat-elevation-z4">
+					<h4>Nascimento:</h4>
+					<h4>{{ funcionario.birthday }}</h4>
+				</mat-card>
+				<mat-card class="funcionario-info-data mat-elevation-z4">
+					<h4>Bairro:</h4>
+					<h4>{{ funcionario.district }}</h4>
+				</mat-card>
+				<mat-card class="funcionario-info-data mat-elevation-z4">
+					<h4>E-mail:</h4>
+					<h4>{{ funcionario.email }}</h4>
+				</mat-card>
 			</div>
 
 			<h3>Função</h3>
-			<h4>{{ funcionario.func }}</h4>
+
+			<mat-card class="mat-elevation-z4">
+				<h4>{{ funcionario.func }}</h4>
+			</mat-card>
 
 			<h3>Documentos</h3>
 			<div>

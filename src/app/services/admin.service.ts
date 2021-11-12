@@ -58,6 +58,19 @@ export class AdminService {
 		return await docRef.where('uid', '==', uid).get();
 	}
 
+	async deleteAdminById(uid: string) {
+		return await this.afs
+			.collection('admins')
+			.doc(uid)
+			.delete()
+			.then(() => {
+				console.log('Documento deletado!');
+			})
+			.catch((err) => {
+				console.log(`Houve um erro: ${err}`);
+			});
+	}
+
 	getAllAdmin() {
 		const ref = this.afs.collection('admins');
 		let adminList = Array<Admin>();

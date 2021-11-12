@@ -49,6 +49,7 @@ import { CriarEquipamentoComponent } from './components/cadastro-components/cada
 import { VerServicoComponent } from './components/ver-servico/ver-servico.component';
 import { EditarServicoComponent } from './components/Perfil-Components/editar-servico/editar-servico.component';
 import { FuncionarioVerPerfilComponent } from './components/Perfil-Components/funcionario-ver-perfil/funcionario-ver-perfil.component';
+import { FuncionarioEditarPerfilComponent } from './components/Perfil-Components/funcionario-editar-perfil/funcionario-editar-perfil.component';
 import { ExcluirModalComponent } from './components/modals/excluir-modal/excluir-modal.component';
 
 @NgModule({
@@ -73,8 +74,9 @@ import { ExcluirModalComponent } from './components/modals/excluir-modal/excluir
 		CriarEquipamentoComponent,
 		VerServicoComponent,
 		EditarServicoComponent,
-  FuncionarioVerPerfilComponent,
-  ExcluirModalComponent,
+		FuncionarioVerPerfilComponent,
+		FuncionarioEditarPerfilComponent,
+		ExcluirModalComponent,
 	],
 	imports: [
 		BrowserModule,
