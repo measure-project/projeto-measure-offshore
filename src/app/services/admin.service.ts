@@ -66,7 +66,7 @@ export class AdminService {
 			.doc(uid)
 			.delete()
 			.then(() => {
-				console.log('Documento deletado!');
+				console.log('Administrador deletado!');
 			})
 			.catch((err) => {
 				console.log(`Houve um erro: ${err}`);

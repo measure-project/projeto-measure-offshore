@@ -81,7 +81,6 @@ export class AuthService {
 
 		console.log('Passei no service 3');
 		console.log(userState);
-		
 
 		userRef.set(userState, {
 			merge: true,
@@ -152,7 +151,7 @@ export class AuthService {
 			.doc(uid)
 			.delete()
 			.then(() => {
-				console.log('Documento deletado!');
+				console.log('Usuário deletado!');
 			})
 			.catch((err) => {
 				console.log(`Houve um erro: ${err}`);
