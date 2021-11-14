@@ -92,7 +92,7 @@ export class CadastroServicosComponent implements OnInit {
 	}
 
 	fillFormWithPreDefined(service: Servico) {
-		this.preDefinedType = service;
+		this.servico = service;
 	}
 
 	addDocumentType(typeName: string) {
