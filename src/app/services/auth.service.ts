@@ -218,8 +218,6 @@ export class AuthService {
 				window.alert(error.message);
 				console.log(error.message);
 			});
-
-		this.secondaryFbApp.auth().signOut();
 	}
 
 	async SignOut(): Promise<any> {
