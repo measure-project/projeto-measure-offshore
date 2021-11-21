@@ -7,6 +7,8 @@ import { FuncionarioService } from './../../services/funcionario.service';
 import { Component, OnInit } from '@angular/core';
 import { Funcionario } from 'src/app/models/funcionario';
 import { Location } from '@angular/common';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ExcluirModalComponent } from '../modals/excluir-modal/excluir-modal.component';
 
 @Component({
 	selector: 'app-membros-atuais',
@@ -24,7 +26,8 @@ export class MembrosAtuaisComponent implements OnInit {
 		private funcionarioService: FuncionarioService,
 		private adminService: AdminService,
 		private authService: AuthService,
-		private location: Location
+		private location: Location,
+		private dialog: MatDialog
 	) {}
 
 	return() {
@@ -53,19 +56,62 @@ export class MembrosAtuaisComponent implements OnInit {
 	}
 
 	deletarFuncionario(funcionario: Funcionario) {
-		this.funcionarioService.deleteFuncionarioById(funcionario.uid);
-		window.location.reload();
+		const config: MatDialogConfig<any> = {
+			data: {
+				user: funcionario,
+				service: {},
+				tipo: 'funcionario',
+			},
+		};
+
+		this.dialog
+			.open(ExcluirModalComponent, config)
+			.afterClosed()
+			.subscribe((res) => {
+				if (res)
+					this.funcionarios = this.funcionarios.filter((deletado) => {
+						return funcionario.uid !== deletado.uid;
+					});
+			});
 	}
 
 	deletarCliente(cliente: User) {
-		this.authService.deleteUserById(cliente.uid);
+		const config: MatDialogConfig<any> = {
+			data: {
+				user: cliente,
+				service: {},
+				tipo: 'cliente',
+			},
+		};
+
+		this.dialog
+			.open(ExcluirModalComponent, config)
+			.afterClosed()
+			.subscribe((res) => {
+				if (res)
+					this.clientes = this.clientes.filter((deletado) => {
+						return cliente.uid !== deletado.uid;
+					});
+			});
 	}
 
 	deletarAdmin(admin: Admin) {
-		this.adminService.deleteAdminById(admin.uid);
+		const config: MatDialogConfig<any> = {
+			data: {
+				user: admin,
+				service: {},
+				tipo: 'administrador',
+			},
+		};
 
-		this.admins = this.admins.filter((deletadoAdm) => {
-			return admin.uid !== deletadoAdm.uid;
-		});
+		this.dialog
+			.open(ExcluirModalComponent, config)
+			.afterClosed()
+			.subscribe((res) => {
+				if (res)
+					this.admins = this.admins.filter((deletado) => {
+						return admin.uid !== deletado.uid;
+					});
+			});
 	}
 }

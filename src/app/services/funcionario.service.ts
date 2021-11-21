@@ -68,7 +68,7 @@ export class FuncionarioService {
 			.doc(fid)
 			.delete()
 			.then(() => {
-				console.log('Documento deletado!');
+				console.log('Funcionario deletado!');
 			})
 			.catch((err) => {
 				console.log(`Houve um erro: ${err}`);

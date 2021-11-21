@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./tela-recuperar-senha.component.scss'],
 })
 export class TelaRecuperarSenhaComponent implements OnInit {
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(
+		private authService: AuthService,
+		private router: Router,
+		private location: Location
+	) {}
 
 	ngOnInit(): void {}
 
@@ -17,10 +22,10 @@ export class TelaRecuperarSenhaComponent implements OnInit {
 
 		this.authService.ForgotPassword(email);
 
-		this.router.navigate(['/login']);
+		this.location.back();
 	}
 
 	cancel() {
-		this.router.navigate(['/login']);
+		this.location.back();
 	}
 }

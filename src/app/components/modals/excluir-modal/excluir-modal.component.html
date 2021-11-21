@@ -1,13 +1,77 @@
 <mat-dialog-content>
-	<h2>Tem certeza que deseja excluir o serviço</h2>
-	<h2>
-		<b>{{ this.service.title }}?</b>
-	</h2>
+	<!-- SERVIÇO -->
+
+	<ng-container *ngIf="tipo == 'servico'">
+		<h2>Tem certeza que deseja excluir o serviço</h2>
+		<h2>
+			<b>{{ this.service.title }}?</b>
+		</h2>
+	</ng-container>
+
+	<!-- CLIENTE, ADM E FUNCIONARIO -->
+
+	<ng-container *ngIf="tipo != 'servico'">
+		<h2>Tem certeza que deseja excluir o {{ tipo }}</h2>
+		<h2>
+			<b>{{ this.user.name }}?</b>
+		</h2>
+	</ng-container>
 </mat-dialog-content>
 
 <mat-dialog-content class="btn-group">
-	<button mat-button mat-dialog-close class="action-btn">Cancelar</button>
-	<button mat-button type="button" (click)="deleteServico()" class="danger-btn">
-		Excluir
-	</button>
+	<!-- SERVIÇO -->
+
+	<ng-container *ngIf="tipo == 'servico'">
+		<button mat-button mat-dialog-close class="action-btn">Cancelar</button>
+		<button
+			mat-button
+			type="button"
+			(click)="deleteServico()"
+			class="danger-btn"
+		>
+			Excluir
+		</button>
+	</ng-container>
+
+	<!-- CLIENTE -->
+
+	<ng-container *ngIf="tipo == 'cliente'">
+		<button mat-button mat-dialog-close class="action-btn">Cancelar</button>
+		<button
+			mat-button
+			type="button"
+			(click)="deleteCliente()"
+			class="danger-btn"
+		>
+			Excluir
+		</button>
+	</ng-container>
+
+	<!-- ADMINISTRADOR -->
+
+	<ng-container *ngIf="tipo == 'administrador'">
+		<button mat-button mat-dialog-close class="action-btn">Cancelar</button>
+		<button
+			mat-button
+			type="button"
+			(click)="deleteAdmin()"
+			class="danger-btn"
+		>
+			Excluir
+		</button>
+	</ng-container>
+
+	<!-- FUNCIONARIO -->
+
+	<ng-container *ngIf="tipo == 'funcionario'">
+		<button mat-button mat-dialog-close class="action-btn">Cancelar</button>
+		<button
+			mat-button
+			type="button"
+			(click)="deleteFuncionario()"
+			class="danger-btn"
+		>
+			Excluir
+		</button>
+	</ng-container>
 </mat-dialog-content>

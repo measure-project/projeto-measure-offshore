@@ -7,7 +7,11 @@
 	<mat-card class="profileCard mat-elevation-z4">
 		<mat-card-title>
 			<h1>Perfil</h1>
-			<a *ngIf="!admin" [routerLink]="['./editarPerfil']" class="editProfile">
+			<a
+				*ngIf="!admin"
+				[routerLink]="['./editarPerfil']"
+				class="editProfile"
+			>
 				<span class="material-icons">border_color</span><br />Editar
 			</a>
 		</mat-card-title>
@@ -32,23 +36,14 @@
 		</mat-card-actions>
 	</mat-card>
 
-	<mat-expansion-panel class="filialPanel">
-		<mat-expansion-panel-header>
-			<mat-panel-title> Selecione sua filial </mat-panel-title>
-		</mat-expansion-panel-header>
-
-		<div class="panelContent">
-			<a (click)="filialDialog()" *ngFor="let filial of filiais"
-				>{{ filial.name }}
-				<hr
-			/></a>
-		</div>
-	</mat-expansion-panel>
-
 	<div class="servicos">
 		<div class="header">
 			<h3>Serviços Contratados</h3>
-			<button *ngIf="admin" (click)="toAdicionarServico()" mat-raised-button>
+			<button
+				*ngIf="admin"
+				(click)="toAdicionarServico()"
+				mat-raised-button
+			>
 				Adicionar serviço
 			</button>
 		</div>
@@ -58,7 +53,12 @@
 				<mat-card-title>
 					<h1>
 						<a
-							[routerLink]="['/verPerfil', user.uid, 'servico', service.uid]"
+							[routerLink]="[
+								'/verPerfil',
+								user.uid,
+								'servico',
+								service.uid
+							]"
 							class="routerLink"
 							>{{ service.title }}</a
 						>
@@ -69,7 +69,8 @@
 							[routerLink]="['./editarServico', service.uid]"
 							class="routerLink"
 						>
-							<span class="material-icons">border_color</span><br />
+							<span class="material-icons">border_color</span
+							><br />
 						</a>
 						<a
 							*ngIf="admin"
