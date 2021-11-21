@@ -7,12 +7,19 @@ import {
 	AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-
+import firebase from 'firebase/app';
+import { environment } from 'src/environments/environment';
 @Injectable({
 	providedIn: 'root',
 })
 export class AdminService {
 	admin = {} as Admin;
+
+	secondaryFbApp = firebase.initializeApp(
+		environment.firebase,
+		'SecondaryAdm'
+	);
+
 	constructor(
 		private afs: AngularFirestore,
 		private afStorage: AngularFireStorage,
@@ -105,7 +112,12 @@ export class AdminService {
 	}
 
 	signUpAdmin(admin: Admin, password: string): any {
-		return this.afAuth
+		this.secondaryFbApp
+			.auth()
+			.setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+		return this.secondaryFbApp
+			.auth()
 			.createUserWithEmailAndPassword(admin.email, password)
 			.then((result: any) => {
 				this.auth.SendVerificationMail();

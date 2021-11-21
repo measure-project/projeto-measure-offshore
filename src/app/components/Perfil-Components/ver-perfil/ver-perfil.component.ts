@@ -65,6 +65,7 @@ export class VerPerfilComponent implements OnInit {
 			data: {
 				user: this.user,
 				service: service,
+				tipo: 'servico',
 			},
 		};
 
