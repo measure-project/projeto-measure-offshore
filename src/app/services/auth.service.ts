@@ -204,7 +204,7 @@ export class AuthService {
 			.auth()
 			.setPersistence(firebase.auth.Auth.Persistence.NONE);
 
-		return this.secondaryFbApp
+		this.secondaryFbApp
 			.auth()
 			.createUserWithEmailAndPassword(user.email, password)
 			.then((result: any) => {
@@ -218,6 +218,8 @@ export class AuthService {
 				window.alert(error.message);
 				console.log(error.message);
 			});
+
+		this.secondaryFbApp.auth().signOut();
 	}
 
 	async SignOut(): Promise<any> {
