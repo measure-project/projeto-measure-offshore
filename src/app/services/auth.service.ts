@@ -204,7 +204,7 @@ export class AuthService {
 			.auth()
 			.setPersistence(firebase.auth.Auth.Persistence.NONE);
 
-		return this.secondaryFbApp
+		this.secondaryFbApp
 			.auth()
 			.createUserWithEmailAndPassword(user.email, password)
 			.then((result: any) => {

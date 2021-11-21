@@ -52,8 +52,6 @@ export class AdminService {
 			funcao: admin.funcao,
 		};
 
-		localStorage.setItem('currentUser', JSON.stringify(adminState));
-
 		return await docRef.set(adminState, {
 			merge: true,
 		});
