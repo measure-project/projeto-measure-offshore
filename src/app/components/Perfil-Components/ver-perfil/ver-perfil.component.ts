@@ -63,7 +63,6 @@ export class VerPerfilComponent implements OnInit {
 				.then((users) => {
 					users.forEach((user: any) => {
 						this.user = user.data();
-						console.log(this.user);
 					});
 				});
 		}
@@ -77,7 +76,6 @@ export class VerPerfilComponent implements OnInit {
 	}
 
 	deleteService(service: Servico) {
-		console.log('Excluindo ' + service.uid);
 		const config: MatDialogConfig<any> = {
 			data: {
 				user: this.user,

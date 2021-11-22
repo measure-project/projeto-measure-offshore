@@ -59,43 +59,62 @@ export class CadastroServicosComponent implements OnInit {
 			});
 	}
 
-	async cadastrarServico(servico: Servico) {
-		servico.documentos = this.servico.documentos.map((document) => {
+	async cadastrarServico() {
+		this.servico.documentos = this.servico.documentos.map((document) => {
 			return {
 				categoria: document.categoria,
 				nome: document.nome,
 			};
 		});
 
-		servico.funcionarios = this.servico.funcionarios;
-		servico.equipamentos = this.servico.equipamentos;
+		this.servico.uid = uuidv4();
 
-		servico.uid = uuidv4();
+		this.servicoService.uploadFiles(this.servico.documentos, this.servico.uid);
 
-		this.servico.documentos.forEach((file) => {
-			this.servico.documentos.push({
-				name: file.name,
-				type: file.type,
-			});
+		this.servico.documentos = this.servico.documentos.map((document) => {
+			return {
+				categoria: document.categoria,
+				nome: document.nome,
+			};
 		});
 
-		this.servicoService.uploadFiles(this.servico.documentos, servico.uid);
-
 		if (this.saveModel) {
-			this.servicoService.setService(servico);
+			this.servicoService.setService(this.servico);
 		}
 
-		this.user.services?.push(servico);
+		this.user.services?.push(this.servico);
 		await this.authService.SetUserData(this.user);
 
 		this.backToProfile();
 	}
 
-	fillFormWithPreDefined(service: Servico) {
-		this.preDefinedType = service;
+	fillFormWithPreDefined(service: Servico): void {
+		Object.keys(service).forEach((key: string) => {
+			if (key == 'uid') return;
+			if (key == 'funcionarios' || key == 'equipamentos') {
+				service[key].forEach((item: any) => {
+					key == 'funcionarios'
+						? this.addFuncionario(item)
+						: this.addEquipamento(item);
+				});
+
+				return;
+			}
+
+			(this.servico as any)[key] = (service as any)[key];
+		});
 	}
 
-	addDocumentType(typeName: string) {
+	confereForm(): boolean {
+		return (
+			!!this.servico.title &&
+			!!this.servico.description &&
+			!!this.servico.funcionarios &&
+			!!this.servico.equipamentos
+		);
+	}
+
+	addDocumentType(typeName: string): void {
 		if (!typeName) {
 			this.authService.displayMessage('Nome de tipo não inserido!', true);
 			return;
@@ -111,15 +130,15 @@ export class CadastroServicosComponent implements OnInit {
 		(<HTMLInputElement>document.getElementById('typeName')).value = '';
 	}
 
-	changeFunction(docType: string, event: any) {
+	changeFunction(docType: string, event: any): void {
 		this.addDocuments(docType, event);
 	}
 
-	removeDocumentType(docType: string) {
+	removeDocumentType(docType: string): void {
 		this.docTypes.splice(this.docTypes.indexOf(docType), 1);
 	}
 
-	addDocuments(docType: string, event: any) {
+	addDocuments(docType: string, event: any): void {
 		if (event.target.files) {
 			for (let i = 0; i < event.target.files.length; i++) {
 				this.servico.documentos.push({
@@ -131,11 +150,27 @@ export class CadastroServicosComponent implements OnInit {
 		}
 	}
 
-	addFuncionario(funcionario: Funcionario) {
+	addFuncionario(funcionario: Funcionario): void {
+		const checksIfExists = (func: Funcionario) => func.name == funcionario.name;
+
+		if (
+			this.servico.funcionarios.some(checksIfExists) ||
+			!this.funcionarios.some(checksIfExists)
+		)
+			return;
+
 		this.servico.funcionarios.push(funcionario);
 	}
 
-	addEquipamento(equipamento: Equipamento) {
+	addEquipamento(equipamento: Equipamento): void {
+		const checksIfExists = (equip: Equipamento) =>
+			equip.name == equipamento.name;
+		if (
+			this.servico.equipamentos.some(checksIfExists) ||
+			!this.equipamentos.some(checksIfExists)
+		)
+			return;
+
 		this.servico.equipamentos.push(equipamento);
 	}
 

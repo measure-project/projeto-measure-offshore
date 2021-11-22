@@ -26,9 +26,7 @@ export class CadastroAdmComponent implements OnInit {
 	setAdmin(admin: Admin): void {
 		try {
 			this.adminService.setAdmin(admin);
-		} catch (e) {
-			console.log(`Erro: ${e}`);
-		}
+		} catch (e) {}
 	}
 
 	editPhoto(event: any) {

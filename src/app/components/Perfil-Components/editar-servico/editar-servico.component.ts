@@ -68,16 +68,12 @@ export class EditarServicoComponent implements OnInit {
 			);
 			this.funcionarioSelected = this.servico.funcionarios;
 			this.equipamentoSelected = this.servico.equipamentos;
-			this.docTypes = this.servico.documentos.map(
-				(doc: any) => doc.categoria
-			);
+			this.docTypes = this.servico.documentos.map((doc: any) => doc.categoria);
 			this.docTypes = [...new Set(this.docTypes)];
 		});
 	}
 
 	async editarServico() {
-		console.log(this.servico.documentos);
-
 		const uploadedFiles: any[] = [
 			...this.servico.documentos.filter(
 				(document: any) =>
@@ -87,14 +83,12 @@ export class EditarServicoComponent implements OnInit {
 			),
 		];
 
-		const userSavedDocuments = this.servico.documentos.map(
-			(document: any) => {
-				return {
-					categoria: document.categoria,
-					nome: document.nome,
-				};
-			}
-		);
+		const userSavedDocuments = this.servico.documentos.map((document: any) => {
+			return {
+				categoria: document.categoria,
+				nome: document.nome,
+			};
+		});
 
 		this.servico.funcionarios = this.funcionarioSelected;
 		this.servico.equipamentos = this.equipamentoSelected;
@@ -103,7 +97,6 @@ export class EditarServicoComponent implements OnInit {
 			this.servicoService.uploadFiles(uploadedFiles, this.servico.uid);
 
 			this.servico.documentos = userSavedDocuments;
-			console.log(this.servico.documentos);
 
 			if (this.saveModel) this.servicoService.editService(this.servico);
 
@@ -119,12 +112,7 @@ export class EditarServicoComponent implements OnInit {
 			this.backToProfile();
 		} catch (error: any) {
 			this.authService.displayMessage(String(error), true);
-			console.log(error);
 		}
-	}
-
-	fillFormWithPreDefined(service: Servico) {
-		this.preDefinedType = service;
 	}
 
 	addDocumentType(typeName: string) {
