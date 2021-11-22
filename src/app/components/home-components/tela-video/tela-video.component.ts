@@ -29,4 +29,12 @@ export class TelaVideoComponent implements OnInit {
 		// Adiciona essas classes à nav bar
 		else element.classList.remove('toolBar-color', 'mat-elevation-z4'); // Remove essas classes da nav bar
 	}
+
+	goToTop() {
+		window.scroll({
+			top: 0,
+			left: 0,
+			behavior: 'smooth',
+		});
+	}
 }

@@ -39,16 +39,23 @@ $tamanho: 300px;
 			display: none;
 		}
 
-		.manutencao,
-		.gerais,
+		.mru,
+		.microbio,
 		.pintura,
 		.jardinagem {
 			text-align: center;
-			background-size: cover;
-			background-image: url('../../../../assets/manutencao.jpg'); // Depois colocar a background image em cada elemento inline
+			background-size: 100% 100%;
 			border-radius: 50px;
 			width: (1279px / 853px) * $tamanho - 100px; // Tamanho provisório
 			height: (853px / 1279px) * $tamanho;
+		}
+
+		.mru {
+			background-image: url('../../../../assets/MRU.png');
+		}
+
+		.microbio {
+			background-image: url('../../../../assets/analise-microbiologica.jpg');
 		}
 
 		:hover {
@@ -60,10 +67,13 @@ $tamanho: 300px;
 				height: inherit;
 				border-radius: inherit;
 				background-color: black;
-				opacity: 0.6;
+				animation-name: blackBoxFade;
+				animation-duration: 0.8s;
+				animation-fill-mode: forwards;
 			}
 			h2 {
 				font-size: 2rem;
+				text-align: center;
 				display: inherit;
 				color: $colorSecondary;
 			}
@@ -103,7 +113,6 @@ $tamanho: 300px;
 
 .certificacoes {
 	background-color: $colorPrimary;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -119,6 +128,11 @@ $tamanho: 300px;
 		margin-top: 5rem;
 	}
 
+	.about {
+		width: 80%;
+		text-align: justify;
+	}
+
 	.certificacoesImg {
 		margin-top: 5rem;
 		display: flex;
@@ -131,16 +145,34 @@ $tamanho: 300px;
 }
 
 .footer {
-	height: 10rem;
+	height: 20rem;
 	width: 100%;
 	background-color: $colorSecondary;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 
-	img {
-		margin-top: -1.55rem;
-		width: 8rem;
+	h2 {
+		width: 30ch;
+	}
+
+	.footer-content {
+		display: flex;
+		width: 100%;
+		justify-content: space-evenly;
+	}
+
+	.footer-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+@keyframes blackBoxFade {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0.6;
 	}
 }

@@ -1,6 +1,6 @@
 <div class="content">
 	<mat-toolbar class="toolBar">
-		<img src="../../../../assets/measure-logo.png" />
+		<img src="../../../assets/measure-logo-header.svg" />
 		<span class="material-icons profileIcon">account_circle</span>
 	</mat-toolbar>
 
@@ -39,13 +39,14 @@
 								<button
 									(click)="verCliente(cliente)"
 									mat-raised-button
+									class="ver"
 								>
 									Ver
 								</button>
 								<button
 									mat-raised-button
-									color="warn"
 									style="margin-left: 0.25rem"
+									class="delete"
 									(click)="deletarCliente(cliente)"
 								>
 									Deletar
@@ -83,12 +84,13 @@
 								<button
 									mat-raised-button
 									(click)="verFuncionario(funcionario)"
+									class="ver"
 								>
 									Ver
 								</button>
 								<button
 									mat-raised-button
-									color="warn"
+									class="delete"
 									style="margin-left: 0.25rem"
 									(click)="deletarFuncionario(funcionario)"
 								>
@@ -127,13 +129,14 @@
 								<button
 									mat-raised-button
 									(click)="verAdmin(admin)"
+									class="ver"
 								>
 									Ver
 								</button>
 								<button
 									mat-raised-button
-									color="warn"
 									style="margin-left: 0.25rem"
+									class="delete"
 									(click)="deletarAdmin(admin)"
 								>
 									Deletar

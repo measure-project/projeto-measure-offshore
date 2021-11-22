@@ -6,6 +6,7 @@
 	background-color: $colorPrimary;
 	justify-content: center;
 	position: relative;
+	overflow-y: hidden;
 
 	img {
 		width: 8rem;
@@ -48,7 +49,7 @@
 
 		.editProfile {
 			text-decoration: none;
-			color: black;
+			color: #3973b8;
 			text-align: center;
 			position: absolute;
 			top: 2rem;

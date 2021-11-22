@@ -1,17 +1,19 @@
 <mat-toolbar id="toolBar" class="toolBar" (scroll)="onWindowScroll()">
 	<img
-		src="../../../../assets/measure-logo.png"
+		src="../../../../assets/measure-logo.svg"
 		alt="Logo da Measure Offshore"
 	/>
 	<div>
-		<span
-			style="
-				mix-blend-mode: difference;
-				text-decoration: underline solid;
-				text-underline-offset: 0.25em;
-			"
-			class="colorWhite"
-			>Home</span
+		<a (click)="goToTop()" style="text-decoration: none">
+			<span
+				style="
+					mix-blend-mode: difference;
+					text-decoration: underline solid;
+					text-underline-offset: 0.25em;
+					color: #9f4d7a;
+				"
+				>Home</span
+			></a
 		>
 		<button mat-raised-button (click)="toLogin()" class="colorWhite">
 			Entrar
@@ -19,12 +21,16 @@
 	</div>
 </mat-toolbar>
 
-<video autoplay muted loop id="backgroundVideo">
+<video style="width: 100%" autoplay muted loop playsinline id="backgroundVideo">
 	<source src="../../../../assets/backgroundVideo.mp4" type="video/mp4" />
 </video>
 
 <div class="content">
-	<h1 class="colorWhite">Uma empresa líder e pioneira em soluções</h1>
-
-	<button mat-raised-button class="colorWhite">Saiba Mais</button>
+	<h1 class="colorWhite">Soluções inovadoras em Serviços de Metrologia</h1>
+	<h3 class="colorWhite">
+		Uma empresa especializada em atender clientes offshore
+	</h3>
+	<a href="https://site.measureoffshore.com.br" target="_blank"
+		><button mat-raised-button class="colorWhite">Saiba Mais</button></a
+	>
 </div>

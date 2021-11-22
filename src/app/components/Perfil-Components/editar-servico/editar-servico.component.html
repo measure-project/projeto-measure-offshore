@@ -1,6 +1,6 @@
 <div class="content">
 	<mat-toolbar class="toolBar">
-		<img src="../../../../assets/measure-logo.png" />
+		<img src="../../../../assets/measure-logo-header.svg" />
 		<span class="material-icons profileIcon">account_circle</span>
 	</mat-toolbar>
 
@@ -29,11 +29,18 @@
 
 					<mat-expansion-panel style="height: min-content">
 						<mat-expansion-panel-header>
-							<mat-panel-title> Selecionar pré-definido </mat-panel-title>
+							<mat-panel-title>
+								Selecionar pré-definido
+							</mat-panel-title>
 						</mat-expansion-panel-header>
 
-						<div *ngFor="let tipo of tipos" class="pre-defined-types">
-							<a (click)="fillFormWithPreDefined(tipo)">{{ tipo.title }}</a>
+						<div
+							*ngFor="let tipo of tipos"
+							class="pre-defined-types"
+						>
+							<a (click)="fillFormWithPreDefined(tipo)">{{
+								tipo.title
+							}}</a>
 						</div>
 					</mat-expansion-panel>
 
@@ -59,7 +66,10 @@
 				<h2>Documentos</h2>
 				<div class="documents">
 					<div style="grid-column: 1 / 4">
-						<mat-form-field style="margin-right: 1rem" appearance="outline">
+						<mat-form-field
+							style="margin-right: 1rem"
+							appearance="outline"
+						>
 							<mat-label>Adicionar Tipo</mat-label>
 							<input
 								#typeName
@@ -78,7 +88,12 @@
 						</button>
 					</div>
 					<div class="documentList" *ngFor="let docType of docTypes">
-						<div style="display: flex; justify-content: space-between">
+						<div
+							style="
+								display: flex;
+								justify-content: space-between;
+							"
+						>
 							<h4>
 								{{ docType }}
 							</h4>
@@ -98,7 +113,9 @@
 							/>
 
 							<i class="material-icons"
-								><a (click)="removeDocumentType(docType)">cancel</a></i
+								><a (click)="removeDocumentType(docType)"
+									>cancel</a
+								></i
 							>
 						</div>
 
@@ -118,7 +135,9 @@
 				<h2>Funcionarios</h2>
 
 				<div class="itemsSelected">
-					<ng-container *ngFor="let funcionario of funcionarioSelected">
+					<ng-container
+						*ngFor="let funcionario of funcionarioSelected"
+					>
 						<p>{{ funcionario.name }}</p>
 					</ng-container>
 				</div>
@@ -133,9 +152,14 @@
 						<i matSuffix class="material-icons">search</i>
 					</mat-form-field>
 					<mat-card
-						style="width: 10rem; display: flex; justify-content: space-between"
+						style="
+							width: 10rem;
+							display: flex;
+							justify-content: space-between;
+						"
 						*ngFor="
-							let funcionario of funcionarios | searchFilter: filterText.value
+							let funcionario of funcionarios
+								| searchFilter: filterText.value
 						"
 					>
 						{{ funcionario.name }}
@@ -150,7 +174,9 @@
 				<h2>Equipamento</h2>
 
 				<div class="itemsSelected">
-					<ng-container *ngFor="let equipamento of equipamentoSelected">
+					<ng-container
+						*ngFor="let equipamento of equipamentoSelected"
+					>
 						<p>{{ equipamento.name }}</p>
 					</ng-container>
 				</div>
@@ -165,9 +191,14 @@
 						<i matSuffix class="material-icons">search</i>
 					</mat-form-field>
 					<mat-card
-						style="width: 10rem; display: flex; justify-content: space-between"
+						style="
+							width: 10rem;
+							display: flex;
+							justify-content: space-between;
+						"
 						*ngFor="
-							let equipamento of equipamentos | searchFilter: filterText.value
+							let equipamento of equipamentos
+								| searchFilter: filterText.value
 						"
 					>
 						{{ equipamento.name }}
@@ -175,7 +206,11 @@
 							><i class="material-icons">add</i></a
 						>
 					</mat-card>
-					<button mat-raised-button type="button" (click)="openDialog()">
+					<button
+						mat-raised-button
+						type="button"
+						(click)="openDialog()"
+					>
 						Criar equipamento
 					</button>
 				</div>
@@ -188,9 +223,17 @@
 					[ngModelOptions]="{ standalone: true }"
 					type="checkbox"
 				/>
-				<label for="preDefine">Definir como modelo pré-estabelecido</label>
+				<label for="preDefine"
+					>Definir como modelo pré-estabelecido</label
+				>
 
-				<div style="display: flex; justify-content: space-between; margin-top: 5px;">
+				<div
+					style="
+						display: flex;
+						justify-content: space-between;
+						margin-top: 5px;
+					"
+				>
 					<button
 						type="button"
 						class="action-btn"

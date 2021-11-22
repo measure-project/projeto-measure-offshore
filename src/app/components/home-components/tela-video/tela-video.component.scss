@@ -1,5 +1,9 @@
 @import '../../../../variables.scss';
 
+html {
+	scroll-behavior: smooth;
+}
+
 #backgroundVideo {
 	position: absolute;
 	right: 0;
@@ -29,6 +33,10 @@
 		background-color: $colorPrimary;
 		border-radius: 50px;
 	}
+
+	a {
+		cursor: pointer;
+	}
 }
 
 .toolBar-color {
@@ -47,7 +55,7 @@
 	h1 {
 		text-align: center;
 		font-size: 2.5rem;
-		width: 15ch;
+		width: 25ch;
 		line-height: 1;
 	}
 
