@@ -13,6 +13,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root',
@@ -23,6 +24,8 @@ export class AuthService {
 	userState: any;
 	currentUserEmail!: string;
 	dadosUser!: AngularFirestoreCollection<User>;
+
+	secondaryFbApp = firebase.initializeApp(environment.firebase, 'Secondary');
 
 	constructor(
 		public ngZone: NgZone,
@@ -37,6 +40,7 @@ export class AuthService {
 	displayMessage(msg: string, isError: boolean = false): void {
 		this.snackBar.open(msg, 'x', {
 			duration: 3000,
+
 			horizontalPosition: 'center',
 			verticalPosition: 'top',
 			panelClass: isError ? ['msg-error'] : ['msg-success'],
@@ -172,7 +176,12 @@ export class AuthService {
 	}
 
 	signUp(user: User, password: string): any {
-		return this.afAuth
+		this.secondaryFbApp
+			.auth()
+			.setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+		this.secondaryFbApp
+			.auth()
 			.createUserWithEmailAndPassword(user.email, password)
 			.then((result: any) => {
 				this.SendVerificationMail();

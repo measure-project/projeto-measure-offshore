@@ -1,3 +1,6 @@
+import { FuncionarioService } from './../../../services/funcionario.service';
+import { AdminService } from 'src/app/services/admin.service';
+import { Funcionario } from 'src/app/models/funcionario';
 import { AuthService } from './../../../services/auth.service';
 import { User } from './../../../models/user';
 import { Servico } from './../../../models/servico';
@@ -12,26 +15,33 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ExcluirModalComponent implements OnInit {
 	service: Servico;
-	user: User;
+	user: any;
+	tipo!: string;
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) private data: any,
 		private dialogRef: MatDialogRef<ExcluirModalComponent>,
 		private servicoService: ServicosService,
-		private authService: AuthService
+		private authService: AuthService,
+		private adminService: AdminService,
+		private funcionarioService: FuncionarioService
 	) {
+		this.tipo = this.data.tipo;
+
 		this.user = this.data.user;
 		this.service = this.data.service;
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		console.log('teste');
+	}
 
 	deleteServico() {
 		this.servicoService
 			.deleteService(this.service)
 			.then(() => {
 				this.user.services = this.user.services?.filter(
-					(excluido) => excluido.uid !== this.service.uid
+					(excluido: any) => excluido.uid !== this.service.uid
 				);
 				this.authService.SetUserData(this.user);
 
@@ -42,5 +52,20 @@ export class ExcluirModalComponent implements OnInit {
 				this.dialogRef.close();
 				this.authService.displayMessage(error.message, true);
 			});
+	}
+
+	deleteCliente() {
+		this.authService.deleteUserById(this.user.uid);
+		this.dialogRef.close();
+	}
+
+	deleteAdmin() {
+		this.adminService.deleteAdminById(this.user.uid);
+		this.dialogRef.close();
+	}
+
+	deleteFuncionario() {
+		this.funcionarioService.deleteFuncionarioById(this.user.uid);
+		this.dialogRef.close(true);
 	}
 }

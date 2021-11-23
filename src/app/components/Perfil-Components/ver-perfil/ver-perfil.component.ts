@@ -22,27 +22,6 @@ export class VerPerfilComponent implements OnInit {
 	services!: Array<Servico>;
 	hasServices: boolean = false;
 
-	filiais: Array<any> = [
-		{
-			name: 'Filial 1 - MG',
-		},
-		{
-			name: 'Filial 1 - MG',
-		},
-		{
-			name: 'Filial 1 - MG',
-		},
-		{
-			name: 'Filial 1 - MG',
-		},
-		{
-			name: 'Filial 1 - MG',
-		},
-		{
-			name: 'Filial 1 - MG',
-		},
-	];
-
 	constructor(
 		private authService: AuthService,
 		private router: Router,
@@ -57,9 +36,13 @@ export class VerPerfilComponent implements OnInit {
 		this.user = JSON.parse(localStorage.getItem('currentUser') || '{ }');
 
 		if (this.user.isAdmin) {
-			this.admin = JSON.parse(localStorage.getItem('currentUser') || '{ }');
+			this.admin = JSON.parse(
+				localStorage.getItem('currentUser') || '{ }'
+			);
 			await this.adminService
-				.consultClient(this.currentRoute.snapshot.paramMap.get('uid') ?? '')
+				.consultClient(
+					this.currentRoute.snapshot.paramMap.get('uid') ?? ''
+				)
 				.then((users) => {
 					users.forEach((user: any) => {
 						this.user = user.data();
@@ -80,6 +63,7 @@ export class VerPerfilComponent implements OnInit {
 			data: {
 				user: this.user,
 				service: service,
+				tipo: 'servico',
 			},
 		};
 
