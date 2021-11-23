@@ -18,8 +18,6 @@ export class TelaRecuperarSenhaComponent implements OnInit {
 	ngOnInit(): void {}
 
 	recuperarSenha(email: string) {
-		console.log(email);
-
 		this.authService.ForgotPassword(email);
 
 		this.location.back();

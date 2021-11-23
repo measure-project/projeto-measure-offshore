@@ -15,10 +15,7 @@ import { environment } from 'src/environments/environment';
 export class AdminService {
 	admin = {} as Admin;
 
-	secondaryFbApp = firebase.initializeApp(
-		environment.firebase,
-		'SecondaryAdm'
-	);
+	secondaryFbApp = firebase.initializeApp(environment.firebase, 'SecondaryAdm');
 
 	constructor(
 		private afs: AngularFirestore,
@@ -68,12 +65,8 @@ export class AdminService {
 			.collection('admins')
 			.doc(uid)
 			.delete()
-			.then(() => {
-				console.log('Administrador deletado!');
-			})
-			.catch((err) => {
-				console.log(`Houve um erro: ${err}`);
-			});
+			.then(() => {})
+			.catch((err) => {});
 	}
 
 	getAllAdmin() {
@@ -93,10 +86,10 @@ export class AdminService {
 		this.afStorage
 			.ref(`admins/${admin.uid}/profile.jpg`)
 			.put(profilePic)
-			.then(() => {
-				console.log('Deu certo');
-			})
-			.catch((error: any) => console.log(`Erro: ${error}`));
+			.then(() => {})
+			.catch((error: any) => {
+				this.auth.displayMessage(error.message, true);
+			});
 	}
 
 	signUpAdmin(admin: Admin, password: string): any {
@@ -115,8 +108,7 @@ export class AdminService {
 				this.setAdmin(admin);
 			})
 			.catch((error: any) => {
-				window.alert(error.message);
-				console.log(error.message);
+				this.auth.displayMessage(error.message, true);
 			});
 	}
 

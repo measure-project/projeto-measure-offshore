@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Funcionario } from './../models/funcionario';
 import { Injectable } from '@angular/core';
@@ -15,7 +16,8 @@ export class FuncionarioService {
 
 	constructor(
 		private afs: AngularFirestore,
-		private afStorage: AngularFireStorage
+		private afStorage: AngularFireStorage,
+		private authService: AuthService
 	) {}
 
 	setFuncionario(funcionario: Funcionario) {
@@ -67,12 +69,8 @@ export class FuncionarioService {
 			.collection('funcionarios')
 			.doc(fid)
 			.delete()
-			.then(() => {
-				console.log('Funcionario deletado!');
-			})
-			.catch((err) => {
-				console.log(`Houve um erro: ${err}`);
-			});
+			.then(() => {})
+			.catch((err) => {});
 	}
 
 	uploadFiles(profilePic: File, documents: Array<any>, email: string) {
@@ -80,38 +78,28 @@ export class FuncionarioService {
 			this.afStorage
 				.ref(`funcionarios/${email}/profileImage/profile.jpg`)
 				.put(profilePic)
-				.then(() => {
-					console.log('Imagem upada!');
-				})
+				.then(() => {})
 				.catch((err) => {
-					console.log(`Houve um erro: ${err}`);
+					this.authService.displayMessage(`Houve um erro: ${err}`, true);
 				});
 
 		documents.forEach((file) => {
 			this.afStorage
 				.ref(`funcionarios/${email}/documents/${file.nome}`)
 				.put(file.arquivo)
-				.then(() => {
-					console.log('Documentos upados!');
-				})
+				.then(() => {})
 				.catch((err) => {
-					console.log(`Houve um erro: ${err}`);
+					this.authService.displayMessage(`Houve um erro: ${err}`, true);
 				});
 		});
 	}
 
-	downloadFiles(
-		email: string,
-		docName: Array<any>,
-		funcionarioIndex: number
-	) {
+	downloadFiles(email: string, docName: Array<any>, funcionarioIndex: number) {
 		this.afStorage
 			.ref(`funcionarios/${email}/profileImage/profile.jpg`)
 			.getDownloadURL()
 			.subscribe((url) => {
-				const img = document.getElementById(
-					`profilePic-${funcionarioIndex}`
-				);
+				const img = document.getElementById(`profilePic-${funcionarioIndex}`);
 
 				img?.setAttribute('src', url);
 			});

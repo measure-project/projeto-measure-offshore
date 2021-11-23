@@ -10,11 +10,7 @@
 		</mat-card-title>
 
 		<mat-card-content class="servicoCardContent">
-			<form
-				#serviceData="ngForm"
-				(ngSubmit)="cadastrarServico(serviceData.value)"
-				class="edit-form"
-			>
+			<form class="edit-form">
 				<h2>Título/Tipo do serviço</h2>
 				<div class="serviceInfo">
 					<mat-form-field appearance="outline">
@@ -24,7 +20,7 @@
 							matInput
 							type="text"
 							name="title"
-							ngModel
+							[(ngModel)]="servico.title"
 							required
 							placeholder="Ex: Jardinagem Especializada"
 						/>
@@ -33,19 +29,14 @@
 
 					<mat-expansion-panel style="height: min-content">
 						<mat-expansion-panel-header>
-							<mat-panel-title>
-								Selecionar pré-definido
-							</mat-panel-title>
+							<mat-panel-title> Selecionar pré-definido </mat-panel-title>
 						</mat-expansion-panel-header>
 
-						<div
-							*ngFor="let tipo of tipos"
-							class="pre-defined-types"
-						>
-							<a (click)="fillFormWithPreDefined(tipo)">{{
-								tipo.title
-							}}</a>
-						</div>
+						<ul *ngFor="let tipo of tipos" class="pre-defined-types">
+							<li>
+								<a (click)="fillFormWithPreDefined(tipo)">{{ tipo.title }}</a>
+							</li>
+						</ul>
 					</mat-expansion-panel>
 
 					<mat-form-field
@@ -58,7 +49,7 @@
 							ngModel
 							name="description"
 							id="description"
-							ngModel
+							[(ngModel)]="servico.description"
 							required
 							cols="30"
 							rows="10"
@@ -71,10 +62,7 @@
 				<h2>Documentos</h2>
 				<div class="documents">
 					<div style="grid-column: 1 / 4">
-						<mat-form-field
-							style="margin-right: 1rem"
-							appearance="outline"
-						>
+						<mat-form-field style="margin-right: 1rem" appearance="outline">
 							<mat-label>Adicionar Tipo</mat-label>
 							<input
 								#typeName
@@ -94,12 +82,7 @@
 						</button>
 					</div>
 					<div class="documentList" *ngFor="let docType of docTypes">
-						<div
-							style="
-								display: flex;
-								justify-content: space-between;
-							"
-						>
+						<div style="display: flex; justify-content: space-between">
 							<h4>
 								{{ docType }}
 							</h4>
@@ -119,9 +102,7 @@
 							/>
 
 							<i class="material-icons"
-								><a (click)="removeDocumentType(docType)"
-									>cancel</a
-								></i
+								><a (click)="removeDocumentType(docType)">cancel</a></i
 							>
 						</div>
 
@@ -141,9 +122,7 @@
 				<h2>Funcionarios</h2>
 
 				<div class="itemsSelected">
-					<ng-container
-						*ngFor="let funcionario of servico.funcionarios"
-					>
+					<ng-container *ngFor="let funcionario of servico.funcionarios">
 						<p>{{ funcionario.name }}</p>
 					</ng-container>
 				</div>
@@ -158,14 +137,9 @@
 						<i matSuffix class="material-icons">search</i>
 					</mat-form-field>
 					<mat-card
-						style="
-							width: 10rem;
-							display: flex;
-							justify-content: space-between;
-						"
+						style="width: 10rem; display: flex; justify-content: space-between"
 						*ngFor="
-							let funcionario of funcionarios
-								| searchFilter: filterText.value
+							let funcionario of funcionarios | searchFilter: filterText.value
 						"
 					>
 						{{ funcionario.name }}
@@ -180,9 +154,7 @@
 				<h2>Equipamento</h2>
 
 				<div class="itemsSelected">
-					<ng-container
-						*ngFor="let equipamento of servico.equipamentos"
-					>
+					<ng-container *ngFor="let equipamento of servico.equipamentos">
 						<p>{{ equipamento.name }}</p>
 					</ng-container>
 				</div>
@@ -197,14 +169,9 @@
 						<i matSuffix class="material-icons">search</i>
 					</mat-form-field>
 					<mat-card
-						style="
-							width: 10rem;
-							display: flex;
-							justify-content: space-between;
-						"
+						style="width: 10rem; display: flex; justify-content: space-between"
 						*ngFor="
-							let equipamento of equipamentos
-								| searchFilter: filterText.value
+							let equipamento of equipamentos | searchFilter: filterText.value
 						"
 					>
 						{{ equipamento.name }}
@@ -212,11 +179,7 @@
 							><i class="material-icons">add</i></a
 						>
 					</mat-card>
-					<button
-						mat-raised-button
-						type="button"
-						(click)="openDialog()"
-					>
+					<button mat-raised-button type="button" (click)="openDialog()">
 						Criar equipamento
 					</button>
 				</div>
@@ -229,9 +192,7 @@
 					[ngModelOptions]="{ standalone: true }"
 					type="checkbox"
 				/>
-				<label for="preDefine"
-					>Definir como modelo pré-estabelecido</label
-				>
+				<label for="preDefine">Definir como modelo pré-estabelecido</label>
 
 				<div style="display: flex; justify-content: space-between">
 					<button
@@ -244,7 +205,8 @@
 					</button>
 					<button
 						type="submit"
-						[disabled]="!serviceData.valid"
+						[disabled]="!confereForm()"
+						(click)="cadastrarServico()"
 						mat-raised-button
 						class="action-btn"
 					>

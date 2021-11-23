@@ -44,10 +44,7 @@ export class VerServicoComponent implements OnInit {
 
 							this.docTypes = [...new Set(this.doclist)];
 
-							this.servicoService.downloadFiles(
-								sid,
-								service.documentos
-							);
+							this.servicoService.downloadFiles(sid, service.documentos);
 
 							let funcionarioIndex = 0;
 							this.service.funcionarios.forEach((funcionario) => {
@@ -75,7 +72,6 @@ export class VerServicoComponent implements OnInit {
 	}
 
 	onErrorImg(e: any) {
-		console.log(e.target);
 		if (e) e.target.src = this.defaultImage;
 	}
 }

@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Servico } from './../models/servico';
 import { Equipamento } from './../models/equipamento';
 import { Injectable } from '@angular/core';
@@ -9,6 +8,7 @@ import {
 	DocumentData,
 } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { AuthService } from './auth.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -16,7 +16,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class ServicosService {
 	constructor(
 		private afs: AngularFirestore,
-		private afStorage: AngularFireStorage
+		private afStorage: AngularFireStorage,
+		private authService: AuthService
 	) {}
 
 	setService(service: Servico) {
@@ -32,7 +33,7 @@ export class ServicosService {
 			equipamentos: service.equipamentos,
 			funcionarios: service.funcionarios,
 			uid: id,
-			documentos: service.documentos.slice(),
+			documentos: [],
 		};
 
 		return docRef.set(serviceState, {
@@ -51,7 +52,7 @@ export class ServicosService {
 			equipamentos: service.equipamentos,
 			funcionarios: service.funcionarios,
 			uid: service.uid,
-			documentos: service.documentos.slice(),
+			documentos: [],
 		};
 
 		return docRef.update(serviceState);
@@ -111,11 +112,9 @@ export class ServicosService {
 			this.afStorage
 				.ref(`servicos/${id}/documents/${file.categoria}/${file.nome}`)
 				.put(file.documento)
-				.then(() => {
-					console.log('Documentos Upados!');
-				})
+				.then(() => {})
 				.catch((err) => {
-					console.log(`Houve um erro: ${err}`);
+					this.authService.displayMessage(`Houve um erro: ${err}`, true);
 				});
 		});
 	}
@@ -142,8 +141,6 @@ export class ServicosService {
 	}
 
 	async deleteService(service: Servico) {
-		console.log('Chamou no service ' + service.uid);
-
 		const typesArray: any[] = [];
 
 		return await service.documentos.forEach((doc) => {

@@ -52,8 +52,6 @@ export class AuthService {
 			`users/${user.uid}`
 		);
 
-		console.log('Passei no service 1');
-
 		const userState: any = {
 			uid: user.uid,
 
@@ -77,20 +75,12 @@ export class AuthService {
 
 			services: user.services ?? [],
 		};
-
-		console.log('Passei no service 2');
-
 		if (!this.adminLogado)
 			localStorage.setItem('currentUser', JSON.stringify(userState));
-
-		console.log('Passei no service 3');
-		console.log(userState);
 
 		userRef.set(userState, {
 			merge: true,
 		});
-
-		console.log('Passe aqui 4');
 	}
 
 	getUserData(email: string): User {
@@ -103,10 +93,7 @@ export class AuthService {
 
 		userLogadoCollection$.subscribe((user) => {
 			this.userLogado = user[0];
-			localStorage.setItem(
-				'currentUser',
-				JSON.stringify(this.userLogado)
-			);
+			localStorage.setItem('currentUser', JSON.stringify(this.userLogado));
 		});
 
 		return this.userLogado;
@@ -126,10 +113,7 @@ export class AuthService {
 		adminLogadoCollection$.subscribe((admin) => {
 			this.adminLogado = admin[0];
 			if (this.adminLogado) {
-				localStorage.setItem(
-					'currentUser',
-					JSON.stringify(this.adminLogado)
-				);
+				localStorage.setItem('currentUser', JSON.stringify(this.adminLogado));
 			}
 		});
 
@@ -154,11 +138,9 @@ export class AuthService {
 			.collection('users')
 			.doc(uid)
 			.delete()
-			.then(() => {
-				console.log('Usuário deletado!');
-			})
+			.then(() => {})
 			.catch((err) => {
-				console.log(`Houve um erro: ${err}`);
+				this.displayMessage(`Houve um erro: ${err}`, true);
 			});
 	}
 
@@ -183,19 +165,13 @@ export class AuthService {
 						this.ngZone.run(() => {
 							// Tem que trocar para this.adminLogado para funcionar como admin
 							if (this.adminLogado)
-								this.router.navigate([
-									`/verPerfilAdm/${this.adminLogado.uid}`,
-								]);
-							else
-								this.router.navigate([
-									`/verPerfil/${this.userLogado.uid}`,
-								]);
+								this.router.navigate([`/verPerfilAdm/${this.adminLogado.uid}`]);
+							else this.router.navigate([`/verPerfil/${this.userLogado.uid}`]);
 						});
 					});
 			})
 			.catch((error: any) => {
 				this.displayMessage('Usuário ou senha incorretos', true);
-				console.log(error);
 			});
 	}
 
@@ -215,8 +191,7 @@ export class AuthService {
 				this.SetUserData(user);
 			})
 			.catch((error: any) => {
-				window.alert(error.message);
-				console.log(error.message);
+				this.displayMessage(error.message, true);
 			});
 	}
 
@@ -269,11 +244,9 @@ export class AuthService {
 		this.afStorage
 			.ref(`users/${uid}/profile.jpg`)
 			.put(file)
-			.then(() => {
-				console.log('Imagem upada!');
-			})
+			.then(() => {})
 			.catch((err) => {
-				console.log(`Houve um erro: ${err}`);
+				this.displayMessage(`Houve um erro: ${err}`);
 			});
 	}
 
