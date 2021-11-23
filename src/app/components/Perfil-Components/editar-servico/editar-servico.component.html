@@ -27,24 +27,7 @@
 						<mat-error>Insira um título válido</mat-error>
 					</mat-form-field>
 
-					<mat-expansion-panel style="height: min-content">
-						<mat-expansion-panel-header>
-							<mat-panel-title>
-								Selecionar pré-definido
-							</mat-panel-title>
-						</mat-expansion-panel-header>
-
-						<div
-							*ngFor="let tipo of tipos"
-							class="pre-defined-types"
-						>
-							<a (click)="fillFormWithPreDefined(tipo)">{{
-								tipo.title
-							}}</a>
-						</div>
-					</mat-expansion-panel>
-
-					<mat-form-field
+          <mat-form-field
 						style="grid-column: 1 / 3; margin-top: 1rem"
 						appearance="outline"
 					>
@@ -228,11 +211,7 @@
 				>
 
 				<div
-					style="
-						display: flex;
-						justify-content: space-between;
-						margin-top: 5px;
-					"
+					style="display: flex; justify-content: space-between; margin-top: 5px"
 				>
 					<button
 						type="button"
