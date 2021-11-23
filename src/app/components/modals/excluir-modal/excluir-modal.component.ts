@@ -32,7 +32,9 @@ export class ExcluirModalComponent implements OnInit {
 		this.service = this.data.service;
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		console.log('teste');
+	}
 
 	deleteServico() {
 		this.servicoService
@@ -44,10 +46,7 @@ export class ExcluirModalComponent implements OnInit {
 				this.authService.SetUserData(this.user);
 
 				this.dialogRef.close();
-				this.authService.displayMessage(
-					'Serviço excluído com sucesso!',
-					false
-				);
+				this.authService.displayMessage('Serviço excluído com sucesso!', false);
 			})
 			.catch((error) => {
 				this.dialogRef.close();
