@@ -8,31 +8,31 @@ import { Component, OnInit } from '@angular/core';
 export class TelaBottomComponent implements OnInit {
 	images = [
 		{
-			path: '../../../../assets/manutencao.jpg',
+			path: '../../../../assets/calib-torq.png',
 		},
 		{
-			path: '../../../../assets/manutencao.jpg',
+			path: 'https://placeholder.pics/svg/300',
 		},
 		{
-			path: '../../../../assets/manutencao.jpg',
+			path: 'https://placeholder.pics/svg/300',
 		},
 		{
-			path: '../../../../assets/manutencao.jpg',
+			path: 'https://placeholder.pics/svg/300',
 		},
 		{
-			path: '../../../../assets/manutencao.jpg',
+			path: 'https://placeholder.pics/svg/300',
 		},
 		{
-			path: '../../../../assets/manutencao.jpg',
+			path: 'https://placeholder.pics/svg/300',
 		},
 		{
-			path: '../../../../assets/manutencao.jpg',
+			path: 'https://placeholder.pics/svg/300',
 		},
 		{
-			path: '../../../../assets/manutencao.jpg',
+			path: 'https://placeholder.pics/svg/300',
 		},
 		{
-			path: '../../../../assets/manutencao.jpg',
+			path: 'https://placeholder.pics/svg/300',
 		},
 	];
 

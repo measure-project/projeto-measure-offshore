@@ -4,6 +4,7 @@
 	background-color: $colorPrimary;
 	justify-content: center;
 	margin-bottom: 4.3rem;
+	overflow-y: hidden;
 
 	img {
 		width: 8rem;
@@ -61,6 +62,16 @@
 					margin: 0;
 				}
 			}
+		}
+
+		.ver {
+			background-color: #3973b8;
+			color: $colorSecondary;
+		}
+
+		.delete {
+			background-color: $colorDelete;
+			color: $colorSecondary;
 		}
 
 		mat-card-content {

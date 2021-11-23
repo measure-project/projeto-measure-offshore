@@ -1,6 +1,6 @@
 <div class="content" *ngIf="user">
 	<mat-toolbar class="toolBar">
-		<img src="../../../../assets/measure-logo.png" />
+		<img src="../../../../assets/measure-logo-header.svg" />
 		<span class="material-icons profileIcon">account_circle</span>
 	</mat-toolbar>
 
@@ -69,7 +69,8 @@
 							[routerLink]="['./editarServico', service.uid]"
 							class="routerLink"
 						>
-							<span class="material-icons">border_color</span
+							<span class="material-icons editService"
+								>border_color</span
 							><br />
 						</a>
 						<a

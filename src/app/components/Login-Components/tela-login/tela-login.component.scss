@@ -25,6 +25,7 @@ mat-card {
 
 	img {
 		width: 20rem;
+		margin: 0;
 	}
 }
 
@@ -51,7 +52,7 @@ mat-card {
 .create-account-button,
 .return-button {
 	width: 10rem;
-	background-color: #4abdb7;
+	background-color: $colorPrimary;
 }
 
 .login-button {
