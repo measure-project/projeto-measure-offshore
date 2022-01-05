@@ -1,12 +1,12 @@
 export const environment = {
 	production: true,
 	firebase: {
-		apiKey: 'AIzaSyB4gw9wbMMbRkBph0iPBGH_eEHkbyrrQaw',
-		authDomain: 'measure-prod.firebaseapp.com',
-		projectId: 'measure-prod',
-		storageBucket: 'measure-prod.appspot.com',
-		messagingSenderId: '967578861951',
-		appId: '1:967578861951:web:e591d772a91de50ac09a4a',
-		measurementId: 'G-7YW5P73D4B',
+		apiKey: 'AIzaSyDKwYbZ7kqvqx0g4BnWXxddUmRC02L8s2g',
+		authDomain: 'measure-offshore.firebaseapp.com',
+		projectId: 'measure-offshore',
+		storageBucket: 'measure-offshore.appspot.com',
+		messagingSenderId: '437678796131',
+		appId: '1:437678796131:web:5682b48ad012b809ae7756',
+		measurementId: 'G-E7WH1QZ806',
 	},
 };
